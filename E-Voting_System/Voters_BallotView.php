@@ -61,7 +61,7 @@
                         <input type="text" name="admin_fname" class="input-field" value="Mikhail" disabled>
                     </label>
                     <label for="">Last Name
-                        <input type="text" name="admin_lname" class="input-field" value="Villanueva" disabled>
+                        <input type="text" name="admin_lname" class="input-field" value="Villanueva">
                     </label>
                     <label for="">Position
                         <input type="text" name="admin_username" class="input-field" value="Vice Mayor" disabled>

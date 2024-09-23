@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.image-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setupform {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4A4A4A;
+}
+
+.setupform input {
+    margin-bottom: 10px;
+}
+
+input {
+    width: 90%;
+    padding: 8px 8px 8px 18px;
+    border: 1px solid #959191;
+    border-radius: 15px;
+    font-size: 1em;
+    background-color: #E7E7E7;
+}
+
+label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 18px;
+}
+
+.seondsentence {
+    font-size: small;
+    font-weight: lighter;
+    margin-left: 18px;
+}
+
+.required {
+    font-size: 10px;
+}
+
+#circle1 {
+    width: 180px;
+    height: 180px;
+    background: rgb(68,216,146);
+    background: linear-gradient(0deg, rgba(68,216,146,1) 0%, rgba(68,216,146,1) 0%, rgba(229,207,0,1) 100%);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 200px;
+    left: -90px;
+}
+
+#circle2 {
+    width: 800px;
+    height: 800px;
+    background: rgb(229,207,0);
+    background: linear-gradient(0deg, rgba(229,207,0,1) 0%, rgba(229,207,0,1) 0%, rgba(15,162,92,1) 100%);
+    border-radius: 50%;
+    position: absolute;
+    bottom: -490px;
+    left: -450px;
+}
+
+#circle3 {
+    width: 500px;
+    height: 500px;
+    background: rgb(15,162,92);
+    background: linear-gradient(0deg, rgba(15,162,92,1) 0%, rgba(15,162,92,1) 0%, rgba(229,207,0,1) 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: -290px;
+    right: -280px;
+}
+
+.image-logo p {
+    text-align: center;
+    font-size: 22px;
+    color: #24724D;
+    margin-top: -5px;
+    font-weight: lighter;
+    margin-top: 13px;
+}
+
+.image-logo {
+    text-align: center;
+}
+
+.image-logo img {
+    width: 500px;
+}
+
+.button-option button {
+    background: rgb(15,162,92);
+    background: linear-gradient(90deg, rgba(15,162,92,1) 0%, rgba(15,162,92,1) 0%, rgba(229,207,0,1) 100%);
+    color: white;
+    border: transparent;
+    padding: 8px 45px;
+    font-size: 20px;
+    border-radius: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    cursor: pointer;
+}
+
+.button-option {
+    text-align: center;
+    margin-top: 25px;
+}
+.back-button{
+    position: absolute;
+    top: 70px;
+    left: 150px;
+}
+.back-button button{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+    font-size: 25px;
+    color: #24724D;
+}
+.back-button a{
+    text-decoration: none;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    #circle1 {
+        width: 120px;
+        height: 120px;
+        bottom: 150px;
+        left: -60px;
+    }
+
+    #circle2 {
+        width: 600px;
+        height: 600px;
+        bottom: -390px;
+        left: -300px;
+    }
+
+    #circle3 {
+        width: 400px;
+        height: 400px;
+        top: -220px;
+        right: -220px;
+    }
+
+    .image-logo img {
+        width: 400px;
+    }
+
+    .image-logo p {
+        font-size: 20px;
+    }
+
+    .button-option button {
+        padding: 6px 35px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    #circle1 {
+        width: 90px;
+        height: 90px;
+        bottom: 100px;
+        left: -45px;
+    }
+
+    #circle2 {
+        width: 400px;
+        height: 400px;
+        bottom: -250px;
+        left: -200px;
+    }
+
+    #circle3 {
+        width: 300px;
+        height: 300px;
+        top: -160px;
+        right: -150px;
+    }
+
+    .image-logo img {
+        width: 300px;
+    }
+
+    .image-logo p {
+        font-size: 18px;
+    }
+
+    .button-option button {
+        padding: 5px 25px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    #circle1 {
+        width: 60px;
+        height: 60px;
+        bottom: 80px;
+        left: -30px;
+    }
+
+    #circle2 {
+        width: 250px;
+        height: 250px;
+        bottom: -150px;
+        left: -120px;
+    }
+
+    #circle3 {
+        width: 180px;
+        height: 180px;
+        top: -110px;
+        right: -100px;
+    }
+
+    .image-logo img {
+        width: 200px;
+    }
+
+    .image-logo p {
+        font-size: 14px;
+    }
+
+    .button-option button {
+        padding: 4px 20px;
+        font-size: 14px;
+    }
+}
+/* Define the circle animation with enhanced movement */
+@keyframes moveCircle {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.05);
+    }
+}
+
+/* New animation for #circle3 to make its movement more noticeable */
+@keyframes moveUpperRightCircle {
+    0%, 100% {
+        transform: translateY(0) translateX(0) scale(1);
+    }
+    50% {
+        transform: translateY(-30px) translateX(-30px) scale(1.1);
+    }
+}
+
+/* Apply animation timing to circles */
+#circle1, #circle2 {
+    animation: moveCircle 5s infinite ease-in-out;
+}
+
+/* Apply custom animation to the upper-right circle */
+#circle3 {
+    animation: moveUpperRightCircle 7s infinite ease-in-out;
+}
+
+/* Button hover effect */
+.button-option button:hover {
+    background: linear-gradient(90deg, rgba(229,207,0,1) 0%, rgba(15,162,92,1) 100%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 20px 40px -10px, rgba(0, 0, 0, 0.3) 0px 12px 24px -16px;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.setupform , .image-logo, button {
+    animation: fadeIn 1s ease-in-out;
+}

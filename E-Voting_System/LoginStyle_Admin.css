@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap');
+
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.image-container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Login-box {
+    width: 350px;
+    padding: 10px 0px 20px 0px;
+    margin-top: -20px;
+}
+
+/* log in box */
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    display: grid;
+    place-items: center;
+}
+
+/* Style the form login */
+.form-login-admin {
+    display: grid;
+    place-items: center;
+}
+
+/* Style the header */
+.heading-content {
+    text-align: center;
+}
+
+.heading-content p {
+    font-size: small;
+    color: #323232;
+}
+
+/* Style the login content */
+.login-content {
+    justify-content: center;
+    align-items: center; 
+    display: flex;
+}
+
+/* Style the input container */
+.input-container {
+    width: 100%;
+    display: flex;
+    margin-bottom: 15px;
+}
+
+/* Style the form icons */
+.Login-box i{
+    padding: 14px 15px;
+    background: #00785D;
+    color: white;
+    min-width: 20px;
+    text-align: center;
+    border-radius: 50px 0px 0px 50px;
+    font-size: 25px;
+}
+
+/* Style the input fields */
+.input-field {
+    width: 100%;
+    padding: 14px 10px;
+    outline: none;
+    border: #24724D solid 1px;
+    border-radius: 0px 50px 50px 0px;
+    font-size: 18px;
+}
+
+.input-field:focus {
+    border: 1px solid #00785D;
+}
+
+.checkbox {
+    display: flex;
+    margin-left: -190px;
+    margin-top: -13px;
+    color: #00785D;
+    padding: 8px;
+}
+
+.checkbox input {
+    margin-top: -6px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.checkbox label {
+    font-size: 11px;
+}
+
+
+.back-button{
+    position: absolute;
+    top: 70px;
+    left: 150px;
+}
+.back-button button{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+    font-size: 25px;
+    color: #24724D;
+    font-weight: 500;
+}
+.back-button a{
+    text-decoration: none;
+}
+
+/* Style the button */
+.submit button {
+    background: rgb(15, 162, 92);
+    background: linear-gradient(90deg, rgba(15, 162, 92, 1) 0%, rgba(15, 162, 92, 1) 0%, rgba(229, 207, 0, 1) 100%);
+    color: white;
+    border: transparent;
+    padding: 15px 125px;
+    font-size: 23px;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    cursor: pointer;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.error {
+    font-size: 11px;
+    color: red;
+    margin-top: -5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#circle1 {
+    width: 180px;
+    height: 180px;
+    background: rgb(68,216,146);
+    background: linear-gradient(0deg, rgba(68,216,146,1) 0%, rgba(68,216,146,1) 0%, rgba(229,207,0,1) 100%);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 200px;
+    left: -90px;
+}
+
+#circle2 {
+    width: 800px;
+    height: 800px;
+    background: rgb(229,207,0);
+    background: linear-gradient(0deg, rgba(229,207,0,1) 0%, rgba(229,207,0,1) 0%, rgba(15,162,92,1) 100%);
+    border-radius: 50%;
+    position: absolute;
+    bottom: -490px;
+    left: -450px;
+}
+
+#circle3 {
+    width: 500px;
+    height: 500px;
+    background: rgb(15,162,92);
+    background: linear-gradient(0deg, rgba(15,162,92,1) 0%, rgba(15,162,92,1) 0%, rgba(229,207,0,1) 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: -290px;
+    right: -280px;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    #circle1 {
+        width: 120px;
+        height: 120px;
+        bottom: 150px;
+        left: -60px;
+    }
+    
+    #circle2 {
+        width: 600px;
+        height: 600px;
+        bottom: -390px;
+        left: -300px;
+    }
+    
+    #circle3 {
+        width: 400px;
+        height: 400px;
+        top: -220px;
+        right: -220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .Login-box {
+        width: 300px;
+        margin-top: -10px;
+    }
+
+    #circle1 {
+        width: 90px;
+        height: 90px;
+        bottom: 100px;
+        left: -45px;
+    }
+    
+    #circle2 {
+        width: 400px;
+        height: 400px;
+        bottom: -250px;
+        left: -200px;
+    }
+    
+    #circle3 {
+        width: 300px;
+        height: 300px;
+        top: -160px;
+        right: -150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Login-box {
+        width: 250px;
+        margin-top: 0px;
+    }
+
+    #circle1 {
+        width: 60px;
+        height: 60px;
+        bottom: 80px;
+        left: -30px;
+    }
+    
+    #circle2 {
+        width: 250px;
+        height: 250px;
+        bottom: -150px;
+        left: -120px;
+    }
+    
+    #circle3 {
+        width: 180px;
+        height: 180px;
+        top: -110px;
+        right: -100px;
+    }
+
+    .submit button {
+        padding: 10px 60px;
+        font-size: 18px;
+    }
+}
+ /* Define the circle animation with enhanced movement */
+@keyframes moveCircle {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.05);
+    }
+}
+
+/* New animation for #circle3 to make its movement more noticeable */
+@keyframes moveUpperRightCircle {
+    0%, 100% {
+        transform: translateY(0) translateX(0) scale(1);
+    }
+    50% {
+        transform: translateY(-30px) translateX(-30px) scale(1.1);
+    }
+}
+
+/* Apply animation timing to circles */
+#circle1, #circle2 {
+    animation: moveCircle 5s infinite ease-in-out;
+}
+
+/* Apply custom animation to the upper-right circle */
+#circle3 {
+    animation: moveUpperRightCircle 7s infinite ease-in-out;
+}
+
+/* Button hover effect */
+.submit button:hover {
+    background: linear-gradient(90deg, rgba(229,207,0,1) 0%, rgba(15,162,92,1) 100%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 20px 40px -10px, rgba(0, 0, 0, 0.3) 0px 12px 24px -16px;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-login-admin, .logo img, button {
+    animation: fadeIn 1s ease-in-out;
+}

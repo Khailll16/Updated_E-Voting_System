@@ -228,7 +228,7 @@
                                                            
                                 ?>
                                         <span class="image">
-                                            <img id="picture-admin" src="Images/david-removebg-preview.png" alt="">
+                                            <img id="picture-admin" src="Images/<?php echo $row ['admin_profile']?>" alt="">
                                         </span>
                                         <div class="text header-text">
                                             <p id="name-admin"><?php echo $row['firstname'];?> <?php echo $row['lastname']; ?></p>

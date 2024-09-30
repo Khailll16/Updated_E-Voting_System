@@ -33,7 +33,7 @@ include "database_connect.php";
                 $_SESSION['firstname'] = $row['firstname'];
                 $_SESSION['lastname'] = $row['lastname'];
                 
-                header("Location: Dashboard_Page.php");
+                header("Location: Dashboard_Page.php?insert_msg=You have successfully logged in");
                 exit();
             }else{
                 header("Location: LoginPage_Admin.php?error=Incorrect Username or Password");

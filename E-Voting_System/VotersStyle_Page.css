@@ -22,14 +22,14 @@
 
 body {
   height: 100vh;
-  background: white;
+  background: #F8F8FF;
   transition: var(--tran-05);
 
 }
 
 .notification {
   display: none;
-  background-color: #F7F7F6;
+  background-color: #F8F8FF;
   /* Green */
   color: #24724D;
   border: 3px solid #24724D;

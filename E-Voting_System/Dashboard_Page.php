@@ -50,6 +50,19 @@
 
                             <div class="dashboard-content">
 
+                                <div class="notification" id="notification">
+                                        <?php 
+                                            if (isset($_GET['insert_msg'])) {
+                                                echo "<div class='welcome-message'>";
+                                                echo "<i style ='font-size:50px'class='bx bxs-check-circle'></i>";
+                                                echo "<h2>Welcome back, " . $_SESSION['firstname'] . "!</h2>";  
+                                                echo "<p>You have successfully logged in</p>";
+                                                echo "</div>";
+                                            }
+                                            
+                                        ?>
+                                </div>
+
                                 <!----DASHBOARD TITLE---->
                                 <h2 style="font-weight: 550;" class="header" id="breadcrup-title">DASHBOARD</h2>
                                 
@@ -300,6 +313,7 @@
         </div>
         <script src="Election_Title.js"></script>
         <script src="hamburger-navbar.js"></script>
+        <script src="displayPopUpMessage.js"></script>
     </body>
 </html>
 

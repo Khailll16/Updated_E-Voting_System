@@ -21,7 +21,7 @@
 }
 body{
   height: 100vh;
-  background: white;
+  background: #F8F8FF;
   transition: var(--tran-05);
 
 }
@@ -33,7 +33,7 @@ body{
   left: 0;
   height: 100%;
   width: 290px;
-  background-color: white;
+  background-color: #F8F8FF;
   transition: var(--tran-05);
   z-index: 100;
   border: 2.9px solid #dcdcdc;

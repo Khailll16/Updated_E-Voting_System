@@ -9,7 +9,7 @@
 
 body {
     height: 100vh;
-    background: white;
+    background: #F8F8FF;
     transition: var(--tran-05);
 
 }

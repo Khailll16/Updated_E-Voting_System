@@ -142,7 +142,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </tr>
 
                                                 <?php
-                                                "SELECT candidates.*, positions.descrip 
+                                               $sql = "SELECT candidates.*, positions.descrip 
                                                 FROM candidates 
                                                 LEFT JOIN positions ON candidates.position_id = positions.id
                                                 WHERE candidate_lastname LIKE '%$searchQuery%' 

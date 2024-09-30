@@ -96,6 +96,7 @@
                                             
                                             $candifirstn = $_POST['cfname'];
                                             $candilastn = $_POST['clname'];
+                                            $candipos = $_POST['position'];
                                             $candiplat = $_POST['cplatforms'];
 
                                             $query = "SELECT candidate_profile FROM candidates WHERE id = '$idnew'";
@@ -120,6 +121,7 @@
                                             $sql = "UPDATE `candidates` SET 
                                                     `candidate_firstname` = '$candifirstn',
                                                     `candidate_lastname` = '$candilastn',
+                                                    `position_id` = '$candipos',
                                                     `platform` = '$candiplat',
                                                     `candidate_profile` = '$picturename' 
                                                     WHERE `id` = '$idnew'";

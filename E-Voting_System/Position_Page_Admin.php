@@ -122,7 +122,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             </div>
 
                                             <!-- Moved search-bar to the end -->
-                                            <<div class="search-bar">
+                                            <div class="search-bar">
                                                     <div class="search-container">
                                                         <form method="POST" action="">
                                                             <i class="bx bx-search icon"></i>

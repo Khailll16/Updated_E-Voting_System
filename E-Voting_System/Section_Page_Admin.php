@@ -3,6 +3,10 @@ session_start();
 include "database_connect.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
+        $searchQuery = '';
+        if (isset($_POST['search'])) {
+            $searchQuery = mysqli_real_escape_string($conn, $_POST['search']);
+        }
 
 ?>
 
@@ -118,7 +122,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <div class="search-bar">
                                                 <div class="search-container">
                                                     <i class="bx bx-search icon"></i>
-                                                    <input type="text" class="search-input" placeholder="Search...">
+                                                    <input type="text" class="search-input" placeholder="Search..." value="<?php echo $searchQuery; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +141,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </tr>
 
                                                 <?php
-                                                $sql = "SELECT * FROM sections";
+                                                $sql = "SELECT * FROM sections WHERE
+                                                grade LIKE '%$searchQuery%' OR
+                                                section LIKE '%$searchQuery%' OR
+                                                max_student LIKE '%$searchQuery%'";
                                                 $result = $conn->query($sql);
 
                                                 if (!$result) {

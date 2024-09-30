@@ -4,6 +4,10 @@ include "database_connect.php";
 include "Add_Positions.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
+        $searchQuery = '';
+        if (isset($_POST['search'])) {
+            $searchQuery = mysqli_real_escape_string($conn, $_POST['search']);
+        }
 
 ?>
 
@@ -98,7 +102,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     <select name="" id="">
                                                         <option>Position</option>
                                                         <?php
-                                                        $sql = "SELECT * FROM positions";
+                                                        $sql = "SELECT * FROM positions WHERE
+                                                        descrip LIKE '%$searchQuery%' OR
+                                                        max_vote LIKE '%$searchQuery%'";
                                                         $result = $conn->query($sql);
 
                                                         if (!$result) {
@@ -119,7 +125,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <div class="search-bar">
                                                 <div class="search-container">
                                                     <i class="bx bx-search icon"></i>
-                                                    <input type="text" class="search-input" placeholder="Search...">
+                                                    <input type="text" class="search-input" placeholder="Search..." value="<?php echo $searchQuery; ?>">
                                                 </div>
                                             </div>
                                         </div>

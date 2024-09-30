@@ -151,7 +151,7 @@
                                                     <input type="text" name="titleballot" class="input-field" value="<?php echo $row['title'] ?>">
                                                 </label>
                                                 <label for="">New Logo
-                                                    <input type="file" name="logoballot" class="input-field" value="<?php echo $row['logo_ballot'] ?>">
+                                                    <input type="file" name="logoballot" class="input-field" value="<?php echo $row['logo_ballot'] ?>" accept="image/*" onchange="previewImage(event)">
                                                 </label>                                             
 
                                                 <div class="buttons">

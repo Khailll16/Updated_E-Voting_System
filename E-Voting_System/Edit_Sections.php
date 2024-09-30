@@ -105,7 +105,8 @@
                                         if (!$result) {
                                             die("Invalid query: " . $conn->error);
                                         }else{
-                                            header('location: Section_Page_Admin.php');
+                                            header("Location: Section_Page_Admin.php?insert_msg=Section has been edit successfully");
+                                            exit();
                                         }
                                     }
 

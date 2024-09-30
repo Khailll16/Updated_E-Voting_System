@@ -29,7 +29,7 @@ body {
 
 .notification {
   display: none;
-  background-color: #F8F8FF;
+  background-color: #F7F7F6;
   /* Green */
   color: #24724D;
   border: 3px solid #24724D;
@@ -62,7 +62,7 @@ body {
   left: 0;
   height: 100%;
   width: 290px;
-  background-color: white;
+  background-color: #F8F8FF;
   transition: var(--tran-05);
   z-index: 100;
   border: 2.9px solid #dcdcdc;
@@ -589,7 +589,7 @@ td {
 }
 
 tr:hover td {
-  background-color: #F7F7F6;
+  background-color: #ECECEC;
   cursor: pointer;
 }
 

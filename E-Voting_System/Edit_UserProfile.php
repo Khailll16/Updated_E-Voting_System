@@ -131,7 +131,7 @@
                                             if (!$result) {
                                                 die("Invalid query: " . $conn->error);
                                             } else {
-                                                header("Location: View_UserProfile.php?insert_msg=Admin profile has been edit successfully");
+                                                header("Location: View_UserProfile.php?insert_msg=Account has been edit successfully");
                                                 exit();
                                             }
                                         }

@@ -616,11 +616,10 @@ a {
 .platform-container {
   text-align: justify;
 }
-
-.form-section-view {
-  display: flex;
-  flex-direction: column;
-  text-align: start;
+.form-section input{
+  background-color: white;
+  border: 1px solid #959191;
+  color: black;
 }
 
 .back-button {

@@ -590,7 +590,7 @@ td {
 }
 
 tr:hover td {
-  background-color: #F7F7F6;
+  background-color: #ECECEC;
   cursor: pointer;
 }
 

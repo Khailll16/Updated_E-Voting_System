@@ -120,10 +120,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                             <!-- Moved search-bar to the end -->
                                             <div class="search-bar">
-                                                <div class="search-container">
-                                                    <i class="bx bx-search icon"></i>
-                                                    <input type="text" class="search-input" placeholder="Search..." value="<?php echo $searchQuery; ?>">
-                                                </div>
+                                                    <div class="search-container">
+                                                        <form method="POST" action="">
+                                                            <i class="bx bx-search icon"></i>
+                                                            <input type="text" class="search-input" name="search" placeholder="Search..." value="<?php echo $searchQuery; ?>">
+                                                        </form>
+                                                    </div>
                                             </div>
                                         </div>
 

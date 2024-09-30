@@ -142,7 +142,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </tr>
 
                                                 <?php
-                                                $sql = "SELECT * FROM positions";
+                                                $sql = "SELECT * FROM positions WHERE
+                                                descrip LIKE '%$searchQuery%' OR
+                                                max_vote LIKE '%$searchQuery%'";
                                                 $result = $conn->query($sql);
 
                                                 if (!$result) {

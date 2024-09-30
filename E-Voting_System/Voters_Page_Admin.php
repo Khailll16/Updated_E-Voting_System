@@ -4,7 +4,10 @@ include "database_connect.php";
 include "Add_Voters.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
-
+    $searchQuery = '';
+    if (isset($_POST['search'])) {
+        $searchQuery = mysqli_real_escape_string($conn, $_POST['search']);
+    }
 ?>
 
     <!DOCTYPE html>
@@ -128,7 +131,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <div class="search-bar">
                                                 <div class="search-container">
                                                     <i class="bx bx-search icon"></i>
-                                                    <input type="text" class="search-input" placeholder="Search...">
+                                                    <input type="text" class="search-input" placeholder="Search..." value="<?php echo $searchQuery; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -150,7 +153,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
 
                                                 <?php
-                                                $sql = "SELECT * FROM voters";
+                                                $sql = "SELECT * FROM voters WHERE 
+                                                voters_lastname LIKE '%$searchQuery%' OR 
+                                                voters_firstname LIKE '%$searchQuery%' OR 
+                                                voters_id LIKE '%$searchQuery%' OR 
+                                                grade_id LIKE '%$searchQuery%' OR 
+                                                section_id LIKE '%$searchQuery%'";
                                                 $result = $conn->query($sql);
 
                                                 if (!$result) {

@@ -77,7 +77,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="ballot-section">
                                     <h3 class="official-ballot">OFFICIAL BALLOT</h3>
                                     <div class="ballot-title">
-                                        <img src="Images/school-logo-1.png" alt="" width="120px">
+                                    <img src="Images/<?php echo $row['logo_ballot'] ?>" alt="" width="120px">
                                         <h1><?php echo $row['title']; ?></h1>
                                     </div>
                                 <?php

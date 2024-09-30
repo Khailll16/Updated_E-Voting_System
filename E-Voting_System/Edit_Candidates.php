@@ -163,7 +163,7 @@
                                                     <input type="text" name="clname" class="input-field" value="<?php echo $row['candidate_lastname'] ?>">
                                                 </label>
                                                 <label for="" style="justify-content: end; display: flex;">Position
-                                                    <select class="input-field">
+                                                    <select class="input-field" name="position">
                                                         <option value="" selected="">- Select -</option>
                                                             <?php
                                                             $sql = "SELECT * FROM positions";
@@ -176,7 +176,7 @@
 
                                                                     while($row = mysqli_fetch_assoc($result)) {
                                                                         
-                                                                        echo "<option value='".$row['descrip']."'>".$row['descrip']."</option>";
+                                                                         echo "<option value='".$row['descrip']."'>".$row['descrip']."</option>";
                                                                         
                                                                     }
 

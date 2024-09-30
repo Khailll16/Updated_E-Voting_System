@@ -50,7 +50,7 @@
                             <img src="Images/rhea-removebg-preview.png" alt="Rhea Clarisse Esteban">
                             <div class="candidate-info">
                                 Rhea Clarisse Esteban
-                                <a href=""><button><i class="bx bx-play"></i>View</button></a>
+                                <a href="Voters_BallotView.php"><button><i class="bx bx-play"></i>View</button></a>
                             </div>
                         </label>
                     </div>
@@ -62,7 +62,7 @@
                             <img src="Images/jude-removebg-preview.png" alt="Rhea Clarisse Esteban">
                             <div class="candidate-info">
                                 Jude Ramos
-                                <a href=""><button><i class="bx bx-play"></i>View</button></a>
+                                <a href="Voters_BallotView.php"><button><i class="bx bx-play"></i>View</button></a>
                             </div>
                         </label>
                     </div>
@@ -74,7 +74,7 @@
                             <img src="Images/david-removebg-preview.png" alt="Rhea Clarisse Esteban">
                             <div class="candidate-info">
                                 David Amos
-                                <a href=""><button><i class="bx bx-play"></i>View</button></a>
+                                <a href="Voters_BallotView.php"><button><i class="bx bx-play"></i>View</button></a>
                             </div>
                         </label>
                     </div>
@@ -94,7 +94,7 @@
                             <img src="Images/rhea-removebg-preview.png" alt="Rhea Clarisse Esteban">
                             <div class="candidate-info">
                                 Rhea Clarisse Esteban
-                                <a href=""><button><i class="bx bx-play"></i>View</button></a>
+                                <a href="Voters_BallotView.php"><button><i class="bx bx-play"></i>View</button></a>
                             </div>
                         </label>
                     </div>
@@ -106,7 +106,7 @@
                             <img src="Images/jude-removebg-preview.png" alt="Rhea Clarisse Esteban">
                             <div class="candidate-info">
                                 Jude Ramos
-                                <a href=""><button><i class="bx bx-play"></i>View</button></a>
+                                <a href="Voters_BallotView.php"><button><i class="bx bx-play"></i>View</button></a>
                             </div>
                         </label>
                     </div>
@@ -144,7 +144,8 @@
                                 </g>
                             </g>
                         </svg>Reset</button>
-                    <button type="submit" class="save-btn"><svg fill="#000000" version="1.1" id="Capa_1"
+                        
+                        <button type="submit" class="save-btn"><svg fill="#000000" version="1.1" id="Capa_1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
                             height="15px" style="fill: white;" viewBox="0 0 407.096 407.096" xml:space="preserve">
                             <g>

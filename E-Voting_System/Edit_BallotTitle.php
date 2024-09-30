@@ -95,11 +95,29 @@
                                             $idnew = $_GET['id_new'];
                                         }
                                         $title = $_POST['titleballot'];
-                                        //$lname = $_POST['admin_lname'];
-                                        //$username = $_POST['admin_username'];
-                                        //$password = $_POST['admin_pass'];
 
-                                        $sql = "UPDATE `ballot` set `title` = '$title' where `id` = '$idnew' ";
+                                        $query = "SELECT logo_ballot FROM ballot WHERE id = '$idnew'";
+                                            $result = mysqli_query($conn, $query);
+                                            $row = mysqli_fetch_assoc($result);
+                                            $photo = $row['logo_ballot'];
+
+                                            if (isset($_FILES['logoballot']['name']) && $_FILES['logoballot']['name'] != '') {
+                                                $size = $_FILES['logoballot']['size'];
+                                                $temp = $_FILES['logoballot']['tmp_name'];
+                                                $type = $_FILES['logoballot']['type'];
+                                                $picturename = $_FILES['logoballot']['name'];
+
+                                                if (!empty($photo)) {
+                                                    unlink("Images/$photo");
+                                                }
+                                                move_uploaded_file($temp, "Images/$picturename");
+                                            } else {
+                                                $picturename = $photo;
+                                            }
+                                        
+
+                                        $sql = "UPDATE `ballot` set `title` = '$title', `logo_ballot` = '$picturename' 
+                                        WHERE `id` = '$idnew'";
 
                                     $result = mysqli_query($conn, $sql);
                                                                             
@@ -113,7 +131,7 @@
 
                                 ?>
 
-                                    <form action="Edit_BallotTitle.php?id_new=<?php echo $id; ?>" method="POST">
+                                    <form action="Edit_BallotTitle.php?id_new=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
 
                                         <div class="container-ballot">
 
@@ -121,7 +139,7 @@
                                                 <div class="ballot-section">
                                                     <h3 class="official-ballot">OFFICIAL BALLOT</h3>
                                                     <div class="ballot-title">
-                                                        <img src="Images/school-logo-1.png" alt="" width="120px">
+                                                    <img src="Images/<?php echo $row['logo_ballot'] ?>" alt="" width="120px">
                                                         <h1><?php echo $row['title']; ?></h1>
                                                     </div>
                                                 </div>
@@ -133,7 +151,7 @@
                                                     <input type="text" name="titleballot" class="input-field" value="<?php echo $row['title'] ?>">
                                                 </label>
                                                 <label for="">New Logo
-                                                    <input type="file" class="input-field">
+                                                    <input type="file" name="logoballot" class="input-field" value="<?php echo $row['logo_ballot'] ?>">
                                                 </label>                                             
 
                                                 <div class="buttons">

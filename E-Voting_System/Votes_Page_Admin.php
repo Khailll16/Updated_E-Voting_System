@@ -1,13 +1,14 @@
 <?php
-    session_start();
-    include "database_connect.php";
+session_start();
+include "database_connect.php";
 
-    if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])){
+if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
 ?>
 
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
+
     <head>
         <link rel="stylesheet" href="VotesStyle_Page.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -15,37 +16,38 @@
         <title>Admin Votes Page | SIKHAY</title>
 
     </head>
+
     <body>
-    <div class="main-container">    
+        <div class="main-container">
 
             <!-----RIGHT SIDE CONTENT------>
             <div class="right-side">
 
                 <div class="right-side-content">
 
-                <!-----PROFILE ADMIN------>
+                    <!-----PROFILE ADMIN------>
                     <div class="top_content">
-                
-                            <div class="breadcrumb-content">
-                                <ol class="breadcrumb">
-                                    <li><a href="Votes_Page_Admin.php"><i class='bx bxs-dashboard icon'></i> Home</a></li>
-                                    <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> Votes </a></li>
-                                </ol>
-                            </div>
 
-                            <nav class="nav-burger">
-                                <i class='bx bx-menu icon' onclick="toggleMenu()"></i>
-                                <div class="menu-content">
-                                    <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
-                                    <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon' ></i> User Profile</a>
-                                    <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                                    <a style="border-radius: 0px 0px 15px 15px;" href="LogoutPage_Admin.php"><i class='bx bx-log-out icon'></i>Sign out</a>
-                                </div>
-                            </nav>
+                        <div class="breadcrumb-content">
+                            <ol class="breadcrumb">
+                                <li><a href="Votes_Page_Admin.php"><i class='bx bxs-dashboard icon'></i> Home</a></li>
+                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> Votes </a></li>
+                            </ol>
+                        </div>
+
+                        <nav class="nav-burger">
+                            <i class='bx bx-menu icon' onclick="toggleMenu()"></i>
+                            <div class="menu-content">
+                                <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
+                                <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
+                                <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
+                                <a style="border-radius: 0px 0px 15px 15px;" href="LogoutPage_Admin.php"><i class='bx bx-log-out icon'></i>Sign out</a>
+                            </div>
+                        </nav>
                     </div>
 
                     <!----DASHBOARD---->
-                <div  class="dashboard-body">
+                    <div class="dashboard-body">
 
                         <div class="dashboard-content">
 
@@ -57,15 +59,15 @@
                                 </div>
 
                                 <div class="add-button">
-                                    <button id = "resetposition_openPopup" class="button-add"><i class='bx bx-reset'></i>Reset</button>
+                                    <button id="resetposition_openPopup" class="button-add"><i class='bx bx-reset'></i>Reset</button>
                                 </div>
 
                             </div>
-                            
+
                             <div class="voters-list-container">
                                 <div class="voters-list-content">
                                     <table class="voters-table">
-                                        
+
 
                                         <!--------ENTRIES SEARCH BAR CONTAINER-------->
                                         <div class="entries-search-bar-container">
@@ -76,35 +78,32 @@
                                                     <option>25</option>
                                                     <option>50</option>
                                                     <option>100</option>
-                                                </select> 
+                                                </select>
                                                 <label>Entries</label>
                                             </div>
-                                        
+
                                             <div class="grade-section">
                                                 <div class="grade-selection">
                                                     <select name="" id="">
                                                         <option>Position</option>
                                                         <?php
-                                                            $sql = "SELECT * FROM positions";
-                                                            $result = $conn->query($sql);
+                                                        $sql = "SELECT * FROM positions";
+                                                        $result = $conn->query($sql);
 
-                                                                if(!$result){
-                                                                    die("Invalid query: " . $conn->error);
-                                                                }
-                                                                else{
+                                                        if (!$result) {
+                                                            die("Invalid query: " . $conn->error);
+                                                        } else {
 
-                                                                    while($row = mysqli_fetch_assoc($result)) {
-                                                                        
-                                                                        echo "<option value='".$row['descrip']."'>".$row['descrip']."</option>";
-                                                                        
-                                                                    }
+                                                            while ($row = mysqli_fetch_assoc($result)) {
 
-                                                                }
-                                                            ?>
+                                                                echo "<option value='" . $row['descrip'] . "'>" . $row['descrip'] . "</option>";
+                                                            }
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
-                                        
+
                                             <!-- Moved search-bar to the end -->
                                             <div class="search-bar">
                                                 <div class="search-container">
@@ -114,49 +113,54 @@
                                             </div>
                                         </div>
 
-                                    
+
 
 
                                         <div class="table-container">
                                             <table class="voters-list">
-                                                    <tr>
-                                                        <th style="border-radius: 23px 0px 0px 0px;">Positions</th>
-                                                        <th>Candidates</th>
-                                                        <th style="border-radius: 0px 23px 0px 0px;">Voters</th>
-                                                    </tr>
-                                                    <?php
-                                                        $sql = "SELECT * FROM votes";
-                                                        $result = $conn->query($sql);
+                                                <tr>
+                                                    <th style="border-radius: 23px 0px 0px 0px;">Positions</th>
+                                                    <th>Candidates</th>
+                                                    <th style="border-radius: 0px 23px 0px 0px;">Voters</th>
+                                                </tr>
+                                                <?php
+                                                $sql = "SELECT * FROM votes";
+                                                $result = $conn->query($sql);
 
-                                                        if(!$result){
-                                                            die("Invalid query: " . $conn->error);
-                                                        }else{
-                                                        while($row = mysqli_fetch_assoc($result)) {
-                                                    ?>
+                                                if (!$result) {
+                                                    die("Invalid query: " . $conn->error);
+                                                } else {
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                ?>
 
-                                                    <tr>
-                                                        <td><?php echo $row['position_id'];?></td>
-                                                        <td><?php echo $row['candidate_id'];?></td>
-                                                        <td><?php echo $row['voters_id'];?></td>
-                                                    </tr>
+                                                        <tr>
+                                                            <td><?php echo $row['position_id']; ?></td>
+                                                            <td><?php echo $row['candidate_id']; ?></td>
+                                                            <td><?php echo $row['voters_id']; ?></td>
+                                                        </tr>
 
-                                                        <?php
-                                                            }
-                                                        }
-                                                    ?>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
 
-                                                    <tr>
-                                                        <td colspan="3" style=" padding: 17px; background-color: #24724D;"></td>
-                                                    </tr>
+                                                <tr>
+                                                    <td colspan="3" style=" padding: 17px; background-color: #24724D;"></td>
+                                                </tr>
                                             </table>
-                                        </div>  
+                                            <div class="pagination-content">
+                                                <div class="pagination">
+                                                    <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
+                                                    <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </table>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
-                        
                 </div>
 
 
@@ -165,16 +169,16 @@
 
                     <!-----MENU BAR------>
                     <div class="menu-bar">
-                            <?php
-                                    $sql = "SELECT * FROM `setup`";
-                                    $result = $conn->query($sql);
+                        <?php
+                        $sql = "SELECT * FROM `setup`";
+                        $result = $conn->query($sql);
 
-                                        if(!$result){
-                                            die("Invalid query: " . $conn->error);
-                                        }else{
-                                                ($row = mysqli_fetch_assoc($result));
-                                            }                
-                            ?>
+                        if (!$result) {
+                            die("Invalid query: " . $conn->error);
+                        } else {
+                            ($row = mysqli_fetch_assoc($result));
+                        }
+                        ?>
 
                         <!-----SIDEBAR TOP CONTENT-->
                         <div class="sidebar-content">
@@ -182,116 +186,115 @@
 
                                 <!------SIKHAY LOGO-->
                                 <div class="sikhay-logo">
-                                    <img src="Organization/<?php echo $row ['logo']?>" alt="" width="55px">
+                                    <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="55px">
                                     <div class="school-name">
-                                        <p style="color: #4A4A4A; font-size: 14px;"><?php echo$row['organization_name'];?></p>
+                                        <p style="color: #4A4A4A; font-size: 14px;"><?php echo $row['organization_name']; ?></p>
                                         <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                     </div>
                                 </div>
 
-                                  <!-----PROFILE ADMIN------>
+                                <!-----PROFILE ADMIN------>
                                 <header class="sidebar-profile">
                                     <div class="image-text">
-                                    <?php
-                                    $sql = "SELECT * FROM `admin`";
+                                        <?php
+                                        $sql = "SELECT * FROM `admin`";
                                         $result = $conn->query($sql);
 
-                                            if(!$result){
-                                                die("Invalid query: " . $conn->error);
-                                                }
-                                                else{
-                                                ($row = mysqli_fetch_assoc($result)) 
-                                                           
-                                ?>
-                                        <span class="image">
-                                            <img id="picture-admin" src="Images/<?php echo $row ['admin_profile']?>" alt="">
-                                        </span>
-                                        <div class="text header-text">
-                                            <p id="name-admin"><?php echo $row['firstname'];?> <?php echo $row['lastname']; ?></p>
-                                            <span class="name">Online</span>
-                                        </div>
-                                            <?php
+                                        if (!$result) {
+                                            die("Invalid query: " . $conn->error);
+                                        } else {
+                                            ($row = mysqli_fetch_assoc($result))
+
+                                        ?>
+                                            <span class="image">
+                                                <img id="picture-admin" src="Images/<?php echo $row['admin_profile'] ?>" alt="">
+                                            </span>
+                                            <div class="text header-text">
+                                                <p id="name-admin"><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></p>
+                                                <span class="name">Online</span>
+                                            </div>
+                                        <?php
                                         }
-                                    ?>
+                                        ?>
                                     </div>
                                 </header>
 
                             </div>
                         </div>
 
-                          <!-----MENU------>
+                        <!-----MENU------>
                         <div class="menu">
 
-                              <!-----MENU LINKS------>
-                            <ul class="menu-links"> 
+                            <!-----MENU LINKS------>
+                            <ul class="menu-links">
 
-                                  <!-----DASHBOARD------>
+                                <!-----DASHBOARD------>
                                 <li class="nav-link">
                                     <a href="Dashboard_Page.php">
                                         <i class='bx bxs-dashboard icon'></i>
                                         <span class="text nav-text">DashBoard</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----VOTES------>
+                                <!-----VOTES------>
                                 <li class="nav-link">
                                     <a href="Votes_Page_Admin.php">
                                         <i class='bx bxs-box icon'></i>
                                         <span class="text nav-text">Votes</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                   <!-----Sections------>
+                                <!-----Sections------>
                                 <li class="nav-link">
                                     <a href="Section_Page_Admin.php">
                                         <i class='bx bxs-objects-horizontal-left icon'></i>
                                         <span class="text nav-text">Sections</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----VOTERS------>
+                                <!-----VOTERS------>
                                 <li class="nav-link">
                                     <a href="Voters_Page_Admin.php">
                                         <i class='bx bxs-group icon'></i>
                                         <span class="text nav-text">Voters</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----POSITIONS------>
+                                <!-----POSITIONS------>
                                 <li class="nav-link">
                                     <a href="Position_Page_Admin.php">
                                         <i class='bx bxs-objects-horizontal-left icon'></i>
                                         <span class="text nav-text">Positions</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----CANDIDATES------>
+                                <!-----CANDIDATES------>
                                 <li class="nav-link">
                                     <a href="Candidates_Page_Admin.php">
                                         <i class='bx bxs-user-account icon'></i>
                                         <span class="text nav-text">Candidates</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----BALLOT POSITIONS------>
+                                <!-----BALLOT POSITIONS------>
                                 <li class="nav-link">
                                     <a href="BallotPosition_Page_Admin.php">
                                         <i class='bx bxs-detail icon'></i>
                                         <span class="text nav-text">Ballot Position</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
                             </ul>
                         </div>
 
 
-                          <!-----BUTTON CONTENT------>
+                        <!-----BUTTON CONTENT------>
                         <div class="bottom-content">
 
-                              <!-----LOG OUT------>
+                            <!-----LOG OUT------>
                             <li class="">
-                
-      
+
+
                         </div>
 
 
@@ -306,7 +309,7 @@
                         <div class="resetposition_popup-top">
                             <h2>RESET VOTES</h2>
                         </div>
-            
+
                         <div class="resetposition_popup-forms">
                             <form action="save.php" method="POST">
                                 <div class="warning-description">
@@ -320,14 +323,14 @@
                                         </svg>
                                         Close</button>
                                     <button type="submit" class="save-btn"> <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: white;" viewBox="0 0 512 512" xml:space="preserve">
-                                        <g>
-                                          <g>
-                                            <path d="M256,0C114.615,0,0,114.615,0,256s114.615,256,256,256c118.252,0,218.898-81.941,247.035-192h-67.912
+                                            <g>
+                                                <g>
+                                                    <path d="M256,0C114.615,0,0,114.615,0,256s114.615,256,256,256c118.252,0,218.898-81.941,247.035-192h-67.912
                                               c-26.55,73.368-96.47,128-179.123,128c-105.869,0-192-86.131-192-192S150.131,64,256,64c63.013,0,118.685,29.652,154.629,76.106
                                               l-85.803,64.352H512V0l-86.65,64.928C374.073,24.008,317.339,0,256,0z"></path>
-                                          </g>
-                                        </g>
-                                      </svg>
+                                                </g>
+                                            </g>
+                                        </svg>
                                         Reset</button>
                                 </div>
                             </form>
@@ -339,14 +342,15 @@
             </div>
         </div>
 
-      <script src="Election_Title.js"></script>    
-      <script src="hamburger-navbar.js"></script>
+        <script src="Election_Title.js"></script>
+        <script src="hamburger-navbar.js"></script>
     </body>
-</html>
+
+    </html>
 
 <?php
-    }else{
-        header("Location: Dashboard_Page.php");
-        exit();
-    }
+} else {
+    header("Location: Dashboard_Page.php");
+    exit();
+}
 ?>

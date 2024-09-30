@@ -324,7 +324,7 @@ display: inline-block;
   background-color: red;
   border: transparent;
   border-radius: 30px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .entries-search-bar-container {
@@ -433,6 +433,7 @@ table {
   float: right;
   display: flex;
   gap: 6px;
+  margin-bottom: 15px;
 }
 .pagination a{
   text-decoration: none;
@@ -613,5 +614,14 @@ td {
   text-align: center;
   color: #24724D;
   margin-bottom: 20px;
+}
+.pagination p{
+  background-color: #24724D;
+  padding: 5px 20px;
+  color: white;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 

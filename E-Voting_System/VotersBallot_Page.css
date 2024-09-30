@@ -1,22 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap');
-*{
+
+* {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     height: 100vh;
     background: white;
     transition: var(--tran-05);
 
 }
-main{
+
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .ballot-section {
     width: 100%;
     max-width: 900px;
@@ -27,17 +30,20 @@ main{
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     background: #F7F7F6;
 }
+
 .ballot-section h3 {
     padding: 5px 20px;
     text-align: center;
     background-color: #24724D;
     color: white;
 }
+
 .ballot-title h1 {
     border-left: 3px solid #24724D;
     padding: 36px 0px 36px 30px;
     color: #24724D;
 }
+
 .ballot-title {
     display: flex;
     gap: 50px;
@@ -45,12 +51,14 @@ main{
     padding: 0px 0px 0px 40px;
     border-bottom: 3px solid #24724D;
 }
+
 .candidate {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
     flex-wrap: wrap;
 }
+
 .candidate button {
     background-color: #24724D;
     color: white;
@@ -62,6 +70,7 @@ main{
     border-radius: 10px;
     font-size: 14px;
 }
+
 .candidate label {
     display: flex;
     align-items: center;
@@ -71,12 +80,15 @@ main{
     font-size: 20px;
     font-weight: bold;
 }
-.candidate a{
+
+.candidate a {
     text-decoration: none;
 }
+
 .candidate input {
     margin: 15px;
 }
+
 .candidate img {
     margin-right: 15px;
     border-radius: 5px;
@@ -85,6 +97,7 @@ main{
     max-width: 100px;
     height: auto;
 }
+
 .form-group-button {
     display: flex;
     justify-content: center;
@@ -92,6 +105,7 @@ main{
     padding-top: 15px;
     padding-bottom: 80px;
 }
+
 .addCandidates_close-form-btn {
     background-color: white;
     justify-content: space-between;
@@ -106,6 +120,7 @@ main{
     gap: 5px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
+
 .save-btn {
     background-color: #24724D;
     justify-content: space-between;
@@ -120,26 +135,32 @@ main{
     gap: 5px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
+
 .logo-sikhay-submit {
     display: block;
     justify-content: center;
     text-align: center;
     color: #24724D;
 }
+
 .logo-sikhay-submit img {
     width: 250px;
 }
+
 .logo-sikhay-submit p {
     font-size: 10px;
 }
+
 .container {
     display: flex;
     gap: 50px;
     padding: 30px;
 }
+
 .profile-section {
     text-align: center;
 }
+
 .image-container {
     position: relative;
     width: 280px;
@@ -149,20 +170,24 @@ main{
     overflow: hidden;
     background-color: #BCBCBC;
 }
+
 #profile-picture {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .form-section {
     display: flex;
     flex-direction: column;
     text-align: end;
 }
+
 .form-section label {
     font-size: 18px;
     color: #555555;
 }
+
 .input-field {
     width: 290px;
     padding: 13px;
@@ -172,9 +197,11 @@ main{
     border-radius: 20px;
     margin-left: 20px;
 }
-.back-button{
+
+.back-button {
     padding: 20px 0px 0px 20px;
 }
+
 .back-button button {
     display: flex;
     align-items: center;
@@ -186,18 +213,22 @@ main{
     color: #24724D;
     font-weight: 500;
 }
+
 .back-button a {
     text-decoration: none;
 }
+
 .main-container {
     text-align: center;
     color: #24724D;
     padding: 30px 80px;
 }
-.main-container p{
+
+.main-container p {
     font-size: 25px;
 }
-.summary-button button{
+
+.summary-button button {
     padding: 8px 30px;
     font-size: 18px;
     color: white;
@@ -207,10 +238,8 @@ main{
     cursor: pointer;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-.summary-button{
+
+.summary-button {
     text-align: center;
-    margin: 40px 0px 35px 0px;  
+    margin: 40px 0px 35px 0px;
 }
-
-
-

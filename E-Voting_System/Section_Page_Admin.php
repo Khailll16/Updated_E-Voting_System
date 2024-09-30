@@ -164,7 +164,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <tr>
                                                     <td colspan="4" style=" padding: 17px; background-color: #24724D;"></td>
                                                 </tr>
+                                                
                                             </table>
+                                            <div class="pagination-content">
+                                                <div class="pagination">
+                                                    <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a> 
+                                                    <p>1</p>
+                                                    <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </table>
@@ -382,18 +390,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
         <script src="Election_Title.js"></script>
         <script src="hamburger-navbar.js"></script>
-        <script>
-            // JavaScript to display the notification for 5 seconds
-            window.onload = function() {
-                const notification = document.getElementById('notification');
-                if (notification.innerHTML.trim() !== '') {
-                    notification.style.display = 'block';
-                    setTimeout(() => {
-                        notification.style.display = 'none';
-                    }, 5000);
-                }
-            };
-        </script>
+        <script src="displayPopUpMessage.js"></script>
     </body>
 
     </html>

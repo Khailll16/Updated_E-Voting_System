@@ -72,6 +72,15 @@
                                 <h2 style="font-weight: 550;" class="header" id="breadcrup-title">ADMIN PROFILE</h2>
                             </div>
 
+                            <div class="notification" id="notification">
+                                <?php
+                                    if (isset($_GET['insert_msg'])) {
+                                        echo "<p><i class='bx bxs-check-circle'></i> Success!</p>";
+                                        echo htmlspecialchars($_GET['insert_msg']);
+                                    }
+                                ?>
+                            </div>
+
                             <div class="back-button">
                                 <button class="button-back"><a href="Dashboard_Page.php" style="color: white;"><i class='bx bx-arrow-back'></i>Back</a></button> 
                                 <button class="button-edit"><a href="Edit_UserProfile.php?id=<?php echo $row['id']; ?>" style="color: #24724D;"><i class='bx bx-edit' ></i>Edit</a></button>
@@ -87,8 +96,8 @@
                                                 <div class="image-container">
                                                     <img id="profile-picture" src="Images/<?php echo $row ['admin_profile']?>" alt="">
                                                 </div>
-                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['firstname'];?> <br> <?php echo $row['lastname'];?></p>
-                                                <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -10px;">Admin</p>
+                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['firstname'];?> <?php echo $row['lastname'];?></p>
+                                                <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;">Admin</p>
                                             </div>
                                     
                                             <div class="form-section-view">
@@ -272,6 +281,7 @@
     </div>
     <script src="hamburger-navbar.js"></script>
     <script src="Edit_Voters_Profile.js"></script>
+    <script src="displayPopUpMessage.js"></script>
 </body>
 
 </html>

@@ -91,8 +91,8 @@
                                                 <div class="image-container">
                                                     <img id="profile-picture" src="Candidates/<?php echo $row ['candidate_profile']?>" alt="">
                                                 </div>
-                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo$row['candidate_firstname'];?> <br> <?php echo$row['candidate_lastname'];?></p>
-                                                <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -10px;"><?php echo$row['position_id'];?></p>
+                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo$row['candidate_firstname'];?> <?php echo$row['candidate_lastname'];?></p>
+                                                <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo$row['position_id'];?></p>
                                             </div>
                                     
                                             <div class="form-section-view">

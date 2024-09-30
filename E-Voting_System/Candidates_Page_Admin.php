@@ -1,14 +1,15 @@
 <?php
-    session_start();
-    include "database_connect.php";
-    include "Add_Candidate.php";
+session_start();
+include "database_connect.php";
+include "Add_Candidate.php";
 
-    if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])){
+if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
 ?>
 
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
+
     <head>
         <link rel="stylesheet" href="CandidatesStyle_Page.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -16,29 +17,30 @@
         <title>Admin Candidates Page | SIKHAY</title>
 
     </head>
+
     <body>
-    <div class="main-container">    
+        <div class="main-container">
 
             <!-----RIGHT SIDE CONTENT------>
             <div class="right-side">
 
                 <div class="right-side-content">
 
-                <!-----PROFILE ADMIN------>
+                    <!-----PROFILE ADMIN------>
                     <div class="top_content">
-    
+
                         <div class="breadcrumb-content">
                             <ol class="breadcrumb">
                                 <li><a href="Candidates_Page_Admin.php"><i class='bx bxs-dashboard icon'></i> Home</a></li>
                                 <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> Candidates </a></li>
-                              </ol>
+                            </ol>
                         </div>
 
                         <nav class="nav-burger">
                             <i class='bx bx-menu icon' onclick="toggleMenu()"></i>
                             <div class="menu-content">
                                 <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
-                                <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon' ></i> User Profile</a>
+                                <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
                                 <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
                                 <a style="border-radius: 0px 0px 15px 15px;" href="LogoutPage_Admin.php"><i class='bx bx-log-out icon'></i>Sign out</a>
                             </div>
@@ -47,7 +49,7 @@
                     </div>
 
                     <!----DASHBOARD---->
-                    <div  class="dashboard-body">
+                    <div class="dashboard-body">
 
                         <div class="dashboard-content">
 
@@ -58,16 +60,25 @@
                                     <h2 style="font-weight: 550;" class="header" id="breadcrup-title">CANDIDATES LIST</h2>
                                 </div>
 
+                                <div class="notification" id="notification">
+                                    <?php
+                                    if (isset($_GET['insert_msg'])) {
+                                        echo "<p><i class='bx bxs-check-circle'></i> Success!</p>";
+                                        echo htmlspecialchars($_GET['insert_msg']);
+                                    }
+                                    ?>
+                                </div>
+
                                 <div class="add-button">
                                     <button id="addCandidates_openPopup" class="button-add"><i class='bx bxs-user-plus icon'></i>New</button>
                                 </div>
 
                             </div>
-                            
+
                             <div class="voters-list-container">
                                 <div class="voters-list-content">
                                     <table class="voters-table">
-                                        
+
 
                                         <!--------ENTRIES SEARCH BAR CONTAINER-------->
                                         <div class="entries-search-bar-container">
@@ -78,35 +89,32 @@
                                                     <option>25</option>
                                                     <option>50</option>
                                                     <option>100</option>
-                                                </select> 
+                                                </select>
                                                 <label>Entries</label>
                                             </div>
-                                        
+
                                             <div class="grade-section">
                                                 <div class="grade-selection">
                                                     <select name="" id="">
                                                         <option>Position</option>
                                                         <?php
-                                                            $sql = "SELECT * FROM positions";
-                                                            $result = $conn->query($sql);
+                                                        $sql = "SELECT * FROM positions";
+                                                        $result = $conn->query($sql);
 
-                                                                if(!$result){
-                                                                    die("Invalid query: " . $conn->error);
-                                                                }
-                                                                else{
+                                                        if (!$result) {
+                                                            die("Invalid query: " . $conn->error);
+                                                        } else {
 
-                                                                    while($row = mysqli_fetch_assoc($result)) {
-                                                                        
-                                                                        echo "<option value='".$row['descrip']."'>".$row['descrip']."</option>";
-                                                                        
-                                                                    }
+                                                            while ($row = mysqli_fetch_assoc($result)) {
 
-                                                                }
-                                                            ?>
+                                                                echo "<option value='" . $row['descrip'] . "'>" . $row['descrip'] . "</option>";
+                                                            }
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
-                                        
+
                                             <!-- Moved search-bar to the end -->
                                             <div class="search-bar">
                                                 <div class="search-container">
@@ -116,64 +124,72 @@
                                             </div>
                                         </div>
 
-                                    
+
 
 
                                         <div class="table-container">
                                             <table class="voters-list">
-                                                    <tr>
-                                                        <th style="border-radius: 23px 0px 0px 0px;">Photo</th>
-                                                        <th>Last Name</th>
-                                                        <th>First Name</th>
-                                                        <th>Position</th>                                                 
-                                                        <th style="border-radius: 0px 23px 0px 0px;">Actions</th>
-                                                    </tr>
+                                                <tr>
+                                                    <th style="border-radius: 23px 0px 0px 0px;">Photo</th>
+                                                    <th>Last Name</th>
+                                                    <th>First Name</th>
+                                                    <th>Position</th>
+                                                    <th style="border-radius: 0px 23px 0px 0px;">Actions</th>
+                                                </tr>
 
-                                                    <?php
-                                                        $sql = "SELECT * FROM candidates";
-                                                        $result = $conn->query($sql);
+                                                <?php
+                                                $sql = "SELECT * FROM candidates";
+                                                $result = $conn->query($sql);
 
-                                                        if(!$result){
-                                                            die("Invalid query: " . $conn->error);
-                                                        }
-                                                        else{
-                                                        while($row = mysqli_fetch_assoc($result)) {
-                                                        
-                                                                    ?>
-                                                                    
-                                                                        <tr>
-                                                                            <td>
-                                                                                <img src="Candidates/<?php echo $row['candidate_profile']?>" data-id="<?php echo $row['id']; ?>" width='80px' style='background-color: #ddd; border-radius: 3px;'>
-                                                                            </td>
-                                                                            <td> <?php echo $row['candidate_lastname']; ?>  </td>
-                                                                            <td> <?php echo $row['candidate_firstname']; ?> </td>
-                                                                            <td>
-                                                                                 <?php echo $row['position_id']; ?>
-                                                                            </td>
-                                                                            <td style="padding: 8px 0px;">
-                                                                                <div class="actions-button">
-                                                                                    <a href="View_Candidates.php?id=<?php echo $row['id']; ?>"><button class="view"><i class='bx bx-play'></i>View</button></a>
-                                                                                    <a href="Edit_Candidates.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i>Edit</button></a>         
-                                                                                    <a href="Delete_Candidates.php?id=<?php echo $row['id']; ?>"><button class="delete"><i class='bx bxs-trash' ></i>Delete</button></a>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    <?php 
-                                                                }
-                                                        }
-                                                    ?>
-                                                    <tr>
-                                                        <td colspan="7" style=" padding: 17px; background-color: #24724D;"></td>
-                                                    </tr>                                             
+                                                if (!$result) {
+                                                    die("Invalid query: " . $conn->error);
+                                                } else {
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+
+                                                ?>
+
+                                                        <tr>
+                                                            <td style="padding-top: 7px;">
+                                                                <img src="Candidates/<?php echo $row['candidate_profile'] ?>" data-id="<?php echo $row['id']; ?>" width='60px' style='background-color: #ddd; border-radius: 3px;'>
+                                                            </td>
+                                                            <td> <?php echo $row['candidate_lastname']; ?> </td>
+                                                            <td> <?php echo $row['candidate_firstname']; ?> </td>
+                                                            <td>
+                                                                <?php echo $row['position_id']; ?>
+                                                            </td>
+                                                            <td style="padding: 8px 0px;">
+                                                                <div class="actions-button">
+                                                                    <a href="View_Candidates.php?id=<?php echo $row['id']; ?>"><button class="view"><i class='bx bx-play'></i>View</button></a>
+                                                                    <a href="Edit_Candidates.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i>Edit</button></a>
+                                                                    <a href="Delete_Candidates.php?id=<?php echo $row['id']; ?>"><button class="delete"><i class='bx bxs-trash'></i>Delete</button></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+                                                <tr>
+                                                    <td colspan="7" style=" padding: 17px; background-color: #24724D;"></td>
+                                                </tr>
                                             </table>
-                                        </div>  
+
+                                            <div class="pagination-content">
+                                                <div class="pagination">
+                                                    <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
+                                                    <p>1</p>
+                                                    <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </table>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
-                        
+
                 </div>
 
 
@@ -183,14 +199,14 @@
                     <!-----MENU BAR------>
                     <div class="menu-bar">
                         <?php
-                            $sql = "SELECT * FROM `setup`";
-                            $result = $conn->query($sql);
+                        $sql = "SELECT * FROM `setup`";
+                        $result = $conn->query($sql);
 
-                                if(!$result){
-                                    die("Invalid query: " . $conn->error);
-                                }else{
-                                        ($row = mysqli_fetch_assoc($result));
-                                    }                
+                        if (!$result) {
+                            die("Invalid query: " . $conn->error);
+                        } else {
+                            ($row = mysqli_fetch_assoc($result));
+                        }
                         ?>
 
                         <!-----SIDEBAR TOP CONTENT-->
@@ -199,63 +215,62 @@
 
                                 <!------SIKHAY LOGO-->
                                 <div class="sikhay-logo">
-                                    <img src="Organization/<?php echo $row ['logo']?>" alt="" width="55px">
+                                    <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="55px">
                                     <div class="school-name">
-                                        <p style="color: #4A4A4A; font-size: 14px;"><?php echo $row['organization_name'];?></p>
+                                        <p style="color: #4A4A4A; font-size: 14px;"><?php echo $row['organization_name']; ?></p>
                                         <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                     </div>
                                 </div>
 
-                                  <!-----PROFILE ADMIN------>
+                                <!-----PROFILE ADMIN------>
                                 <header class="sidebar-profile">
                                     <div class="image-text">
-                                    <?php
-                                    $sql = "SELECT * FROM `admin`";
-                                    $result = $conn->query($sql);
+                                        <?php
+                                        $sql = "SELECT * FROM `admin`";
+                                        $result = $conn->query($sql);
 
-                                            if(!$result){
-                                                die("Invalid query: " . $conn->error);
-                                                }
-                                                else{
-                                                ($row = mysqli_fetch_assoc($result)) 
-                                                           
-                                ?>
-                                        <span class="image">
-                                            <img id="picture-admin" src="Images/<?php echo $row ['admin_profile']?>" alt="">
-                                        </span>
-                                        <div class="text header-text">
-                                            <p id="name-admin"><?php echo $row['firstname'];?> <?php echo $row['lastname']; ?></p>
-                                            <span class="name">Online</span>
-                                        </div>
-                                            <?php
+                                        if (!$result) {
+                                            die("Invalid query: " . $conn->error);
+                                        } else {
+                                            ($row = mysqli_fetch_assoc($result))
+
+                                        ?>
+                                            <span class="image">
+                                                <img id="picture-admin" src="Images/<?php echo $row['admin_profile'] ?>" alt="">
+                                            </span>
+                                            <div class="text header-text">
+                                                <p id="name-admin"><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></p>
+                                                <span class="name">Online</span>
+                                            </div>
+                                        <?php
                                         }
-                                    ?>
+                                        ?>
                                     </div>
                                 </header>
 
                             </div>
                         </div>
 
-                          <!-----MENU------>
+                        <!-----MENU------>
                         <div class="menu">
 
-                              <!-----MENU LINKS------>
-                            <ul class="menu-links"> 
+                            <!-----MENU LINKS------>
+                            <ul class="menu-links">
 
-                                  <!-----DASHBOARD------>
+                                <!-----DASHBOARD------>
                                 <li class="nav-link">
                                     <a href="Dashboard_Page.php">
                                         <i class='bx bxs-dashboard icon'></i>
                                         <span class="text nav-text">DashBoard</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----VOTES------>
+                                <!-----VOTES------>
                                 <li class="nav-link">
                                     <a href="Votes_Page_Admin.php">
                                         <i class='bx bxs-box icon'></i>
                                         <span class="text nav-text">Votes</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
                                 <!-----Sections------>
@@ -263,53 +278,53 @@
                                     <a href="Section_Page_Admin.php">
                                         <i class='bx bxs-objects-horizontal-left icon'></i>
                                         <span class="text nav-text">Sections</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----VOTERS------>
+                                <!-----VOTERS------>
                                 <li class="nav-link">
                                     <a href="Voters_Page_Admin.php">
                                         <i class='bx bxs-group icon'></i>
                                         <span class="text nav-text">Voters</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----POSITIONS------>
+                                <!-----POSITIONS------>
                                 <li class="nav-link">
                                     <a href="Position_Page_Admin.php">
                                         <i class='bx bxs-objects-horizontal-left icon'></i>
                                         <span class="text nav-text">Positions</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----CANDIDATES------>
-                                  <li class="nav-link">
+                                <!-----CANDIDATES------>
+                                <li class="nav-link">
                                     <a href="Candidates_Page_Admin.php">
                                         <i class='bx bxs-user-account icon'></i>
                                         <span class="text nav-text">Candidates</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
-                                  <!-----BALLOT POSITIONS------>
+                                <!-----BALLOT POSITIONS------>
                                 <li class="nav-link">
                                     <a href="BallotPosition_Page_Admin.php">
                                         <i class='bx bxs-detail icon'></i>
                                         <span class="text nav-text">Ballot Position</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
                             </ul>
                         </div>
 
 
-                          <!-----BUTTON CONTENT------>
+                        <!-----BUTTON CONTENT------>
                         <div class="bottom-content">
 
-                              <!-----LOG OUT------>
+                            <!-----LOG OUT------>
                             <li class="">
-                                                   
+
                             </li>
-      
+
                         </div>
 
 
@@ -327,7 +342,7 @@
                         <div class="addCandidates_popup-top">
                             <h2>NEW CANDIDATE</h2>
                         </div>
-            
+
                         <div class="addCandidates_popup-forms">
                             <form action="Add_Candidate.php" autocomplete="off" enctype="multipart/form-data" method="POST">
                                 <div class="form-group-title">
@@ -340,26 +355,23 @@
                                 </div>
                                 <div class="form-group-position">
                                     <label for="position" class="col-sm-3 control-label">Position</label>
-                                        <select class="form-position" id="position" name="position" required="">
-                                            <option value="" selected="">- Select -</option>
-                                            <?php
-                                            $sql = "SELECT * FROM positions";
-                                            $result = $conn->query($sql);
+                                    <select class="form-position" id="position" name="position" required="">
+                                        <option value="" selected="">- Select -</option>
+                                        <?php
+                                        $sql = "SELECT * FROM positions";
+                                        $result = $conn->query($sql);
 
-                                                if(!$result){
-                                                    die("Invalid query: " . $conn->error);
-                                                }
-                                                else{
+                                        if (!$result) {
+                                            die("Invalid query: " . $conn->error);
+                                        } else {
 
-                                                    while($row = mysqli_fetch_assoc($result)) {
-                                                        
-                                                        echo "<option value='".$row['descrip']."'>".$row['descrip']."</option>";
-                                                        
-                                                    }
+                                            while ($row = mysqli_fetch_assoc($result)) {
 
-                                                }
-                                            ?>
-                                        </select>
+                                                echo "<option value='" . $row['descrip'] . "'>" . $row['descrip'] . "</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="form-group-photo">
                                     <label for="candidate-profile">Photo</label>
@@ -387,7 +399,7 @@
                                                     <path d="M402.115,84.008L323.088,4.981C319.899,1.792,315.574,0,311.063,0H17.005C7.613,0,0,7.614,0,17.005v373.086
                                                         c0,9.392,7.613,17.005,17.005,17.005h373.086c9.392,0,17.005-7.613,17.005-17.005V96.032
                                                         C407.096,91.523,405.305,87.197,402.115,84.008z M300.664,163.567H67.129V38.862h233.535V163.567z" />
-                                                                                    <path d="M214.051,148.16h43.08c3.131,0,5.668-2.538,5.668-5.669V59.584c0-3.13-2.537-5.668-5.668-5.668h-43.08
+                                                    <path d="M214.051,148.16h43.08c3.131,0,5.668-2.538,5.668-5.669V59.584c0-3.13-2.537-5.668-5.668-5.668h-43.08
                                                         c-3.131,0-5.668,2.538-5.668,5.668v82.907C208.383,145.622,210.92,148.16,214.051,148.16z" />
                                                 </g>
                                             </g>
@@ -398,7 +410,7 @@
                         </div>
                     </div>
                 </div>
-                    
+
 
             </div>
         </div>
@@ -406,12 +418,14 @@
         <script src="Election_Title.js"></script>
         <script src="Add_Candidates_FormPopup.js"></script>
         <script src="hamburger-navbar.js"></script>
+        <script src="displayPopUpMessage.js"></script>
     </body>
-</html>
+
+    </html>
 
 <?php
-    }else{
-        header("Location: Dashboard_Page.php");
-        exit();
-    }
+} else {
+    header("Location: Dashboard_Page.php");
+    exit();
+}
 ?>

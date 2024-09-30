@@ -130,7 +130,8 @@
                                             if (!$result) {
                                                 die("Invalid query: " . $conn->error);
                                             } else {
-                                                header('location: View_WebSetup.php');
+                                                header("Location: View_WebSetup.php?insert_msg=Organization has been edit successfully");
+                                                exit();
                                             }
                                         }
 
@@ -327,6 +328,7 @@
             </nav>
         </div>
     </div>
+    <script src="Election_Title.js"></script>
     <script src="hamburger-navbar.js"></script>
     <script src="Edit_Voters_Profile.js"></script>
 </body>

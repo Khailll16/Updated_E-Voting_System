@@ -129,7 +129,8 @@
                                             if (!$result) {
                                                 die("Invalid query: " . $conn->error);
                                             } else {
-                                                header('location: Candidates_Page_Admin.php');
+                                                header("Location: Candidates_Page_Admin.php?insert_msg=Candidates has been edit successfully");
+                                                exit();
                                             }
                                         }
 

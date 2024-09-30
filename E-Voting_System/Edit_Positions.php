@@ -104,7 +104,8 @@
                                         if (!$result) {
                                             die("Invalid query: " . $conn->error);
                                         }else{
-                                            header('location: Position_Page_Admin.php');
+                                            header("Location: Position_Page_Admin.php?insert_msg=Position has been edit successfully");
+                                            exit(); 
                                         }
                                     }
 

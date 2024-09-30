@@ -106,7 +106,8 @@
                                         if (!$result) {
                                             die("Invalid query: " . $conn->error);
                                         }else{
-                                            header('location: BallotPosition_Page_Admin.php');
+                                            header("Location: BallotPosition_Page_Admin.php?insert_msg=Ballot has been edit successfully");
+                                            exit();
                                         }
                                     }
 

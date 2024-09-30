@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap');
 
-*{
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-:root{
+:root {
   --body-color: #ffffff;
   --sidebar-color: #FFF;
   --primary-color: #FDC323;
@@ -19,15 +19,44 @@
   --tran-04: all 0.4s ease;
   --tran-05: all 0.5s ease;
 }
-body{
+
+body {
   height: 100vh;
   background: white;
   transition: var(--tran-05);
 
 }
 
+.notification {
+  display: none;
+  background-color: #F7F7F6;
+  /* Green */
+  color: #24724D;
+  border: 3px solid #24724D;
+  text-align: center;
+  padding: 20px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  border-radius: 20px;
+  z-index: 1000;
+  /* Make sure it's above other elements */
+  animation: fadeIn 0.5s;
+}
+
+.notification p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  font-size: 20px;
+  gap: 5px;
+}
+
 /* ------SideBar------ */
-.sidebar{
+.sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -41,20 +70,22 @@ body{
   border-bottom: 0px;
   border-left: 0px;
 }
+
 /* ------Reusable CSS------ */
-.sidebar .text{
+.sidebar .text {
   font-size: 16px;
   font-weight: 500;
   white-space: nowrap;
 }
-.sidebar .image{
+
+.sidebar .image {
   min-width: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.sidebar li{
+.sidebar li {
   height: 50px;
   margin-top: 10px;
   list-style: none;
@@ -62,7 +93,7 @@ body{
   align-items: center;
 }
 
-.sidebar li .icon{
+.sidebar li .icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,70 +102,79 @@ body{
 }
 
 .sidebar li .icon,
-.sidebar li .text{
+.sidebar li .text {
   color: var(--text-color);
   transition: var(--tran-02);
 }
 
-.sidebar header .image-text{
+.sidebar header .image-text {
   display: flex;
   align-items: center;
 }
-.top_content li{
-    list-style: none;
+
+.top_content li {
+  list-style: none;
 }
-.top_content span{
-    color:#323232;
+
+.top_content span {
+  color: #323232;
 }
-.top_content .search-box{
-    background-color: var(--primary-color-light);
-    border-radius: 100px;
-    border: 1px solid #000;
-    height: 45px;
-    width: 350px;
-    padding: 10px;
-    transition: var(--tran-05);
-    display: flex;
-    margin-left: 400px;
-    margin-top: 16px;
+
+.top_content .search-box {
+  background-color: var(--primary-color-light);
+  border-radius: 100px;
+  border: 1px solid #000;
+  height: 45px;
+  width: 350px;
+  padding: 10px;
+  transition: var(--tran-05);
+  display: flex;
+  margin-left: 400px;
+  margin-top: 16px;
 }
-.search-box input{
-    height: 90%;
-    width: 90%;
-    outline: none;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 500;
-    background-color: var(--primary-color-light);
-    transition: var(--tran-05);
+
+.search-box input {
+  height: 90%;
+  width: 90%;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: var(--primary-color-light);
+  transition: var(--tran-05);
 }
-.sidebar li a{
-    height: 100%;
-    width: 100%;
-    text-decoration: none;
-    align-items: center;
-    display: flex;
-    border-radius: 100px;
-    transition: var(--tran-04);
+
+.sidebar li a {
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+  border-radius: 100px;
+  transition: var(--tran-04);
 }
-.sidebar li a:hover{
+
+.sidebar li a:hover {
   background-color: var(--primary-color);
   --text-color: #FFFFFF;
   border-radius: 100px;
-  background: rgb(15,162,92);
-  background: linear-gradient(90deg, rgba(15,162,92,1) 0%, rgba(229,207,0,1) 93%, rgba(229,207,0,1) 100%);
+  background: rgb(15, 162, 92);
+  background: linear-gradient(90deg, rgba(15, 162, 92, 1) 0%, rgba(229, 207, 0, 1) 93%, rgba(229, 207, 0, 1) 100%);
 }
-.sidebar .menu-bar{
-    height: calc(100% - 10px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+
+.sidebar .menu-bar {
+  height: calc(100% - 10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-i{
-    cursor: pointer;
+
+i {
+  cursor: pointer;
 }
-.sikhay-logo{
+
+.sikhay-logo {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -147,41 +187,44 @@ i{
 
 
 /*----side bar profile----*/
-.sidebar .sidebar-profile{
-    position: relative;
-    margin-left: 13.9px;
-    padding: 10px 14px;
+.sidebar .sidebar-profile {
+  position: relative;
+  margin-left: 13.9px;
+  padding: 10px 14px;
 }
 
-.sidebar-profile .image-text img{
-    width: 55px;
-    border-radius: 6px;
-    border-radius: 50%;
-    background-color: white;
-    border: 3px solid #24724D;
+.sidebar-profile .image-text img {
+  width: 55px;
+  border-radius: 6px;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid #24724D;
 }
 
-.sidebar-profile .image-text{
-    display: flex;
-    align-items: center;
+.sidebar-profile .image-text {
+  display: flex;
+  align-items: center;
 }
 
-.sidebar-profile .header-text{
+.sidebar-profile .header-text {
   padding: 10px;
 }
 
-.sidebar-profile p{
-    font-weight: 500;
-    font-size: 16px;
-    color: #24724D;
+.sidebar-profile p {
+  font-weight: 500;
+  font-size: 16px;
+  color: #24724D;
 }
-.sidebar-profile span{
-    font-weight: lighter;
-    color: #24724D;
+
+.sidebar-profile span {
+  font-weight: lighter;
+  color: #24724D;
 }
-.menu{
+
+.menu {
   padding: 10px 14px;
 }
+
 .school-name {
   padding-top: 4px;
 }
@@ -190,7 +233,7 @@ i{
 
 
 /*------Right Side-----*/
-  
+
 .right-side {
   margin-left: 290px;
 }
@@ -221,14 +264,14 @@ i{
   z-index: 1000;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   opacity: 0;
-  transform: translateY(-20px); 
+  transform: translateY(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .menu-content.show {
   display: block;
   opacity: 1;
-  transform: translateY(0); 
+  transform: translateY(0);
 }
 
 .menu-content h2 {
@@ -250,9 +293,10 @@ i{
   padding: 10px 20px;
   font-weight: lighter;
 }
-.menu-content .icon{
- font-size: 30px;
- color: #4A4A4A;
+
+.menu-content .icon {
+  font-size: 30px;
+  color: #4A4A4A;
 }
 
 .menu-content a:hover {
@@ -267,46 +311,50 @@ i{
 
 /*------BreadCrump------*/
 
-.breadcrumb{
-    display: flex;
-    gap: 15px;
-    font-size: 16px;
+.breadcrumb {
+  display: flex;
+  gap: 15px;
+  font-size: 16px;
 }
-.breadcrumb-content{
+
+.breadcrumb-content {
   display: inline-block;
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.breadcrumb li a{
-    text-decoration: none;
-    color: white;
-    height: 100%;
-    width: 100%;
-    text-decoration: none;
-    align-items: center;
-    display: flex;
-    gap: 5px;
+
+.breadcrumb li a {
+  text-decoration: none;
+  color: white;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+  gap: 5px;
 }
 
 
 /*----Dashboard body----*/
 
-.dashboard-body{
+.dashboard-body {
   margin-top: 15px;
   margin-bottom: 15px;
   padding: 0px 18px 0px 18px;
   color: #24724D;
 }
 
-.dashboard-content .header{
+.dashboard-content .header {
   margin-bottom: 15px;
 }
-.voters-list-container{
+
+.voters-list-container {
   margin-bottom: 15px;
   font-weight: lighter;
 }
+
 .Voters-list-title {
-display: inline-block;
+  display: inline-block;
 }
 
 .add-button button:hover,
@@ -315,12 +363,13 @@ display: inline-block;
 .view:hover {
   opacity: 0.9;
 }
-.add-button button{
+
+.add-button button {
   cursor: pointer;
 }
 
 /*----add-button-container----*/
-.second-content .button-add{
+.second-content .button-add {
   font-size: 15px;
   padding: 5px 25px;
   display: flex;
@@ -335,92 +384,106 @@ display: inline-block;
 }
 
 .entries-search-bar-container {
-font-size: 18px;
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between; /* Adjusts items spacing */
-align-items: center; /* Centers items vertically */
-margin-top: 20px;
-gap: 20px;
+  font-size: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* Adjusts items spacing */
+  align-items: center;
+  /* Centers items vertically */
+  margin-top: 20px;
+  gap: 20px;
 }
 
-.selector-entries, .grade-section, .search-bar {
-flex: 1; /* Makes each section responsive */
-min-width: 200px; /* Sets a minimum width for smaller screens */
+.selector-entries,
+.grade-section,
+.search-bar {
+  flex: 1;
+  /* Makes each section responsive */
+  min-width: 200px;
+  /* Sets a minimum width for smaller screens */
 }
 
 .selector-entries {
-display: flex;
-align-items: center;
-flex-wrap: wrap;
-position: relative;
-gap: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  gap: 8px;
 }
 
 .selector-entries label {
-font-size: 15px;
+  font-size: 15px;
 }
 
 select {
-border-radius: 3px;
-border: 1.9px solid;
-align-items: center;
-display: flex;
-font-size: 15px;
-color: #9F9898;
+  border-radius: 3px;
+  border: 1.9px solid;
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+  color: #9F9898;
 }
 
 .grade-section {
-display: flex;
-gap: 10px;
-flex-wrap: wrap; /* Makes it wrap on smaller screens */
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  /* Makes it wrap on smaller screens */
 }
 
 .grade-selection select,
 .section-selection select {
-padding: 5px 15px;
-border-radius: 10px;
+  padding: 5px 15px;
+  border-radius: 10px;
 }
 
 .search-bar {
-display: flex;
-justify-content: flex-end; /* Aligns search bar to the right */
+  display: flex;
+  justify-content: flex-end;
+  /* Aligns search bar to the right */
 }
 
 .search-container {
-display: flex;
-align-items: center;
-border-radius: 25px;
-background-color: #ECECEC;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-padding: 1px 10px;
-max-width: 400px;
-width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  background-color: #ECECEC;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1px 10px;
+  max-width: 400px;
+  width: 100%;
 }
-.search-container .icon{
-font-size: 35px;
+
+.search-container .icon {
+  font-size: 35px;
 }
 
 .search-input {
-background-color: #ECECEC;
-border: none;
-outline: none;
-padding: 10px;
-flex: 1;
-border-radius: 25px;
-font-size: 16px;
+  background-color: #ECECEC;
+  border: none;
+  outline: none;
+  padding: 10px;
+  flex: 1;
+  border-radius: 25px;
+  font-size: 16px;
 }
 
 /* Media query for responsiveness */
 @media (max-width: 768px) {
-.entries-search-bar-container {
-    flex-direction: column; /* Stacks elements on smaller screens */
-    align-items: stretch; /* Makes elements take full width */
-}
+  .entries-search-bar-container {
+    flex-direction: column;
+    /* Stacks elements on smaller screens */
+    align-items: stretch;
+    /* Makes elements take full width */
+  }
 
-.selector-entries, .grade-section, .search-bar {
-    min-width: 100%; /* Sets elements to full width on smaller screens */
-}
+  .selector-entries,
+  .grade-section,
+  .search-bar {
+    min-width: 100%;
+    /* Sets elements to full width on smaller screens */
+  }
 }
 
 /*-----Table-----*/
@@ -428,7 +491,8 @@ font-size: 16px;
   width: 100%;
   overflow-x: auto;
 }
-table {  
+
+table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
@@ -436,31 +500,111 @@ table {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 23px 23px 0px 0px;
 }
-th{
+
+.pagination button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #24724D;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 50px;
+  border: transparent;
+  background-color: #ECECEC;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.pagination {
+  float: right;
+  display: flex;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.pagination a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pagination .bx {
+  color: white;
+  background-color: #24724D;
+  padding: 10px;
+}
+
+.pagination button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #24724D;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 50px;
+  border: transparent;
+  background-color: #ECECEC;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.pagination .bxs-left-arrow {
+  border-radius: 20px 0px 0px 20px;
+}
+
+.pagination .prev-btn {
+  padding-right: 25px;
+}
+
+.pagination .bxs-right-arrow {
+  border-radius: 0px 20px 20px 0px;
+}
+
+.pagination .next-btn {
+  padding-left: 25px;
+}
+
+.pagination p {
+  background-color: #24724D;
+  padding: 5px 20px;
+  color: white;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+th {
   padding: 15px;
   border: 2.9px solid white;
   background-color: #24724D;
   color: white;
   text-align: center;
 }
+
 td {
   text-align: center;
   border: 1px solid #BCBCBC;
   color: #4A4A4A;
 }
 
-.actions-button{
-display: flex;
-justify-content: center; 
-gap: 10px;
+tr:hover td {
+  background-color: #F7F7F6;
+  cursor: pointer;
 }
-.actions-button a{
-text-decoration: none;
+
+.actions-button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
- a{
+
+.actions-button a {
   text-decoration: none;
 }
-.view{
+
+a {
+  text-decoration: none;
+}
+
+.view {
   font-size: 15px;
   padding: 5px 25px;
   display: flex;
@@ -473,20 +617,22 @@ text-decoration: none;
   border-radius: 30px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-.update{
-font-size: 15px;
-padding: 5px 25px;
-display: flex;
-cursor: pointer;
-align-items: center;
-gap: 3px;
-color: rgb(36, 114, 77);
-background-color: transparent;
-border: 2px solid rgb(36, 114, 77);
-border-radius: 30px;
-box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+.update {
+  font-size: 15px;
+  padding: 5px 25px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  gap: 3px;
+  color: rgb(36, 114, 77);
+  background-color: transparent;
+  border: 2px solid rgb(36, 114, 77);
+  border-radius: 30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-.delete{
+
+.delete {
   font-size: 15px;
   padding: 5px 25px;
   cursor: pointer;
@@ -504,281 +650,292 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8p
 /*POP UP*/
 
 .popup {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
-  }
-  
-  .popup-content {
-    background-color: #ffffff;
-    margin-inline: auto;
-    margin-top: 25px;
-    padding: 20px;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
-    width: 40%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s;
-  }
-  
-  .popup-top {
-    width: 100%;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eeeeee;
-    margin-bottom: 15px;
-  }
-  
-  .popup-top h2 {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 0;
-    color: #333333;
-  }
-  
-  .popup-forms {
-    width: 100%;
-  }
-  
-  .form-group-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .form-group-title label {
-    font-size: 1em;
-    font-weight: bold;
-    color: #555555;
-    margin-right: 20px;
-  }
-  
-  .input-size {
-    width: 65%;
-    padding: 10px;
-    border: 1px solid #959191;
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: #E7E7E7;
-  }
-  
-  .form-group-button {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding-top: 15px;
-  }
-  
-  .save-btn {
-    background-color: #28a745;
-    justify-content: space-between;
-    padding: 10px 20px;
-    color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .save-btn:hover {
-    background-color: #218838;
-  }
-  
-  .close-form-btn {
-    background-color: #dc3545;
-    justify-content: space-between;
-    padding: 10px 20px;
-    color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .close-form-btn:hover {
-    background-color: #c82333;
-  }
-
-  .icons-container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000000;
-    text-decoration: none;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-
-  
-  /*ADD CANDIDATE POP UP FORM DESIGN*/
-
-
-  .addCandidates_popup {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
-  }
-  
-  .addCandidates_popup-content {
-    background-color: #F7F7F6;
-    margin-inline: auto;
-    margin-top: 25px;
-    padding: 0px 0px 20px 0px;
-    border: 4px solid #24724D;
-    border-radius: 30px;
-    width: 35%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s;
-  }
-  
-  .addCandidates_popup-top {
-    width: 100%;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    text-align: center;
-    background: #24724D;
-    border-radius: 20px 20px 0px 0px;
-    padding-top: 10px;
-  }
-  
-  .addCandidates_popup-top h2 {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 0;
-    color: white;
-  }
-  
-  .addCandidates_popup-forms {
-    width: 100%;
-  }
-  
-  .form-group-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .form-group-title label {
-    font-size: 1em;
-    font-weight: bold;
-    color: #555555;
-    margin-right: 20px;
-  }
-  
-
-  /*Design for Select */
-  .form-group-position{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 15px;
-    margin-bottom: 15px;
-  }
-  .form-group-position select{
-    display: flex;
-    width: 66.8%;
-    padding: 10px;
-    border: 1px solid #959191;
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: #E7E7E7;
-  }
-  .form-group-position option{
-    width: 65%;
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    font-size: 1em;
-  }
-  .form-group-position label {
-    font-size: 1em;
-    font-weight: bold;
-    color: #555555;
-    margin-right: 20px;
-  }
-
-  /*Design for Photo */
-
-  .form-group-photo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 33px;
-    margin-bottom: 15px;
-  }
-
-  .form-group-photo label {
-    font-size: 1em;
-    font-weight: bold;
-    color: #555555;
-    margin-right: 20px;
-  }
-
-  .form-group-photo .input-size{
-    width: 69.2%;
-    padding: 10px;
-    border: 1px solid #959191;
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: #E7E7E7;
-  }
-
-
-  /*Design for TextArea*/
-  .form-group-textarea {
-    display: flex;
-    align-items: flex-start; /* Align items to the start (left-aligned) */
-    margin-left: 55px;
-    margin-bottom: 15px;
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Black w/ opacity */
 }
+
+.popup-content {
+  background-color: #ffffff;
+  margin-inline: auto;
+  margin-top: 25px;
+  padding: 20px;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  width: 40%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s;
+}
+
+.popup-top {
+  width: 100%;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eeeeee;
+  margin-bottom: 15px;
+}
+
+.popup-top h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+  color: #333333;
+}
+
+.popup-forms {
+  width: 100%;
+}
+
+.form-group-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-group-title label {
+  font-size: 1em;
+  font-weight: bold;
+  color: #555555;
+  margin-right: 20px;
+}
+
+.input-size {
+  width: 65%;
+  padding: 10px;
+  border: 1px solid #959191;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: #E7E7E7;
+}
+
+.form-group-button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 15px;
+}
+
+.save-btn {
+  background-color: #28a745;
+  justify-content: space-between;
+  padding: 10px 20px;
+  color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+}
+
+.close-form-btn {
+  background-color: #dc3545;
+  justify-content: space-between;
+  padding: 10px 20px;
+  color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.close-form-btn:hover {
+  background-color: #c82333;
+}
+
+.icons-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000000;
+  text-decoration: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+/*ADD CANDIDATE POP UP FORM DESIGN*/
+
+
+.addCandidates_popup {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Black w/ opacity */
+}
+
+.addCandidates_popup-content {
+  background-color: #F7F7F6;
+  margin-inline: auto;
+  margin-top: 25px;
+  padding: 0px 0px 20px 0px;
+  border: 4px solid #24724D;
+  border-radius: 30px;
+  width: 35%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s;
+}
+
+.addCandidates_popup-top {
+  width: 100%;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  background: #24724D;
+  border-radius: 20px 20px 0px 0px;
+  padding-top: 10px;
+}
+
+.addCandidates_popup-top h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+  color: white;
+}
+
+.addCandidates_popup-forms {
+  width: 100%;
+}
+
+.form-group-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-group-title label {
+  font-size: 1em;
+  font-weight: bold;
+  color: #555555;
+  margin-right: 20px;
+}
+
+
+/*Design for Select */
+.form-group-position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.form-group-position select {
+  display: flex;
+  width: 66.8%;
+  padding: 10px;
+  border: 1px solid #959191;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: #E7E7E7;
+}
+
+.form-group-position option {
+  width: 65%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.form-group-position label {
+  font-size: 1em;
+  font-weight: bold;
+  color: #555555;
+  margin-right: 20px;
+}
+
+/*Design for Photo */
+
+.form-group-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 33px;
+  margin-bottom: 15px;
+}
+
+.form-group-photo label {
+  font-size: 1em;
+  font-weight: bold;
+  color: #555555;
+  margin-right: 20px;
+}
+
+.form-group-photo .input-size {
+  width: 69.2%;
+  padding: 10px;
+  border: 1px solid #959191;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: #E7E7E7;
+}
+
+
+/*Design for TextArea*/
+.form-group-textarea {
+  display: flex;
+  align-items: flex-start;
+  /* Align items to the start (left-aligned) */
+  margin-left: 55px;
+  margin-bottom: 15px;
+}
+
 .form-group-textarea label {
   font-size: 1em;
   font-weight: bold;
   color: #555555;
   margin-right: 20px;
 }
-.form-group-textarea .input-size{
+
+.form-group-textarea .input-size {
   width: 72.5%;
   padding: 10px;
   border: 1px solid #959191;
@@ -786,14 +943,18 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8p
   font-size: 1em;
   background-color: #E7E7E7;
 }
+
 @media (max-width: 768px) {
   .form-group-textarea {
-      margin-left: 0; /* Remove left margin on smaller screens */
-      padding: 0 10px; /* Reduce padding */
+    margin-left: 0;
+    /* Remove left margin on smaller screens */
+    padding: 0 10px;
+    /* Reduce padding */
   }
 
   .form-group-textarea label {
-      font-size: 0.9em; /* Slightly reduce font size on smaller screens */
+    font-size: 0.9em;
+    /* Slightly reduce font size on smaller screens */
   }
 }
 
@@ -806,86 +967,82 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8p
 
 
 
-  .input-size {
-    width: 65%;
-    padding: 10px;
-    border: 1px solid #959191;
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: #E7E7E7;
-  }
-  
-  .form-group-button {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding-top: 15px;
-  }
-  
-  .save-btn {
-    background-color: #24724D;
-    justify-content: space-between;
-    padding: 10px 25px;
-    color: white;
-    border: 2px solid #24724D;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .save-btn:hover {
-    background-color: #218838;
-  }
-  
-  .addCandidates_close-form-btn {
-    background-color: white;
-    justify-content: space-between;
-    padding: 10px 20px;
-    color: #24724D;
-    border: 2px solid #24724D;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .icons-container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .addCandidates_close {
-    color: #24724D;
-    float: right;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .addCandidates_close:hover,
-  .addCandidates_close:focus {
-    color: #24724D;
-    text-decoration: none;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+.input-size {
+  width: 65%;
+  padding: 10px;
+  border: 1px solid #959191;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: #E7E7E7;
+}
+
+.form-group-button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 15px;
+}
+
+.save-btn {
+  background-color: #24724D;
+  justify-content: space-between;
+  padding: 10px 25px;
+  color: white;
+  border: 2px solid #24724D;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+}
+
+.addCandidates_close-form-btn {
+  background-color: white;
+  justify-content: space-between;
+  padding: 10px 20px;
+  color: #24724D;
+  border: 2px solid #24724D;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icons-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addCandidates_close {
+  color: #24724D;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.addCandidates_close:hover,
+.addCandidates_close:focus {
+  color: #24724D;
+  text-decoration: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  
-
-
-
+  to {
+    opacity: 1;
+  }
+}

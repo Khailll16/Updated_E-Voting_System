@@ -150,7 +150,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             </table>
                                             <div class="pagination-content">
                                                 <div class="pagination">
-                                                    <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
+                                                    <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a> 
+                                                    <p>1</p>
                                                     <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
                                                 </div>
                                             </div>

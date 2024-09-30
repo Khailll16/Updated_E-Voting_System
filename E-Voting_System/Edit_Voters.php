@@ -133,7 +133,8 @@
                                             if (!$result) {
                                                 die("Invalid query: " . $conn->error);
                                             } else {
-                                                header('location: Voters_Page_Admin.php');
+                                                header("Location: Voters_Page_Admin.php?insert_msg=Voters has been edit successfully");
+                                                exit(); 
                                             }
                                         }
 

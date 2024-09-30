@@ -73,6 +73,15 @@
                                 <h2 style="font-weight: 550;" class="header" id="breadcrup-title">WEB SETUP</h2>
                             </div>
 
+                            <div class="notification" id="notification">
+                                <?php
+                                    if (isset($_GET['insert_msg'])) {
+                                        echo "<p><i class='bx bxs-check-circle'></i> Success!</p>";
+                                        echo htmlspecialchars($_GET['insert_msg']);
+                                    }
+                                ?>
+                            </div>
+
                             <div class="back-button">
                                 <button class="button-back"><a href="Dashboard_Page.php" style="color: white;"><i
                                             class='bx bx-arrow-back'></i>Back</a></button>
@@ -266,6 +275,7 @@
     </div>
     <script src="hamburger-navbar.js"></script>
     <script src="Edit_Voters_Profile.js"></script>
+    <script src="displayPopUpMessage.js"></script>
 </body>
 
 </html>

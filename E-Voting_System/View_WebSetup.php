@@ -82,7 +82,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     </div>
 
                                     <div class="back-button">
-                                        <button class="button-add"><a href="Edit_WebSetup.php?id=<?php echo $row['id']; ?>" style="color: white; display:flex; align-items:center; gap: 3px;"><i class='bx bx-edit'></i>Update</a></button>
+                                        <button class="button-add"><a href="Edit_WebSetup.php?id=<?php echo $row['id']; ?>" style="color: white; display:flex; align-items:center; gap: 3px;"><i class="bx bxs-edit"></i>Update</a></button>
                                     </div>
 
                                     <div id="addvoters-popup" class="addvoters-popup">

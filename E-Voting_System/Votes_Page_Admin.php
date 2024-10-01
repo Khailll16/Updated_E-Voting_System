@@ -120,10 +120,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                         <div class="table-container">
                                             <table class="voters-list">
-                                                <tr>
-                                                    <th style="border-radius: 23px 0px 0px 0px;">Positions</th>
+                                                <tr style="border-radius:11px">
+                                                    <th style="border-radius: 11px 0px 0px 11px;">Positions</th>
                                                     <th>Candidates</th>
-                                                    <th style="border-radius: 0px 23px 0px 0px;">Voters</th>
+                                                    <th style="border-radius: 0px 11px 11px 0px;">Voters</th>
                                                 </tr>
                                                 <?php
                                                 $sql = "SELECT * FROM votes";
@@ -146,9 +146,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 }
                                                 ?>
 
-                                                <tr>
-                                                    <td colspan="3" style=" padding: 17px; background-color: #24724D;"></td>
-                                                </tr>
                                             </table>
                                             <div class="pagination-content">
                                                 <div class="pagination">

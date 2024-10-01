@@ -80,9 +80,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         ?>
                                     </div>
 
-                                    <div class="back-button">
-                                        <button class="button-back"><a href="Dashboard_Page.php" style="color: white;"><i class='bx bx-arrow-back'></i>Back</a></button>
-                                        <button class="button-edit"><a href="Edit_UserProfile.php?id=<?php echo $row['id']; ?>" style="color: #24724D;"><i class='bx bx-edit'></i>Edit</a></button>
+                                    <div class="add-button">
+                                        <button class="button-add"><a href="Edit_UserProfile.php?id=<?php echo $row['id']; ?>" style="color: white;"><i class='bx bx-edit'></i>Edit</a></button>
                                     </div>
 
                                     <div id="addvoters-popup" class="addvoters-popup">
@@ -113,7 +112,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <label for="">Password
                                                             <input type="password" name="admin_pass" class="input-field" value="<?php echo $row['admin_password'] ?>" disabled>
                                                         </label>
-                                                                            
+
                                                     <?php
                                                 }
                                                     ?>

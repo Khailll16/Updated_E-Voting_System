@@ -143,14 +143,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                         <div class="table-container">
                                             <table class="voters-list">
-                                                <tr>
-                                                    <th style="border-radius: 23px 0px 0px 0px;">Photo</th>
+                                                <tbody>
+                                                <tr style="border-radius: 11px;">
+                                                    <th style="border-radius: 11px 0px 0px 11px;">Photo</th>
                                                     <th>Last Name</th>
                                                     <th>First Name</th>
                                                     <th>Voters ID</th>
                                                     <th>Grade</th>
                                                     <th>Section</th>
-                                                    <th style="border-radius: 0px 23px 0px 0px;">Actions</th>
+                                                    <th style="border-radius: 0px 11px 11px 0px;">Actions</th>
                                                 </tr>
 
 
@@ -188,8 +189,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             </td>
                                                             <td style="padding: 8px 0px;">
                                                                 <div class="actions-button">
-                                                                    <a href="Edit_Voters.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i>Edit</button></a>
-                                                                    <a href="Delete_Voters.php?id=<?php echo $row['id']; ?>"><button class="delete"><i class='bx bxs-trash'></i>Delete</button></a>
+                                                                    <a href="Edit_Voters.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i></button></a>
+                                                                    <a href="Delete_Voters.php?id=<?php echo $row['id']; ?>"><button class="delete"><i class='bx bxs-trash'></i></button></a>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -197,9 +198,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     }
                                                 }
                                                 ?>
-                                                <tr>
-                                                    <td colspan="7" style=" padding: 17px; background-color: #24724D;"></td>
-                                                </tr>
                                             </table>
 
                                             <div class="pagination-content">

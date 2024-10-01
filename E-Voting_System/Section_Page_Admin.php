@@ -82,12 +82,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="voters-list-content">
                                     <table class="voters-table">
 
-
                                         <!--------ENTRIES SEARCH BAR CONTAINER-------->
                                         <div class="entries-search-bar-container">
                                             <div class="selector-entries">
                                                 <label>Show</label>
-                                                <select name="specialization" leng="">
+                                                <select name="entries" id="entries">
                                                     <option>10</option>
                                                     <option>25</option>
                                                     <option>50</option>
@@ -96,44 +95,44 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <label>Entries</label>
                                             </div>
 
+                                            <!-- Separate filter form for section -->
                                             <div class="grade-section">
                                                 <div class="grade-selection">
-                                                    <select name="" id="">
-                                                        <option>Section</option>
-                                                        <?php
-                                                        $sql = "SELECT * FROM sections";
-                                                        $result = $conn->query($sql);
+                                                    <form method="POST" action="">
+                                                        <select name="filter_section" id="filter_section" onchange="this.form.submit()">
+                                                            <option value="">Select Section</option>
+                                                            <?php
+                                                            // Fetch all sections from the database
+                                                            $sql = "SELECT * FROM sections";
+                                                            $result = $conn->query($sql);
 
-                                                        if (!$result) {
-                                                            die("Invalid query: " . $conn->error);
-                                                        } else {
-
-                                                            while ($row = mysqli_fetch_assoc($result)) {
-
-                                                                echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
+                                                            if (!$result) {
+                                                                die("Invalid query: " . $conn->error);
+                                                            } else {
+                                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                                    // Keep selected option when reloading the page
+                                                                    $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['section'] ? 'selected' : '';
+                                                                    echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
+                                                                }
                                                             }
-                                                        }
-                                                        ?>
-                                                    </select>
+                                                            ?>
+                                                        </select>
+                                                    </form>
                                                 </div>
                                             </div>
 
-                                            <!-- Moved search-bar to the end -->
+                                            <!-- Separate search form -->
                                             <div class="search-bar">
-                                                    <div class="search-container">
-                                                        <form method="POST" action="">
-                                                            <i class="bx bx-search icon"></i>
-                                                            <input type="text" class="search-input" name="search" placeholder="Search..." value="<?php echo $searchQuery; ?>">
-                                                        </form>
-                                                    </div>
+                                                <div class="search-container">
+                                                    <form method="POST" action="">
+                                                        <i class="bx bx-search icon"></i>
+                                                        <input type="text" class="search-input" name="search" placeholder="Search..." value="<?php echo isset($_POST['search']) ? $_POST['search'] : ''; ?>">
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
 
-
-
-
                                         <div class="table-container">
-
                                             <table class="voters-list">
                                                 <tr>
                                                     <th style="border-radius: 23px 0px 0px 0px;">Grades</th>
@@ -143,10 +142,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </tr>
 
                                                 <?php
-                                                $sql = "SELECT * FROM sections WHERE
-                                                grade LIKE '%$searchQuery%' OR
-                                                section LIKE '%$searchQuery%' OR
-                                                max_student LIKE '%$searchQuery%'";
+                                                // Handle the section filter separately
+                                                $sectionFilter = isset($_POST['filter_section']) ? $_POST['filter_section'] : '';
+
+                                                // Handle the search query separately
+                                                $searchQuery = isset($_POST['search']) ? $_POST['search'] : '';
+
+                                                // Base SQL query
+                                                $sql = "SELECT * FROM sections WHERE 1";
+
+                                                // Add section filter to SQL if a section is selected
+                                                if ($sectionFilter != '') {
+                                                    $sql .= " AND section = '$sectionFilter'";
+                                                }
+
+                                                // Add search filter to SQL if a search query is entered
+                                                if ($searchQuery != '') {
+                                                    $sql .= " AND (grade LIKE '%$searchQuery%' OR section LIKE '%$searchQuery%' OR max_student LIKE '%$searchQuery%')";
+                                                }
+
                                                 $result = $conn->query($sql);
 
                                                 if (!$result) {
@@ -158,7 +172,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <td> <?php echo $row['grade']; ?> </td>
                                                             <td> <?php echo $row['section']; ?> </td>
                                                             <td> <?php echo $row['max_student']; ?> </td>
-
                                                             <td style="padding: 8px 0px;">
                                                                 <div class="actions-button">
                                                                     <a href="Edit_Sections.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i>Edit</button></a>
@@ -171,22 +184,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 }
                                                 ?>
                                                 <tr>
-                                                    <td colspan="4" style=" padding: 17px; background-color: #24724D;"></td>
+                                                    <td colspan="4" style="padding: 17px; background-color: #24724D;"></td>
                                                 </tr>
-                                                
                                             </table>
+
                                             <div class="pagination-content">
                                                 <div class="pagination">
-                                                    <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a> 
+                                                    <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
                                                     <p>1</p>
                                                     <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </table>
                                 </div>
                             </div>
+
 
                         </div>
                     </div>

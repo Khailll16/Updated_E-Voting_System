@@ -7,7 +7,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
         if (isset($_POST['search'])) {
             $searchQuery = mysqli_real_escape_string($conn, $_POST['search']);
         }
-
 ?>
 
     <!DOCTYPE html>
@@ -95,7 +94,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <label>Entries</label>
                                             </div>
 
-                                            <!-- Separate filter form for section -->
                                             <div class="grade-section">
                                                 <div class="grade-selection">
                                                     <form method="POST" action="">
@@ -121,7 +119,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </div>
                                             </div>
 
-                                            <!-- Separate search form -->
                                             <div class="search-bar">
                                                 <div class="search-container">
                                                     <form method="POST" action="">
@@ -142,21 +139,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </tr>
 
                                                 <?php
-                                                // Handle the section filter separately
                                                 $sectionFilter = isset($_POST['filter_section']) ? $_POST['filter_section'] : '';
 
-                                                // Handle the search query separately
                                                 $searchQuery = isset($_POST['search']) ? $_POST['search'] : '';
 
-                                                // Base SQL query
                                                 $sql = "SELECT * FROM sections WHERE 1";
 
-                                                // Add section filter to SQL if a section is selected
                                                 if ($sectionFilter != '') {
                                                     $sql .= " AND section = '$sectionFilter'";
                                                 }
 
-                                                // Add search filter to SQL if a search query is entered
                                                 if ($searchQuery != '') {
                                                     $sql .= " AND (grade LIKE '%$searchQuery%' OR section LIKE '%$searchQuery%' OR max_student LIKE '%$searchQuery%')";
                                                 }

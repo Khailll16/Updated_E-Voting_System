@@ -106,24 +106,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <option>10</option>
                                                     </select>
                                                 </div>
-                                                <div class="section-selection">
-                                                    <select name="" id="">
-                                                        <option>Section</option>
-                                                        <?php
-                                                        $sql = "SELECT * FROM sections";
-                                                        $result = $conn->query($sql);
+                                                <div class="grade-selection">
+                                                    <form method="POST" action="">
+                                                        <select name="filter_section" id="filter_section" onchange="this.form.submit()">
+                                                            <option value="">Select Section</option>
+                                                            <?php
+                                                            // Fetch all sections from the database
+                                                            $sql = "SELECT * FROM sections";
+                                                            $result = $conn->query($sql);
 
-                                                        if (!$result) {
-                                                            die("Invalid query: " . $conn->error);
-                                                        } else {
-
-                                                            while ($row = mysqli_fetch_assoc($result)) {
-
-                                                                echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
+                                                            if (!$result) {
+                                                                die("Invalid query: " . $conn->error);
+                                                            } else {
+                                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                                    // Keep selected option when reloading the page
+                                                                    $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['section'] ? 'selected' : '';
+                                                                    echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
+                                                                }
                                                             }
-                                                        }
-                                                        ?>
-                                                    </select>
+                                                            ?>
+                                                        </select>
+                                                    </form>
                                                 </div>
                                             </div>
 
@@ -155,12 +158,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
 
                                                 <?php
-                                                $sql = "SELECT * FROM voters WHERE 
-                                                voters_lastname LIKE '%$searchQuery%' OR 
+                                                $sql = "SELECT voters.*, sections.grade 
+                                                FROM voters 
+                                                LEFT JOIN sections ON voters.grade_id = sections.id
+                                                WHERE voters_lastname LIKE '%$searchQuery%' OR 
                                                 voters_firstname LIKE '%$searchQuery%' OR 
-                                                voters_id LIKE '%$searchQuery%' OR 
-                                                grade_id LIKE '%$searchQuery%' OR 
-                                                section_id LIKE '%$searchQuery%'";
+                                                voters_id LIKE '%$searchQuery%'";
                                                 $result = $conn->query($sql);
 
                                                 if (!$result) {
@@ -384,9 +387,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     <label for="votersLastname">Lastname</label>
                                     <input type="text" id="voterslastname" name="voterslastname" class="input-size" value="" required>
                                 </div>
-                                <div class="form-group-grade">
-                                    <label for="Grade">Grade</label>
-                                    <input type="text" id="grade" name="grade" class="input-size" required>
+                                <div class="form-group-position">
+                                <label for="Grade" class="col-sm-3 control-label">Grade</label>
+                                    <select class="form-position" id="grade" name="grade" required="">
+                                        <option value="" selected="">- Select -</option>
+                                        <?php
+                                        $sql = "SELECT * FROM sections";
+                                        $result = $conn->query($sql);
+
+                                        if (!$result) {
+                                            die("Invalid query: " . $conn->error);
+                                        } else {
+
+                                            while ($row = mysqli_fetch_assoc($result)) {
+
+                                                echo "<option value='" . $row['grade'] . "'>" . $row['grade'] . "</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="form-group-position">
                                     <label for="position" class="col-sm-3 control-label">Section</label>

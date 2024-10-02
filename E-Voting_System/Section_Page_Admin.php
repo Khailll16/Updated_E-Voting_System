@@ -71,339 +71,334 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     }
                                     ?>
                                 </div>
-
-                                <div class="add-button">
-                                    <button id="addposition-openPopup" class="button-add"><i class='bx bx-plus-medical'></i>New</button>
-                                </div>
-
-                            </div>
-
-                            <div class="voters-list-container">
                                 <div class="voters-list-content">
-                                    <table class="voters-table">
+                                    <div class="add-button">
+                                        <button id="addposition-openPopup" class="button-add"><i class='bx bx-plus-medical'></i>New</button>
+                                    </div>
 
-                                        <!--------ENTRIES SEARCH BAR CONTAINER-------->
-                                        <div class="entries-search-bar-container">
-                                            <div class="selector-entries">
-                                                <label>Show</label>
-                                                <select name="entries" id="entries">
-                                                    <option>10</option>
-                                                    <option>25</option>
-                                                    <option>50</option>
-                                                    <option>100</option>
-                                                </select>
-                                                <label>Entries</label>
-                                            </div>
 
-                                            <div class="grade-section">
-                                                <div class="grade-selection">
-                                                    <form method="POST" action="">
-                                                        <select name="filter_section" id="filter_section" onchange="this.form.submit()">
-                                                            <option value="">Select Section</option>
-                                                            <?php
-                                                            // Fetch all sections from the database
-                                                            $sql = "SELECT * FROM sections";
-                                                            $result = $conn->query($sql);
+                                    <div class="voters-list-container">
 
-                                                            if (!$result) {
-                                                                die("Invalid query: " . $conn->error);
-                                                            } else {
-                                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                                    // Keep selected option when reloading the page
-                                                                    $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['section'] ? 'selected' : '';
-                                                                    echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
+                                        <table class="voters-table">
+
+                                            <!--------ENTRIES SEARCH BAR CONTAINER-------->
+                                            <div class="entries-search-bar-container">
+                                                <div class="selector-entries">
+                                                    <label>Show</label>
+                                                    <select name="entries" id="entries">
+                                                        <option>10</option>
+                                                        <option>25</option>
+                                                        <option>50</option>
+                                                        <option>100</option>
+                                                    </select>
+                                                    <label>Entries</label>
+                                                </div>
+
+                                                <div class="grade-section">
+                                                    <div class="grade-selection">
+                                                        <form method="POST" action="">
+                                                            <select name="filter_section" id="filter_section" onchange="this.form.submit()">
+                                                                <option value="">Select Section</option>
+                                                                <?php
+                                                                // Fetch all sections from the database
+                                                                $sql = "SELECT * FROM sections";
+                                                                $result = $conn->query($sql);
+
+                                                                if (!$result) {
+                                                                    die("Invalid query: " . $conn->error);
+                                                                } else {
+                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                        // Keep selected option when reloading the page
+                                                                        $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['section'] ? 'selected' : '';
+                                                                        echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
+                                                                    }
                                                                 }
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </form>
+                                                                ?>
+                                                            </select>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <div class="search-bar">
+                                                    <div class="search-container">
+                                                        <form method="POST" action="">
+                                                            <i class="bx bx-search icon"></i>
+                                                            <input type="text" class="search-input" name="search" placeholder="Search..." value="<?php echo $searchQuery; ?>">
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div class="search-bar">
-                                                <div class="search-container">
-                                                    <form method="POST" action="">
-                                                        <i class="bx bx-search icon"></i>
-                                                        <input type="text" class="search-input" name="search" placeholder="Search..." value="<?php echo $searchQuery; ?>">
-                                                    </form>
+                                            <div class="table-container">
+
+                                                <table class="voters-list" style="border-spacing: 0 15px;">
+                                                    <tr style="border-radius: 11px;">
+                                                        <th style="border-radius: 11px 0px 0px 11px;">Grades</th>
+                                                        <th>Sections</th>
+                                                        <th>Maximum Student</th>
+                                                        <th style="border-radius: 0px 11px 11px 0px;">Actions</th>
+                                                    </tr>
+
+                                                    <?php
+                                                    $sectionFilter = isset($_POST['filter_section']) ? $_POST['filter_section'] : '';
+
+                                                    $searchQuery = isset($_POST['search']) ? $_POST['search'] : '';
+
+                                                    $sql = "SELECT * FROM sections WHERE 1";
+
+                                                    if ($sectionFilter != '') {
+                                                        $sql .= " AND section = '$sectionFilter'";
+                                                    }
+
+                                                    if ($searchQuery != '') {
+                                                        $sql .= " AND (grade LIKE '%$searchQuery%' OR section LIKE '%$searchQuery%' OR max_student LIKE '%$searchQuery%')";
+                                                    }
+
+                                                    $result = $conn->query($sql);
+
+                                                    if (!$result) {
+                                                        die("Invalid query: " . $conn->error);
+                                                    } else {
+                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                    ?>
+                                                            <tr>
+                                                                <td> <?php echo $row['grade']; ?> </td>
+                                                                <td> <?php echo $row['section']; ?> </td>
+                                                                <td> <?php echo $row['max_student']; ?> </td>
+                                                                <td style="padding: 8px 0px;">
+                                                                    <div class="actions-button">
+                                                                        <a href="Edit_Sections.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i></button></a>
+                                                                        <a href="Delete_Sections.php?id=<?php echo $row['id']; ?>"><button class="delete"><i class='bx bxs-trash'></i></button></a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </table>
+
+                                                <div class="pagination-content">
+                                                    <div class="pagination">
+                                                        <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
+                                                        <p>1</p>
+                                                        <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
+                                                    </div>
                                                 </div>
+                                            </div>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-----SIDE BAR------>
+                        <nav class="sidebar">
+
+                            <!-----MENU BAR------>
+                            <div class="menu-bar">
+                                <?php
+                                $sql = "SELECT * FROM `setup`";
+                                $result = $conn->query($sql);
+
+                                if (!$result) {
+                                    die("Invalid query: " . $conn->error);
+                                } else {
+                                    ($row = mysqli_fetch_assoc($result));
+                                }
+                                ?>
+
+                                <!-----SIDEBAR TOP CONTENT-->
+                                <div class="sidebar-content">
+                                    <div class="sidebar-top-content">
+
+                                        <!------SIKHAY LOGO-->
+                                        <div class="sikhay-logo">
+                                            <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="78px">
+                                            <div class="school-name">
+                                                <p style="color: #4A4A4A; font-size: 16px;"><?php echo $row['organization_name']; ?></p>
+                                                <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                             </div>
                                         </div>
 
-                                        <div class="table-container">
-
-                                            <table class="voters-list" style="border-spacing: 0 15px;">
-                                                <tr style="border-radius: 11px;">
-                                                    <th style="border-radius: 11px 0px 0px 11px;">Grades</th>
-                                                    <th>Sections</th>
-                                                    <th>Maximum Student</th>
-                                                    <th style="border-radius: 0px 11px 11px 0px;">Actions</th>
-                                                </tr>
-
+                                        <!-----PROFILE ADMIN------>
+                                        <header class="sidebar-profile">
+                                            <div class="image-text">
                                                 <?php
-                                                $sectionFilter = isset($_POST['filter_section']) ? $_POST['filter_section'] : '';
-
-                                                $searchQuery = isset($_POST['search']) ? $_POST['search'] : '';
-
-                                                $sql = "SELECT * FROM sections WHERE 1";
-
-                                                if ($sectionFilter != '') {
-                                                    $sql .= " AND section = '$sectionFilter'";
-                                                }
-
-                                                if ($searchQuery != '') {
-                                                    $sql .= " AND (grade LIKE '%$searchQuery%' OR section LIKE '%$searchQuery%' OR max_student LIKE '%$searchQuery%')";
-                                                }
-
+                                                $sql = "SELECT * FROM `admin`";
                                                 $result = $conn->query($sql);
 
                                                 if (!$result) {
                                                     die("Invalid query: " . $conn->error);
                                                 } else {
-                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                    ($row = mysqli_fetch_assoc($result))
+
                                                 ?>
-                                                        <tr>
-                                                            <td> <?php echo $row['grade']; ?> </td>
-                                                            <td> <?php echo $row['section']; ?> </td>
-                                                            <td> <?php echo $row['max_student']; ?> </td>
-                                                            <td style="padding: 8px 0px;">
-                                                                <div class="actions-button">
-                                                                    <a href="Edit_Sections.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i></button></a>
-                                                                    <a href="Delete_Sections.php?id=<?php echo $row['id']; ?>"><button class="delete"><i class='bx bxs-trash'></i></button></a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                    <span class="image">
+                                                        <img id="picture-admin" src="Images/<?php echo $row['admin_profile'] ?>" alt="">
+                                                    </span>
+                                                    <div class="text header-text">
+                                                        <p id="name-admin"><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></p>
+                                                        <span class="name">Online</span>
+                                                    </div>
                                                 <?php
-                                                    }
                                                 }
                                                 ?>
-                                            </table>
-
-                                            <div class="pagination-content">
-                                                <div class="pagination">
-                                                    <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
-                                                    <p>1</p>
-                                                    <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
-                                                </div>
                                             </div>
+                                        </header>
+
+                                    </div>
+                                </div>
+
+                                <!-----MENU------>
+                                <div class="menu">
+
+                                    <!-----MENU LINKS------>
+                                    <ul class="menu-links">
+
+                                        <!-----DASHBOARD------>
+                                        <li class="nav-link">
+                                            <a href="Dashboard_Page.php">
+                                                <i class='bx bxs-dashboard icon'></i>
+                                                <span class="text nav-text">DashBoard</span>
+                                            </a>
+                                        </li>
+
+                                        <!-----VOTES------>
+                                        <li class="nav-link">
+                                            <a href="Votes_Page_Admin.php">
+                                                <i class='bx bxs-box icon'></i>
+                                                <span class="text nav-text">Votes</span>
+                                            </a>
+                                        </li>
+
+                                        <!-----Sections------>
+                                        <li class="nav-link">
+                                            <a href="Section_Page_Admin.php">
+                                                <i class='bx bxs-objects-horizontal-left icon'></i>
+                                                <span class="text nav-text">Sections</span>
+                                            </a>
+                                        </li>
+
+                                        <!-----VOTERS------>
+                                        <li class="nav-link">
+                                            <a href="Voters_Page_Admin.php">
+                                                <i class='bx bxs-group icon'></i>
+                                                <span class="text nav-text">Voters</span>
+                                            </a>
+                                        </li>
+
+                                        <!-----POSITIONS------>
+                                        <li class="nav-link">
+                                            <a href="Position_Page_Admin.php">
+                                                <i class='bx bxs-objects-horizontal-left icon'></i>
+                                                <span class="text nav-text">Positions</span>
+                                            </a>
+                                        </li>
+
+                                        <!-----CANDIDATES------>
+                                        <li class="nav-link">
+                                            <a href="Candidates_Page_Admin.php">
+                                                <i class='bx bxs-user-account icon'></i>
+                                                <span class="text nav-text">Candidates</span>
+                                            </a>
+                                        </li>
+
+                                        <!-----BALLOT POSITIONS------>
+                                        <li class="nav-link">
+                                            <a href="BallotPosition_Page_Admin.php">
+                                                <i class='bx bxs-detail icon'></i>
+                                                <span class="text nav-text">Ballot Position</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+
+                                <!-----BUTTON CONTENT------>
+                                <div class="bottom-content">
+
+                                    <!-----LOG OUT------>
+                                    <li class="">
+
+                                    </li>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </nav>
+
+
+
+
+                        <!--------ADD POSITION POP UP FORM----------->
+
+                        <div id="addposition-popup" class="addposition-popup">
+                            <div class="addposition-popup-content">
+                                <span class="addposition-close">&times;</span>
+                                <div class="addposition-popup-top">
+                                    <h2>NEW SECTION</h2>
+                                </div>
+
+                                <div class="addposition-popup-forms">
+                                    <form action="Add_Sections.php" method="POST">
+
+                                        <div class="form-group-title">
+                                            <label for="position-candidate">Section</label>
+                                            <input type="text" id="position-candidate" name="section-student" class="input-size" value="" required>
                                         </div>
-                                    </table>
-                                </div>
-                            </div>
 
+                                        <div class="form-group-maximum-student">
+                                            <label for="maximum-student">Grade</label>
+                                            <input type="number" id="maximum-student" name="grade-student" class="input-size" value="" required>
+                                        </div>
 
-                        </div>
-                    </div>
+                                        <div class="form-group-maximum-vote">
+                                            <label for="maximum-vote">Maximum Student</label>
+                                            <input type="number" id="maximum-vote" name="maximum-student" class="input-size" value="" required>
+                                        </div>
 
-                </div>
-
-
-                <!-----SIDE BAR------>
-                <nav class="sidebar">
-
-                    <!-----MENU BAR------>
-                    <div class="menu-bar">
-                        <?php
-                        $sql = "SELECT * FROM `setup`";
-                        $result = $conn->query($sql);
-
-                        if (!$result) {
-                            die("Invalid query: " . $conn->error);
-                        } else {
-                            ($row = mysqli_fetch_assoc($result));
-                        }
-                        ?>
-
-                        <!-----SIDEBAR TOP CONTENT-->
-                        <div class="sidebar-content">
-                            <div class="sidebar-top-content">
-
-                                <!------SIKHAY LOGO-->
-                                <div class="sikhay-logo">
-                                    <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="78px">
-                                    <div class="school-name">
-                                        <p style="color: #4A4A4A; font-size: 16px;"><?php echo $row['organization_name']; ?></p>
-                                        <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
-                                    </div>
-                                </div>
-
-                                <!-----PROFILE ADMIN------>
-                                <header class="sidebar-profile">
-                                    <div class="image-text">
-                                        <?php
-                                        $sql = "SELECT * FROM `admin`";
-                                        $result = $conn->query($sql);
-
-                                        if (!$result) {
-                                            die("Invalid query: " . $conn->error);
-                                        } else {
-                                            ($row = mysqli_fetch_assoc($result))
-
-                                        ?>
-                                            <span class="image">
-                                                <img id="picture-admin" src="Images/<?php echo $row['admin_profile'] ?>" alt="">
-                                            </span>
-                                            <div class="text header-text">
-                                                <p id="name-admin"><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></p>
-                                                <span class="name">Online</span>
-                                            </div>
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
-                                </header>
-
-                            </div>
-                        </div>
-
-                        <!-----MENU------>
-                        <div class="menu">
-
-                            <!-----MENU LINKS------>
-                            <ul class="menu-links">
-
-                                <!-----DASHBOARD------>
-                                <li class="nav-link">
-                                    <a href="Dashboard_Page.php">
-                                        <i class='bx bxs-dashboard icon'></i>
-                                        <span class="text nav-text">DashBoard</span>
-                                    </a>
-                                </li>
-
-                                <!-----VOTES------>
-                                <li class="nav-link">
-                                    <a href="Votes_Page_Admin.php">
-                                        <i class='bx bxs-box icon'></i>
-                                        <span class="text nav-text">Votes</span>
-                                    </a>
-                                </li>
-
-                                <!-----Sections------>
-                                <li class="nav-link">
-                                    <a href="Section_Page_Admin.php">
-                                        <i class='bx bxs-objects-horizontal-left icon'></i>
-                                        <span class="text nav-text">Sections</span>
-                                    </a>
-                                </li>
-
-                                <!-----VOTERS------>
-                                <li class="nav-link">
-                                    <a href="Voters_Page_Admin.php">
-                                        <i class='bx bxs-group icon'></i>
-                                        <span class="text nav-text">Voters</span>
-                                    </a>
-                                </li>
-
-                                <!-----POSITIONS------>
-                                <li class="nav-link">
-                                    <a href="Position_Page_Admin.php">
-                                        <i class='bx bxs-objects-horizontal-left icon'></i>
-                                        <span class="text nav-text">Positions</span>
-                                    </a>
-                                </li>
-
-                                <!-----CANDIDATES------>
-                                <li class="nav-link">
-                                    <a href="Candidates_Page_Admin.php">
-                                        <i class='bx bxs-user-account icon'></i>
-                                        <span class="text nav-text">Candidates</span>
-                                    </a>
-                                </li>
-
-                                <!-----BALLOT POSITIONS------>
-                                <li class="nav-link">
-                                    <a href="BallotPosition_Page_Admin.php">
-                                        <i class='bx bxs-detail icon'></i>
-                                        <span class="text nav-text">Ballot Position</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-
-
-                        <!-----BUTTON CONTENT------>
-                        <div class="bottom-content">
-
-                            <!-----LOG OUT------>
-                            <li class="">
-
-                            </li>
-
-                        </div>
-
-
-                    </div>
-
-
-                </nav>
-
-
-
-
-                <!--------ADD POSITION POP UP FORM----------->
-
-                <div id="addposition-popup" class="addposition-popup">
-                    <div class="addposition-popup-content">
-                        <span class="addposition-close">&times;</span>
-                        <div class="addposition-popup-top">
-                            <h2>NEW SECTION</h2>
-                        </div>
-
-                        <div class="addposition-popup-forms">
-                            <form action="Add_Sections.php" method="POST">
-
-                                <div class="form-group-title">
-                                    <label for="position-candidate">Section</label>
-                                    <input type="text" id="position-candidate" name="section-student" class="input-size" value="" required>
-                                </div>
-
-                                <div class="form-group-maximum-student">
-                                    <label for="maximum-student">Grade</label>
-                                    <input type="number" id="maximum-student" name="grade-student" class="input-size" value="" required>
-                                </div>
-
-                                <div class="form-group-maximum-vote">
-                                    <label for="maximum-vote">Maximum Student</label>
-                                    <input type="number" id="maximum-vote" name="maximum-student" class="input-size" value="" required>
-                                </div>
-
-                                <div class="form-group-button">
-                                    <button type="button" class="addposition-close-form-btn"><svg width="15px" height="15px" fill="#24724D"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
-                                                fill="#24724D" />
-                                        </svg>
-                                        Close</button>
-                                    <button type="submit" name="add_section" class="save-btn"><svg fill="#000000" version="1.1" id="Capa_1"
-                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            width="15px" height="15px" style="fill: white;" viewBox="0 0 407.096 407.096"
-                                            xml:space="preserve">
-                                            <g>
-                                                <g>
-                                                    <path d="M402.115,84.008L323.088,4.981C319.899,1.792,315.574,0,311.063,0H17.005C7.613,0,0,7.614,0,17.005v373.086
+                                        <div class="form-group-button">
+                                            <button type="button" class="addposition-close-form-btn"><svg width="15px" height="15px" fill="#24724D"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                                                        fill="#24724D" />
+                                                </svg>
+                                                Close</button>
+                                            <button type="submit" name="add_section" class="save-btn"><svg fill="#000000" version="1.1" id="Capa_1"
+                                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    width="15px" height="15px" style="fill: white;" viewBox="0 0 407.096 407.096"
+                                                    xml:space="preserve">
+                                                    <g>
+                                                        <g>
+                                                            <path d="M402.115,84.008L323.088,4.981C319.899,1.792,315.574,0,311.063,0H17.005C7.613,0,0,7.614,0,17.005v373.086
                                                         c0,9.392,7.613,17.005,17.005,17.005h373.086c9.392,0,17.005-7.613,17.005-17.005V96.032
                                                         C407.096,91.523,405.305,87.197,402.115,84.008z M300.664,163.567H67.129V38.862h233.535V163.567z" />
-                                                    <path d="M214.051,148.16h43.08c3.131,0,5.668-2.538,5.668-5.669V59.584c0-3.13-2.537-5.668-5.668-5.668h-43.08
+                                                            <path d="M214.051,148.16h43.08c3.131,0,5.668-2.538,5.668-5.669V59.584c0-3.13-2.537-5.668-5.668-5.668h-43.08
                                                         c-3.131,0-5.668,2.538-5.668,5.668v82.907C208.383,145.622,210.92,148.16,214.051,148.16z" />
-                                                </g>
-                                            </g>
-                                        </svg>
-                                        Save</button>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                Save</button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
+
+
                     </div>
                 </div>
 
-
-            </div>
-        </div>
-
-        <script src="Election_Title.js"></script>
-        <script src="hamburger-navbar.js"></script>
-        <script src="displayPopUpMessage.js"></script>
+                <script src="Election_Title.js"></script>
+                <script src="hamburger-navbar.js"></script>
+                <script src="displayPopUpMessage.js"></script>
     </body>
 
     </html>

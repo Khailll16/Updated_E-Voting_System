@@ -336,8 +336,7 @@ i {
 
 /*----Dashboard body----*/
 .dashboard-body {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 18px;
   padding: 0px 18px 0px 18px;
   color: #24724D;
 }
@@ -348,7 +347,6 @@ i {
 }
 
 .voters-list-container {
-  margin-bottom: 15px;
   font-weight: lighter;
 }
 
@@ -497,8 +495,16 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 23px 23px 0px 0px;
+}
+
+.voters-list-content {
+  border-radius: 8px;
+  background: #ffffff;
+  border-top: 3px solid #d2d6de;
+  width: 100%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 18px;
 }
 
 .pagination button {
@@ -515,10 +521,8 @@ table {
 }
 
 .pagination {
-  float: right;
   display: flex;
   gap: 6px;
-  margin-bottom: 15px;
 }
 
 .pagination a {
@@ -585,9 +589,8 @@ td {
   text-align: center;
   color: #4A4A4A;
 }
-tr{
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
-  margin-bottom: 20px;
+tr {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;;
 }
 tr:hover td {
   background-color: #f0f0f0;

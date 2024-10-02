@@ -101,16 +101,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     <div class="form-section">
 
                                                         <label for="">First Name
-                                                            <input type="text" name="admin_fname" class="input-field" value="<?php echo $row['firstname'] ?>" disabled>
+                                                            <input style="border: 1px solid #24724D" type="text" name="admin_fname" class="input-field" value="<?php echo $row['firstname'] ?>" disabled>
                                                         </label>
                                                         <label for="">Last Name
-                                                            <input type="text" name="admin_lname" class="input-field" value="<?php echo $row['lastname'] ?>" disabled>
+                                                            <input style="border: 1px solid #24724D" type="text" name="admin_lname" class="input-field" value="<?php echo $row['lastname'] ?>" disabled>
                                                         </label>
                                                         <label for="">Username
-                                                            <input type="text" name="admin_username" class="input-field" value="<?php echo $row['admin_username'] ?>" disabled>
+                                                            <input style="border: 1px solid #24724D" type="text" name="admin_username" class="input-field" value="<?php echo $row['admin_username'] ?>" disabled>
                                                         </label>
                                                         <label for="">Password
-                                                            <input type="password" name="admin_pass" class="input-field" value="<?php echo $row['admin_password'] ?>" disabled>
+                                                            <input style="border: 1px solid #24724D" type="password" name="admin_pass" class="input-field" value="<?php echo $row['admin_password'] ?>" disabled>
                                                         </label>
 
                                                     <?php

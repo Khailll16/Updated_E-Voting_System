@@ -63,7 +63,7 @@ body{
     top: 0;
     left: 0;
     height: 100%;
-    width: 290px;
+    width: 250px;
     background-color: #F8F8FF;
     transition: var(--tran-05);
     z-index: 100;
@@ -173,13 +173,14 @@ i{
     cursor: pointer;
 }
 .sikhay-logo{ 
-    display: flex;
+    /* display: flex; */
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: -6px;
+    margin-bottom: 15px;
+    /* margin-top: -6px; */
     gap: 7px;
-    padding: 5px 14px;
-    border-bottom: 2.9px solid #dcdcdc;
+    padding: 10px 14px;
+    /* border-bottom: 2.9px solid #dcdcdc; */
+    text-align: center;
 }
 
 
@@ -187,7 +188,6 @@ i{
 /*----side bar profile----*/
 .sidebar .sidebar-profile{
     position: relative;
-    margin-left: 13.9px;
     padding: 10px 14px;
 }
 
@@ -221,7 +221,7 @@ i{
 /*------Right Side-----*/
 
 .right-side {
-    margin-left: 290px;
+    margin-left: 250px;
 }
 
 

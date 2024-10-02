@@ -174,14 +174,15 @@ i {
   cursor: pointer;
 }
 
-.sikhay-logo {
-  display: flex;
+.sikhay-logo{ 
+  /* display: flex; */
   align-items: center;
-  margin-bottom: 20px;
-  margin-top: -6px;
+  margin-bottom: 15px;
+  /* margin-top: -6px; */
   gap: 7px;
-  padding: 5px 14px;
-  border-bottom: 2.9px solid #dcdcdc;
+  padding: 10px 14px;
+  /* border-bottom: 2.9px solid #dcdcdc; */
+  text-align: center;
 }
 
 

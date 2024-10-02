@@ -98,16 +98,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <div class=" form-section">
 
                                                         <label for="">First Name
-                                                            <input type="text" name="cfname" class="input-field" value="<?php echo $row['candidate_firstname'] ?>" disabled>
+                                                            <input style="border: 1px solid #24724D" type="text" name="cfname" class="input-field" value="<?php echo $row['candidate_firstname'] ?>" disabled>
                                                         </label>
                                                         <label for="">Last Name
-                                                            <input type="text" name="clname" class="input-field" value="<?php echo $row['candidate_lastname'] ?>" disabled>
+                                                            <input style="border: 1px solid #24724D" type="text" name="clname" class="input-field" value="<?php echo $row['candidate_lastname'] ?>" disabled>
                                                         </label>
                                                         <label for="">Last Name
-                                                            <input type="text" name="position" class="input-field" value="<?php echo $row['position_id'] ?>" disabled>
+                                                            <input style="border: 1px solid #24724D" type="text" name="position" class="input-field" value="<?php echo $row['position_id'] ?>" disabled>
                                                         </label>
-                                                        <label style="display: flex; justify-content: end;" for="">Platform
-                                                            <textarea class="input-field" name="cplatforms" rows="7" style="resize: vertical; color:black;" disabled><?php echo $row['platform']; ?></textarea>
+                                                        <label style="display: flex; justify-content: end; " for="">Platform
+                                                            <textarea class="input-field" name="cplatforms" rows="7" style="resize: vertical; color:black; border: 1px solid #24724D" disabled><?php echo $row['platform']; ?></textarea>
                                                         </label>
                                                     </div>
 
@@ -150,7 +150,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="sikhay-logo">
                                     <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="55px">
                                     <div class="school-name">
-                                        <p style="color: #4A4A4A; font-size: 14px;"><?php echo $row['organization_name']; ?></p>
+                                        <p style="color: #4A4A4A; font-size: 16px;"><?php echo $row['organization_name']; ?></p>
                                         <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                     </div>
                                 </div>

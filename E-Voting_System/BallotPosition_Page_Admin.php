@@ -78,7 +78,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     <h3 class="official-ballot">OFFICIAL BALLOT</h3>
                                     <div class="ballot-title">
                                     <img src="Images/<?php echo $row['logo_ballot'] ?>" alt="" width="120px">
-                                        <h1><?php echo $row['title']; ?></h1>
+                                        <h1 style="color:#4A4A4A;"><?php echo $row['title']; ?></h1>
                                     </div>
                                 <?php
                             }
@@ -235,7 +235,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="55px">
                                 <div class="school-name">
 
-                                    <p style="color: #4A4A4A; font-size: 14px;"><?php echo $row['organization_name']; ?></p>
+                                    <p style="color: #4A4A4A; font-size: 16px;"><?php echo $row['organization_name']; ?></p>
                                     <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                 </div>
                             </div>

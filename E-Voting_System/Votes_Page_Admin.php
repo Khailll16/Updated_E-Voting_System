@@ -120,10 +120,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                         <div class="table-container">
                                             <table class="voters-list">
-                                                <tr>
-                                                    <th style="border-radius: 23px 0px 0px 0px;">Positions</th>
+                                                <tr style="border-radius:11px">
+                                                    <th style="border-radius: 11px 0px 0px 11px;">Positions</th>
                                                     <th>Candidates</th>
-                                                    <th style="border-radius: 0px 23px 0px 0px;">Voters</th>
+                                                    <th style="border-radius: 0px 11px 11px 0px;">Voters</th>
                                                 </tr>
                                                 <?php
                                                 $sql = "SELECT * FROM votes";
@@ -146,9 +146,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 }
                                                 ?>
 
-                                                <tr>
-                                                    <td colspan="3" style=" padding: 17px; background-color: #24724D;"></td>
-                                                </tr>
                                             </table>
                                             <div class="pagination-content">
                                                 <div class="pagination">
@@ -191,7 +188,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="sikhay-logo">
                                     <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="55px">
                                     <div class="school-name">
-                                        <p style="color: #4A4A4A; font-size: 14px;"><?php echo $row['organization_name']; ?></p>
+                                        <p style="color: #4A4A4A; font-size: 16px;"><?php echo $row['organization_name']; ?></p>
                                         <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                     </div>
                                 </div>

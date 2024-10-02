@@ -63,8 +63,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
 
                                 <div class="back-button">
-                                    <button class="button-back"><a href="Position_Page_Admin.php"
-                                            style="color: white;"><i class="bx bx-arrow-back"></i>Back</a></button>
+                                    <button class="button-back"><a href="Position_Page_Admin.php" style="color:white; display:flex; align-items:center; gap: 3px;"><i class="bx bx-arrow-back"></i>Back</a></button>
                                 </div>
 
                                 <div id="addvoters-popup" class="addvoters-popup">
@@ -174,7 +173,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="sikhay-logo">
                                     <img src="Organization/<?php echo $row ['logo']?>" alt="" width="55px">
                                     <div class="school-name">
-                                        <p style="color: #4A4A4A; font-size: 14px;"><?php echo$row['organization_name'];?></p>
+                                        <p style="color: #4A4A4A; font-size: 16px;"><?php echo$row['organization_name'];?></p>
                                         <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                     </div>
                                 </div>

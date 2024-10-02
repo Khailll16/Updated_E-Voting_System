@@ -61,7 +61,7 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  width: 290px;
+  width: 250px;
   background-color: #F8F8FF;
   transition: var(--tran-05);
   z-index: 100;
@@ -174,14 +174,15 @@ i {
   cursor: pointer;
 }
 
-.sikhay-logo {
-  display: flex;
+.sikhay-logo{ 
+  /* display: flex; */
   align-items: center;
-  margin-bottom: 20px;
-  margin-top: -6px;
+  margin-bottom: 15px;
+  /* margin-top: -6px; */
   gap: 7px;
-  padding: 5px 14px;
-  border-bottom: 2.9px solid #dcdcdc;
+  padding: 10px 14px;
+  /* border-bottom: 2.9px solid #dcdcdc; */
+  text-align: center;
 }
 
 
@@ -189,7 +190,6 @@ i {
 /*----side bar profile----*/
 .sidebar .sidebar-profile {
   position: relative;
-  margin-left: 13.9px;
   padding: 10px 14px;
   ;
 }
@@ -235,7 +235,7 @@ i {
 /*------Right Side-----*/
 
 .right-side {
-  margin-left: 290px;
+  margin-left: 250px;
 }
 
 /*---Profile------*/
@@ -497,7 +497,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
-  border: 2.9px solid white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 23px 23px 0px 0px;
 }
@@ -575,7 +574,6 @@ table {
 th {
   padding: 15px;
   text-align: left;
-  border: 2.9px solid white;
   background-color: #24724D;
   color: white;
   text-align: center;
@@ -584,13 +582,15 @@ th {
 td {
   padding: 6px 0px 0px 15px;
   text-align: left;
-  border: 1px solid #BCBCBC;
   text-align: center;
   color: #4A4A4A;
 }
-
+tr{
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  margin-bottom: 20px;
+}
 tr:hover td {
-  background-color: #ECECEC;
+  background-color: #f0f0f0;
   cursor: pointer;
 }
 
@@ -606,7 +606,7 @@ tr:hover td {
 
 .update {
   font-size: 15px;
-  padding: 5px 25px;
+  padding: 5px ;
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -614,13 +614,16 @@ tr:hover td {
   color: rgb(36, 114, 77);
   background-color: transparent;
   border: 2px solid rgb(36, 114, 77);
-  border-radius: 30px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  border-radius: 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.update .bx{
+  font-size: 25px;
 }
 
 .delete {
   font-size: 15px;
-  padding: 5px 25px;
+  padding: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -628,8 +631,11 @@ tr:hover td {
   color: white;
   background-color: red;
   border: 2px solid red;
-  border-radius: 30px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  border-radius: 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.delete .bx{
+  font-size: 25px;
 }
 
 

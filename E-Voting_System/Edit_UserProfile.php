@@ -215,7 +215,7 @@
                             <div class="sikhay-logo">
                                 <img src="Organization/<?php echo $row ['logo']?>" alt="" width="55px">
                                 <div class="school-name">
-                                    <p style="color: #4A4A4A; font-size: 14px;"><?php echo$row['organization_name'];?></p>
+                                    <p style="color: #4A4A4A; font-size: 16px;"><?php echo$row['organization_name'];?></p>
                                     <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                 </div>
                             </div>

@@ -433,13 +433,14 @@ select {
   
   .warning-description {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 17px;
     color: #4A4A4A;
   }
   
   .content-wrapper {
     display: flex;
     gap: 50px;
+    margin-bottom: 10px;
   }
   
   .profile-section {
@@ -454,8 +455,8 @@ select {
   
   .image-container {
     position: relative;
-    width: 280px;
-    height: 280px;
+    width: 233px;
+    height: 233px;
     margin: 0 auto;
     border-radius: 1%;
     overflow: hidden;
@@ -475,11 +476,15 @@ select {
     text-align: start;
     margin-top: 50px;
   }
+  .form-section label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   
   .buttons {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Adds space between the button and the form/profile */
   }
   
   .update-btn {

@@ -121,7 +121,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                 <div class="content-wrapper">
                                                     <div class="form-section" style="margin-top: 5px;">
-                                                        <label for="" style="color: #24724D; margin-bottom: 15px;">Grade and Section :
+                                                        <label for="" style="color: #24724D; margin-bottom: 15px;">Grade and Section :                                                      
                                                             <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['grade']?> - <?php echo $row['section']?></p>
                                                         </label>
                                                         <label for="" style="color: #24724D; margin-bottom: 15px;">Maximum Student :

@@ -122,23 +122,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                             <div class="content-wrapper">    
                                                 <div class="profile-section">
-                                                    <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;">Candidate</p>
                                                     <div class="image-container">
                                                         <img id="profile-picture" src="Candidates/<?php echo $row ['candidate_profile']?>" alt="">
                                                     </div>
-                                                </div>
-                                        
-                                                <div class="form-section" style="margin-top: -14.9px;">
-                                                    <label for="" style="color: #24724D; margin-bottom: 15px;">First Name :
-                                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['candidate_firstname']?></p>
-                                                    </label>
-                                                    <label for="" style="color: #24724D; margin-bottom: 15px;">Last Name :
-                                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['candidate_lastname']?></p>
-                                                    </label>
-                                                    <label for="" style="color: #24724D; margin-bottom: 15px;">Position :
-                                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['position_id']?></p>
-                                                    </label>
-                                                </div>
+                                                    <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['candidate_firstname']?> <?php echo $row['candidate_lastname']?></p>
+                                                    <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo $row['position_id']?></p>
+                                                </div>                                     
                                             </div>
 
                                                 <div class="buttons">

@@ -123,23 +123,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                 <div class="content-wrapper">
                                                     <div class="profile-section">
-                                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;">Voter</p>
                                                         <div class="image-container">
                                                             <img id="profile-picture" src="Voters/<?php echo $row['voters_photo'] ?>" alt="">
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-section">
-                                                        <label for="" style="color: #24724D; margin-bottom: 15px;">First Name :
-                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['voters_firstname'] ?></p>
-                                                        </label>
-                                                        <label for="" style="color: #24724D; margin-bottom: 15px;">Last Name :
-                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['voters_lastname'] ?></p>
-                                                        </label>
-                                                        <label for="" style="color: #24724D; margin-bottom: 15px;">Grade and Section :
-                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['grade_id'] ?> - <?php echo $row['section_id'] ?></p>
-                                                        </label>
-           
+                                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['voters_firstname']?> <?php echo $row['voters_lastname']?></p>
+                                                        <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo $row['grade_id'] ?> - <?php echo $row['section_id'] ?></p>
                                                     </div>
                                                 </div>
 

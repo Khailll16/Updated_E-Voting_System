@@ -61,87 +61,87 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="Voters-list-title">
                                     <h2 style="font-weight: 550;" class="header" id="breadcrup-title">DELETE POSITION</h2>
                                 </div>
+                                <div class="voters-list-content">
+                                    <div class="back-button">
+                                        <button class="button-back"><a href="Position_Page_Admin.php" style="color:white; display:flex; align-items:center; gap: 3px;"><i class="bx bx-arrow-back"></i>Back</a></button>
+                                    </div>
 
-                                <div class="back-button">
-                                    <button class="button-back"><a href="Position_Page_Admin.php" style="color:white; display:flex; align-items:center; gap: 3px;"><i class="bx bx-arrow-back"></i>Back</a></button>
-                                </div>
+                                    <div id="addvoters-popup" class="addvoters-popup">
 
-                                <div id="addvoters-popup" class="addvoters-popup">
+                                        <div class="addvoters-popup-forms">
 
-                                    <div class="addvoters-popup-forms">
+                                            <?php
+                                            // Start by checking if the form is submitted and delete the position
+                                            function deletePosition()
+                                            {
+                                                include "database_connect.php";
+                                                $id = $_GET["id"];
+                                                $sql = "DELETE FROM positions WHERE id=" . $id;
+                                                $result = $conn->query($sql);
 
-                                        <?php
-                                        // Start by checking if the form is submitted and delete the position
-                                        function deletePosition()
-                                        {
-                                            include "database_connect.php";
-                                            $id = $_GET["id"];
-                                            $sql = "DELETE FROM positions WHERE id=" . $id;
-                                            $result = $conn->query($sql);
-
-                                            if ($result) {
-                                                header("Location: Position_Page_Admin.php?insert_msg=Position has been deleted successfully");
-                                                exit();
-                                            } else {
-                                                echo "Error deleting position: " . $conn->error;
+                                                if ($result) {
+                                                    header("Location: Position_Page_Admin.php?insert_msg=Position has been deleted successfully");
+                                                    exit();
+                                                } else {
+                                                    echo "Error deleting position: " . $conn->error;
+                                                }
                                             }
-                                        }
 
-                                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnDelete'])) {
-                                            deletePosition();
-                                        }
-                                        ?>
-
-                                        <?php
-
-                                        if (isset($_GET['id'])) {
-                                            $id = $_GET['id'];
-
-
-                                            $sql = "SELECT * from `positions` where `id` = '$id'";
-                                            $result = mysqli_query($conn, $sql);
-
-
-                                            if (!$result) {
-                                                die("Invalid query: " . $conn->error);
-                                            } else {
-                                                $row = mysqli_fetch_assoc($result);
+                                            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnDelete'])) {
+                                                deletePosition();
                                             }
-                                        }
-                                        ?>
+                                            ?>
 
-                                        <form action="" method="POST">
+                                            <?php
 
-                                            <div class="container">
-                                                <div class="warning-description">
-                                                    <i style="font-size: 90px; color: red;" class="bx bx-alarm-exclamation"></i>
-                                                    <h2>Are you sure?</h2>
-                                                    <p>Once you delete, you will not be able to recover</p>
-                                                </div>
+                                            if (isset($_GET['id'])) {
+                                                $id = $_GET['id'];
 
-                                                <div class="content-wrapper">
-                                                    <div class="form-section" style="margin-top: 5px;">
-                                                        <label for="" style="color: #24724D; margin-bottom: 15px;">Description :
-                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['descrip']; ?></p>
-                                                        </label>
-                                                        <label for="" style="color: #24724D; margin-bottom: 15px;">Maximum Vote :
-                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['max_vote']; ?></p>
-                                                        </label>
+
+                                                $sql = "SELECT * from `positions` where `id` = '$id'";
+                                                $result = mysqli_query($conn, $sql);
+
+
+                                                if (!$result) {
+                                                    die("Invalid query: " . $conn->error);
+                                                } else {
+                                                    $row = mysqli_fetch_assoc($result);
+                                                }
+                                            }
+                                            ?>
+
+                                            <form action="" method="POST">
+
+                                                <div class="container">
+                                                    <div class="warning-description">
+                                                        <i style="font-size: 90px; color: red;" class="bx bx-alarm-exclamation"></i>
+                                                        <h2>Are you sure?</h2>
+                                                        <p>Once you delete, you will not be able to recover</p>
+                                                    </div>
+
+                                                    <div class="content-wrapper">
+                                                        <div class="form-section" style="margin-top: 5px;">
+                                                            <label for="" style="color: #24724D; margin-bottom: 15px;">Description :
+                                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['descrip']; ?></p>
+                                                            </label>
+                                                            <label for="" style="color: #24724D; margin-bottom: 15px;">Maximum Vote :
+                                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['max_vote']; ?></p>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="buttons">
+                                                        <button type="submit" name="btnDelete" class="update-btn">
+                                                            <i class="fas fa-trash-alt"></i> Delete
+                                                        </button>
                                                     </div>
                                                 </div>
+                                            </form>
+                                        </div>
 
-                                                <div class="buttons">
-                                                    <button type="submit" name="btnDelete" class="update-btn">
-                                                        <i class="fas fa-trash-alt"></i> Delete
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
                                     </div>
 
                                 </div>
-
-
                             </div>
 
                         </div>
@@ -155,25 +155,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                     <!-----MENU BAR------>
                     <div class="menu-bar">
-                            <?php
-                                $sql = "SELECT * FROM `setup`";
-                                $result = $conn->query($sql);
+                        <?php
+                        $sql = "SELECT * FROM `setup`";
+                        $result = $conn->query($sql);
 
-                                    if(!$result){
-                                        die("Invalid query: " . $conn->error);
-                                    }else{
-                                            ($row = mysqli_fetch_assoc($result));
-                                        }                
-                            ?>                                            
+                        if (!$result) {
+                            die("Invalid query: " . $conn->error);
+                        } else {
+                            ($row = mysqli_fetch_assoc($result));
+                        }
+                        ?>
                         <!-----SIDEBAR TOP CONTENT-->
                         <div class="sidebar-content">
                             <div class="sidebar-top-content">
 
                                 <!------SIKHAY LOGO-->
                                 <div class="sikhay-logo">
-                                    <img src="Organization/<?php echo $row ['logo']?>" alt="" width="78px">
+                                    <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="78px">
                                     <div class="school-name">
-                                        <p style="color: #4A4A4A; font-size: 16px;"><?php echo$row['organization_name'];?></p>
+                                        <p style="color: #4A4A4A; font-size: 16px;"><?php echo $row['organization_name']; ?></p>
                                         <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                     </div>
                                 </div>
@@ -181,27 +181,26 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <!-----PROFILE ADMIN------>
                                 <header class="sidebar-profile">
                                     <div class="image-text">
-                                    <?php
-                                    $sql = "SELECT * FROM `admin`";
+                                        <?php
+                                        $sql = "SELECT * FROM `admin`";
                                         $result = $conn->query($sql);
 
-                                            if(!$result){
-                                                die("Invalid query: " . $conn->error);
-                                                }
-                                                else{
-                                                ($row = mysqli_fetch_assoc($result)) 
-                                                           
-                                ?>
-                                        <span class="image">
-                                            <img id="picture-admin" src="Images/<?php echo $row ['admin_profile']?>" alt="">
-                                        </span>
-                                        <div class="text header-text">
-                                            <p id="name-admin"><?php echo $row['firstname'];?> <?php echo $row['lastname']; ?></p>
-                                            <span class="name">Online</span>
-                                        </div>
-                                            <?php
+                                        if (!$result) {
+                                            die("Invalid query: " . $conn->error);
+                                        } else {
+                                            ($row = mysqli_fetch_assoc($result))
+
+                                        ?>
+                                            <span class="image">
+                                                <img id="picture-admin" src="Images/<?php echo $row['admin_profile'] ?>" alt="">
+                                            </span>
+                                            <div class="text header-text">
+                                                <p id="name-admin"><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></p>
+                                                <span class="name">Online</span>
+                                            </div>
+                                        <?php
                                         }
-                                    ?>
+                                        ?>
                                     </div>
                                 </header>
 
@@ -231,12 +230,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     </a>
                                 </li>
 
-                                 <!-----Sections------>
+                                <!-----Sections------>
                                 <li class="nav-link">
                                     <a href="Section_Page_Admin.php">
                                         <i class='bx bxs-objects-horizontal-left icon'></i>
                                         <span class="text nav-text">Sections</span>
-                                    </a>                            
+                                    </a>
                                 </li>
 
                                 <!-----VOTERS------>

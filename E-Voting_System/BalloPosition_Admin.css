@@ -345,8 +345,7 @@ i {
 /*----Dashboard body----*/
 
 .dashboard-body {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 18px;
   padding: 0px 18px 0px 18px;
   color: #24724D;
 }
@@ -356,6 +355,15 @@ i {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.voters-list-content {
+  border-radius: 8px;
+  background: #ffffff;
+  border-top: 3px solid #d2d6de;
+  width: 100%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 18px;
 }
 
 .ballot-section {
@@ -513,9 +521,6 @@ i {
   gap: 3px;
 }
 
-.button-edit {
-  margin-top: 15px;
-}
 
 .button-edit:hover {
   opacity: 0.9;

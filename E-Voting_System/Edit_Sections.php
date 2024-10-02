@@ -135,6 +135,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                     </div>
                                                 </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

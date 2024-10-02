@@ -739,7 +739,7 @@ a {
 }
 
 .save-btn:hover {
-  background-color: #218838;
+  opacity: 0.9;
 }
 
 .close-form-btn {
@@ -999,7 +999,7 @@ a {
 }
 
 .save-btn:hover {
-  background-color: #218838;
+  opacity: 0.9;
 }
 
 .addCandidates_close-form-btn {

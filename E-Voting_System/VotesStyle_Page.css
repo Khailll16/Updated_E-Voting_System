@@ -615,7 +615,7 @@ tr:hover td {
 }
 
 .save-btn:hover {
-  background-color: #218838;
+  opacity: 0.9;
 }
 
 .resetposition_close-form-btn {

@@ -82,12 +82,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="voters-list-content">
                                     <table class="voters-table">
 
-
                                         <!--------ENTRIES SEARCH BAR CONTAINER-------->
                                         <div class="entries-search-bar-container">
                                             <div class="selector-entries">
                                                 <label>Show</label>
-                                                <select name="specialization" leng="">
+                                                <select name="entries" id="entries">
                                                     <option>10</option>
                                                     <option>25</option>
                                                     <option>50</option>
@@ -98,27 +97,29 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                             <div class="grade-section">
                                                 <div class="grade-selection">
-                                                    <select name="" id="">
-                                                        <option>Section</option>
-                                                        <?php
-                                                        $sql = "SELECT * FROM sections";
-                                                        $result = $conn->query($sql);
+                                                    <form method="POST" action="">
+                                                        <select name="filter_section" id="filter_section" onchange="this.form.submit()">
+                                                            <option value="">Select Section</option>
+                                                            <?php
+                                                            // Fetch all sections from the database
+                                                            $sql = "SELECT * FROM sections";
+                                                            $result = $conn->query($sql);
 
-                                                        if (!$result) {
-                                                            die("Invalid query: " . $conn->error);
-                                                        } else {
-
-                                                            while ($row = mysqli_fetch_assoc($result)) {
-
-                                                                echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
+                                                            if (!$result) {
+                                                                die("Invalid query: " . $conn->error);
+                                                            } else {
+                                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                                    // Keep selected option when reloading the page
+                                                                    $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['section'] ? 'selected' : '';
+                                                                    echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
+                                                                }
                                                             }
-                                                        }
-                                                        ?>
-                                                    </select>
+                                                            ?>
+                                                        </select>
+                                                    </form>
                                                 </div>
                                             </div>
 
-                                            <!-- Moved search-bar to the end -->
                                             <div class="search-bar">
                                                 <div class="search-container">
                                                     <form method="POST" action="">
@@ -128,9 +129,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </div>
                                             </div>
                                         </div>
-
-
-
 
                                         <div class="table-container">
 
@@ -143,10 +141,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </tr>
 
                                                 <?php
-                                                $sql = "SELECT * FROM sections WHERE
-                                                grade LIKE '%$searchQuery%' OR
-                                                section LIKE '%$searchQuery%' OR
-                                                max_student LIKE '%$searchQuery%'";
+                                                $sectionFilter = isset($_POST['filter_section']) ? $_POST['filter_section'] : '';
+
+                                                $searchQuery = isset($_POST['search']) ? $_POST['search'] : '';
+
+                                                $sql = "SELECT * FROM sections WHERE 1";
+
+                                                if ($sectionFilter != '') {
+                                                    $sql .= " AND section = '$sectionFilter'";
+                                                }
+
+                                                if ($searchQuery != '') {
+                                                    $sql .= " AND (grade LIKE '%$searchQuery%' OR section LIKE '%$searchQuery%' OR max_student LIKE '%$searchQuery%')";
+                                                }
+
                                                 $result = $conn->query($sql);
 
                                                 if (!$result) {
@@ -179,10 +187,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </table>
                                 </div>
                             </div>
+
 
                         </div>
                     </div>

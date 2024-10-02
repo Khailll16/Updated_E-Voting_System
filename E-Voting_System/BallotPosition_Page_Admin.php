@@ -232,7 +232,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         <div class="sidebar-top-content">
                             <!------SIKHAY LOGO---->
                             <div class="sikhay-logo">
-                                <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="55px">
+                                <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="78px">
                                 <div class="school-name">
 
                                     <p style="color: #4A4A4A; font-size: 16px;"><?php echo $row['organization_name']; ?></p>

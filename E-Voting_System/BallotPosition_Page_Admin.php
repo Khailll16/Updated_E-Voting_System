@@ -10,7 +10,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     <html>
 
     <head>
-        <link rel="stylesheet" href="BalloPosition_Admin.css">
+        <link rel="stylesheet" href="BallotPosition_Admin.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="icon" href="Images/Black Retro Minimalist Vegan Cafe Logo (26).png">
         <title>Admin Ballot Position Page | SIKHAY</title>

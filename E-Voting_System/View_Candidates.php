@@ -103,7 +103,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <label for="">Last Name
                                                             <input style="border: 1px solid #24724D" type="text" name="clname" class="input-field" value="<?php echo $row['candidate_lastname'] ?>" disabled>
                                                         </label>
-                                                        <label for="">Last Name
+                                                        <label for="">Position
                                                             <input style="border: 1px solid #24724D" type="text" name="position" class="input-field" value="<?php echo $row['position_id'] ?>" disabled>
                                                         </label>
                                                         <label style="display: flex; justify-content: end; " for="">Platform

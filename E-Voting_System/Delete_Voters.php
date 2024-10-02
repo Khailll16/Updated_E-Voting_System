@@ -105,7 +105,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
 
                                 <div class="back-button">
-                                    <button class="button-back"><a href="Voters_Page_Admin.php" style="color: white;"><i class="bx bx-arrow-back"></i>Back</a></button>
+                                    <button class="button-back"><a href="Voters_Page_Admin.php" style="color:white; display:flex; align-items:center; gap: 3px;"><i class="bx bx-arrow-back"></i>Back</a></button>
                                 </div>
 
                                 <div id="addvoters-popup" class="addvoters-popup">

@@ -514,6 +514,7 @@ select {
 
 .cancel-btn:hover,
 .update-btn:hover,
+.button-back:hover,
 .choose-file-btn:hover {
   opacity: 0.9;
 }

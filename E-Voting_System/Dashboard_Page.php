@@ -69,7 +69,7 @@
                                 <!----BUTTON MENU---->
                                 <div class="button-container">
 
-                                    <button class="btn" style="background-color: #00c0ef;">  
+                                    <button class="btn">  
                                         <i class='bx bx-objects-horizontal-right icon'></i>   
                                     <div class="inner"> 
                                         <?php
@@ -85,7 +85,7 @@
                                     </button>
 
 
-                                    <button class="btn" style="background-color: #f39c12;">   
+                                    <button class="btn">   
                                         <i class='bx bxs-user-account icon'> </i>             
                                     <div class="inner">     
                                          <?php
@@ -102,7 +102,7 @@
                                     </button>
 
 
-                                    <button class="btn" style="background-color: #ba55d3;">   
+                                    <button class="btn">   
                                         <i class='bx bx-objects-horizontal-right icon'></i>   
                                     <div class="inner">     
                                         <?php
@@ -119,7 +119,7 @@
                                     </button>
 
 
-                                    <button class="btn" style="background-color: #dd4b39;">   
+                                    <button class="btn">   
                                         <i class='bx bx-group icon' ></i>                     
                                     <div class="inner">     
                                         <?php
@@ -136,7 +136,7 @@
                                     </button>
 
 
-                                    <button class="btn" style="background-color: #fb607f;">   
+                                    <button class="btn">   
                                         <i class='bx bx-box icon'></i>                        
                                     <div class="inner">    
                                         <?php
@@ -156,9 +156,10 @@
                                 </div>
 
 
-                                <!----VOTES TALLY TITLE---->
-                                <h2 style="font-weight: 550; margin-top: 15px;" class="header">VOTES TALLY</h2>
-
+                                <!----VOTES PARTICIPATION---->
+                                <div class="votes-participation">
+                                    <h2 style="font-weight: 550;" class="header">VOTES PARTICIPATION</h2>
+                                </div>
                                 <!----VOTES BOX RESULT---->
                                 <div class="votes-container">
                                     

@@ -25,7 +25,9 @@ body{
     transition: var(--tran-05);
 
 }
-
+.button-container button{
+    background-color: #24724D;
+}
 .notification{
     display: none;
     background-color: #F7F7F6;
@@ -325,9 +327,8 @@ i{
 
 /*----Dashboard body----*/
 
-.dashboard-body{
-    margin-top: 15px;
-    margin-bottom: 15px;
+.dashboard-body {
+    margin: 18px;
     padding: 0px 18px 0px 18px;
     color: #24724D;
 }
@@ -374,7 +375,7 @@ i{
     right: 10px;
     z-index: 0;
     font-size:100px;
-    color: rgba(0, 0, 0, 0.15);
+    color: #FFFFFF;
     cursor:unset;
 }
 .btn:hover .icon {
@@ -415,146 +416,18 @@ i{
     border-radius: 0px 0px 14px 14px;
 }
 .btn>.small-box-footer:hover {
-    color: #fff;
+    color: #ffffff;
     background: rgba(0, 0, 0, 0.15);
 }
-
-
-
-
-
-/*POP UP*/
-
-
-.popup {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
-  }
-  
-  .popup-content {
-    background-color: #ffffff;
-    margin-inline: auto;
-    margin-top: 25px;
-    padding: 20px;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
-    width: 40%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s;
-  }
-  
-  .popup-top {
-    width: 100%;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eeeeee;
-    margin-bottom: 15px;
-  }
-  
-  .popup-top h2 {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 0;
-    color: #333333;
-  }
-  
-  .popup-forms {
-    width: 100%;
-  }
-  
-  .form-group-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .form-group-title label {
-    font-size: 1em;
-    font-weight: bold;
-    color: #555555;
-    margin-right: 20px;
-  }
-  
-  .input-size {
-    width: 65%;
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    font-size: 1em;
-  }
-  
-  .form-group-button {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    padding-top: 15px;
-  }
-  
-  .save-btn {
-    background-color: #28a745;
-    justify-content: space-between;
-    padding: 10px 20px;
-    color: white;
-    border: 1px solid #ddd;
+.votes-participation{
+    margin-top: 15px;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .save-btn:hover {
-    background-color: #218838;
-  }
-  
-  .close-form-btn {
-    background-color: #dc3545;
-    justify-content: space-between;
-    padding: 10px 20px;
-    color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .close-form-btn:hover {
-    background-color: #c82333;
-  }
-
-  .icons-container{
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000000;
-    text-decoration: none;
-  }
-  
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding: 18px;
+}
   @keyframes fadeIn {
     from {
       opacity: 0;

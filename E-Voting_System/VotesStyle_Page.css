@@ -146,7 +146,7 @@ i {
   cursor: pointer;
 }
 
-.sikhay-logo{ 
+.sikhay-logo {
   /* display: flex; */
   align-items: center;
   margin-bottom: 15px;
@@ -325,7 +325,7 @@ i {
 }
 
 .add-button button:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 
@@ -472,6 +472,16 @@ table {
   padding: 18px;
 }
 
+.pagination-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entries p {
+  font-size: 15px;
+}
+
 .pagination {
   display: flex;
   gap: 6px;
@@ -485,7 +495,8 @@ table {
 .pagination .bx {
   color: white;
   background-color: #24724D;
-  padding: 10px;
+  padding: 7.8px;
+  font-size: 15px;
 }
 
 .pagination .bxs-left-arrow {
@@ -496,12 +507,20 @@ table {
   border-radius: 0px 20px 20px 0px;
 }
 
+.pagination .prev-btn {
+  padding-right: 25px;
+}
+
+.pagination .next-btn {
+  padding-left: 25px;
+}
+
 .pagination button {
   display: flex;
   align-items: center;
   gap: 14px;
   color: #24724D;
-  font-size: 15px;
+  font-size: 14.9px;
   cursor: pointer;
   border-radius: 50px;
   border: transparent;
@@ -509,12 +528,15 @@ table {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-.pagination .prev-btn {
-  padding-right: 25px;
-}
-
-.pagination .next-btn {
-  padding-left: 25px;
+.pagination p {
+  background-color: #24724D;
+  padding: 5px 18px;
+  color: white;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  margin: 0px 6px 0px 6px;
 }
 
 th {
@@ -668,14 +690,4 @@ tr:hover td {
   text-align: center;
   color: #24724D;
   margin-bottom: 20px;
-}
-
-.pagination p {
-  background-color: #24724D;
-  padding: 5px 20px;
-  color: white;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: bold;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }

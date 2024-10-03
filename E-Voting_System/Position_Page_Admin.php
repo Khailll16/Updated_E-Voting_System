@@ -171,6 +171,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </table>
 
                                                 <div class="pagination-content">
+                                                    <?php
+                                                    include "database_connect.php";
+
+                                                    $sql = "SELECT * FROM positions";
+                                                    $query = $conn->query($sql);
+                                                   
+                                                    echo "<div class='entries'>";
+                                                    echo "<p>Showing 1 to $query->num_rows  of  $query->num_rows  entries</p>";
+                                                    echo "</div>";
+                                                    ?>
                                                     <div class="pagination">
                                                         <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
                                                         <p>1</p>

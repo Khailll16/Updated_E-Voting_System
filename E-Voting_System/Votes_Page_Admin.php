@@ -152,6 +152,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                 </table>
                                                 <div class="pagination-content">
+                                                    <div class="entries">
+                                                        <p>Showing 1 to 2 of 2 entries</p>
+                                                    </div>
                                                     <div class="pagination">
                                                         <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
                                                         <p>1</p>

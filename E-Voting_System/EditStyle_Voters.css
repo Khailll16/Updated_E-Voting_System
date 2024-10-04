@@ -628,6 +628,16 @@ a {
   gap: 3px;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .cancel-btn:hover,
 .update-btn:hover,
 .button-back:hover,

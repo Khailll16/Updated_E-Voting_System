@@ -524,3 +524,12 @@ i {
 .button-edit:hover {
   opacity: 0.9;
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

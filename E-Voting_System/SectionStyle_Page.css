@@ -848,7 +848,7 @@ tr:hover td {
   justify-content: center;
   align-items: center;
   margin-bottom: 15px;
-  margin-left: 6px;
+  margin-left: 10px;
 }
 
 .form-group-maximum-student label {
@@ -859,7 +859,7 @@ tr:hover td {
 }
 
 .form-group-maximum-student .input-size {
-  width: 65.1%;
+  width: 65.9%;
   padding: 10px;
   border: 1px solid #959191;
   border-radius: 4px;
@@ -872,7 +872,7 @@ tr:hover td {
   justify-content: center;
   align-items: center;
   margin-bottom: 15px;
-  margin-left: -96px;
+  margin-right: 92px;
 }
 
 .form-group-maximum-vote label {
@@ -883,7 +883,7 @@ tr:hover td {
 }
 
 .form-group-maximum-vote .input-size {
-  width: 58%;
+  width: 71.9%;
   padding: 10px;
   border: 1px solid #959191;
   border-radius: 4px;

@@ -164,7 +164,7 @@
                                                 </label>
                                                 <label for="" style="justify-content: end; display: flex;">Position
                                                     <select class="input-field" name="position">
-                                                        <option value="" selected="">- Select -</option>
+                                                        <option value="<?php echo $row['position_id'] ?>" selected="">- Select -</option>
                                                             <?php
                                                             $sql = "SELECT * FROM positions";
                                                             $result = $conn->query($sql);

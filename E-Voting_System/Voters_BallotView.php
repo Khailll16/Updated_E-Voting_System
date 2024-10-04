@@ -33,41 +33,58 @@
                                 ?>
             <h3 class="official-ballot" style="border-radius: 20px 20px 0px 0px;">OFFICIAL BALLOT</h3>
             <div class="ballot-title">
-                <img src="Images/school-logo-1.png" alt="" width="120px">
+                <img src="Organization/<?php echo $row['logo_ballot'] ?>" alt="" width="120px">
                 <h1>
                     <?php echo $row['title'];?>
                 </h1>
             </div>
-            <?php
-                    }
-                ?>
+                <?php
+            }
+        ?>
 
             <div class="back-button">
                 <a href="Voters_Ballot_Page.php"><button><i class="bx bx-arrow-back"></i> Back</button></a>
             </div>
 
+            <?php
+                if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+
+
+                    $sql = "SELECT * from `candidates` where `id` = '$id'";
+                    $result = mysqli_query($conn, $sql);
+
+
+                            if (!$result) {
+                                die("Invalid query: " . $conn->error);
+                            } else {
+                                $row = mysqli_fetch_assoc($result);
+                                }
+                            }
+            ?>
+
             <div class="container">
                 <div class="profile-section">
                     <div class="image-container">
-                        <img id="profile-picture" src="Images/rhea-removebg-preview.png" alt="">
+                        <img id="profile-picture" src="Candidates/<?php echo $row['candidate_profile'] ?>" alt="">
                     </div>
-                    <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top: 10px;">Mikhail Villanueva</p>
-                    <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -10px;">Vice Mayor</p>
+                    <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top: 10px;"><?php echo $row['candidate_firstname']; ?> <?php echo $row['candidate_lastname']; ?></p>
+                    <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -10px;"><?php echo $row['position_id'] ?></p>
                 </div>
 
                 <div class="form-section">
 
                     <label for="">First Name
-                        <input type="text" name="admin_fname" class="input-field" value="Mikhail" disabled>
+                        <input type="text" name="admin_fname" class="input-field" value="<?php echo $row['candidate_firstname']; ?>" disabled>
                     </label>
                     <label for="">Last Name
-                        <input type="text" name="admin_lname" class="input-field" value="Villanueva">
+                        <input type="text" name="admin_lname" class="input-field" value="<?php echo $row['candidate_lastname']; ?>" disabled>
                     </label>
                     <label for="">Position
-                        <input type="text" name="admin_username" class="input-field" value="Vice Mayor" disabled>
+                        <input type="text" name="admin_username" class="input-field" value="<?php echo $row['position_id'] ?>" disabled>
                     </label>
                     <label for="">Platform
-                        <input type="text" name="admin_pass" class="input-field" value="123" disabled>
+                        <input type="text" name="admin_pass" class="input-field" value="<?php echo $row['platform'] ?>" disabled>
                     </label>
 
                 </div>

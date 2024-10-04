@@ -82,94 +82,151 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     </div>
                                 <?php
                             }
-                                ?>
-                                <h3>PRESIDENT</h3>
-                                <div class="candidate">
-                                    <div class="details-voter">
-                                        <label>
-                                            <input type="radio" name="president" value="Rhea Clarisse Esteban">
-                                            <img src="Images/rhea-removebg-preview.png" alt="Rhea Clarisse Esteban">
-                                            <div class="candidate-info">
-                                                Rhea Clarisse Esteban
-                                                <button><i class="bx bx-play"></i>View</button>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="candidate">
-                                    <div class="details-voter">
-                                        <label>
-                                            <input type="radio" name="president" value="Rhea Clarisse Esteban">
-                                            <img src="Images/jude-removebg-preview.png" alt="Rhea Clarisse Esteban">
-                                            <div class="candidate-info">
-                                                Jude Ramos
-                                                <button><i class="bx bx-play"></i>View</button>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="candidate">
-                                    <div class="details-voter">
-                                        <label>
-                                            <input type="radio" name="president" value="Rhea Clarisse Esteban">
-                                            <img src="Images/david-removebg-preview.png" alt="Rhea Clarisse Esteban">
-                                            <div class="candidate-info">
-                                                David Amos
-                                                <button><i class="bx bx-play"></i>View</button>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="candidate">
-                                    <label>
-                                        <input type="radio" name="president" value="Abstain">
-                                        Abstain
-                                    </label>
-                                </div>
+                        ?>
 
-                                <h3> VICE PRESIDENT</h3>
-                                <div class="candidate">
-                                    <div class="details-voter">
-                                        <label>
-                                            <input type="radio" name="president" value="Rhea Clarisse Esteban">
-                                            <img src="Images/rhea-removebg-preview.png" alt="Rhea Clarisse Esteban">
-                                            <div class="candidate-info">
-                                                Rhea Clarisse Esteban
-                                                <button><i class="bx bx-play"></i>View</button>
-                                            </div>
-                                        </label>
+                                <?php
+                                    // SQL query to fetch candidates for President
+                                    $sql = "SELECT * FROM `candidates` WHERE position_id = 'President'";
+                                    $result = $conn->query($sql);
+
+                                    // Check if query succeeded
+                                    if (!$result) {
+                                        die("Invalid query: " . $conn->error);
+                                    }
+                                ?>
+
+                                <h3>PRESIDENT</h3>
+
+                                <?php
+                                    // Loop through each row and display candidate data
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <div class="candidate">
+                                        <div class="details-voter">
+                                            <label>
+                                                <!-- Radio button for selecting the candidate -->
+                                                <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
+                                                <!-- Display candidate image -->
+                                                <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
+                                                <!-- Display candidate name and button -->
+                                                <div class="candidate-info">
+                                                    <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
+                                                    <button><i class="bx bx-play"></i>View</button>
+                                                </div>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="candidate">
-                                    <div class="details-voter">
-                                        <label>
-                                            <input type="radio" name="president" value="Rhea Clarisse Esteban">
-                                            <img src="Images/jude-removebg-preview.png" alt="Rhea Clarisse Esteban">
-                                            <div class="candidate-info">
-                                                Jude Ramos
-                                                <button><i class="bx bx-play"></i>View</button>
-                                            </div>
-                                        </label>
+                                <?php
+                                    }
+                                ?>
+
+                                <?php
+                                    // SQL query to fetch candidates for President
+                                    $sql = "SELECT * FROM `candidates` WHERE position_id = 'Vice President'";
+                                    $result = $conn->query($sql);
+
+                                    // Check if query succeeded
+                                    if (!$result) {
+                                        die("Invalid query: " . $conn->error);
+                                    }
+                                ?>
+
+                                <h3>VICE PRESIDENT</h3>
+
+                                <?php
+                                    // Loop through each row and display candidate data
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <div class="candidate">
+                                        <div class="details-voter">
+                                            <label>
+                                                <!-- Radio button for selecting the candidate -->
+                                                <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
+                                                <!-- Display candidate image -->
+                                                <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
+                                                <!-- Display candidate name and button -->
+                                                <div class="candidate-info">
+                                                    <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
+                                                    <button><i class="bx bx-play"></i>View</button>
+                                                </div>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="candidate">
-                                    <div class="details-voter">
-                                        <label>
-                                            <input type="radio" name="president" value="Rhea Clarisse Esteban">
-                                            <img src="Images/david-removebg-preview.png" alt="Rhea Clarisse Esteban">
-                                            <div class="candidate-info">
-                                                David Amos
-                                                <button><i class="bx bx-play"></i>View</button>
-                                            </div>
-                                        </label>
+                                <?php
+                                    }
+                                ?>
+
+                                <?php
+                                    // SQL query to fetch candidates for President
+                                    $sql = "SELECT * FROM `candidates` WHERE position_id = 'Secretary'";
+                                    $result = $conn->query($sql);
+
+                                    // Check if query succeeded
+                                    if (!$result) {
+                                        die("Invalid query: " . $conn->error);
+                                    }
+                                ?>
+
+                                <h3>SECRETARY</h3>
+
+                                <?php
+                                    // Loop through each row and display candidate data
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <div class="candidate">
+                                        <div class="details-voter">
+                                            <label>
+                                                <!-- Radio button for selecting the candidate -->
+                                                <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
+                                                <!-- Display candidate image -->
+                                                <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
+                                                <!-- Display candidate name and button -->
+                                                <div class="candidate-info">
+                                                    <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
+                                                    <button><i class="bx bx-play"></i>View</button>
+                                                </div>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="candidate">
-                                    <label>
-                                        <input type="radio" name="president" value="Abstain">
-                                        Abstain
-                                    </label>
-                                </div>
+                                <?php
+                                    }
+                                ?>
+
+                                <?php
+                                    // SQL query to fetch candidates for President
+                                    $sql = "SELECT * FROM `candidates` WHERE position_id = 'Treasurer'";
+                                    $result = $conn->query($sql);
+
+                                    // Check if query succeeded
+                                    if (!$result) {
+                                        die("Invalid query: " . $conn->error);
+                                    }
+                                ?>
+
+                                <h3>TREASURER</h3>
+
+                                <?php
+                                    // Loop through each row and display candidate data
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <div class="candidate">
+                                        <div class="details-voter">
+                                            <label>
+                                                <!-- Radio button for selecting the candidate -->
+                                                <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
+                                                <!-- Display candidate image -->
+                                                <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
+                                                <!-- Display candidate name and button -->
+                                                <div class="candidate-info">
+                                                    <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
+                                                    <button><i class="bx bx-play"></i>View</button>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                <?php
+                                    }
+                                ?>
 
 
                                 <div class="form-group-button">

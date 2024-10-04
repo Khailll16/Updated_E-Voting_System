@@ -121,7 +121,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <select name="filter_section" id="filter_section" onchange="this.form.submit()">
                                                                 <option value="">Select Section</option>
                                                                 <?php
-                                                                // Fetch all sections from the database
+                                                                
                                                                 $sql = "SELECT * FROM sections";
                                                                 $result = $conn->query($sql);
 
@@ -129,7 +129,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                     die("Invalid query: " . $conn->error);
                                                                 } else {
                                                                     while ($row = mysqli_fetch_assoc($result)) {
-                                                                        // Keep selected option when reloading the page
+                                                                        
                                                                         $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['section'] ? 'selected' : '';
                                                                         echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
                                                                     }
@@ -169,9 +169,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
 
                                                         <?php
-                                                        $sql = "SELECT voters.*, sections.grade 
+                                                        $sql = "SELECT voters.*, grade_table.grade, section_table.section 
                                                         FROM voters 
-                                                        LEFT JOIN sections ON voters.grade_id = sections.id
+                                                        LEFT JOIN sections AS grade_table ON voters.grade_id = grade_table.id
+                                                        LEFT JOIN sections AS section_table ON voters.section_id = section_table.id
                                                         WHERE voters_lastname LIKE '%$searchQuery%' OR 
                                                         voters_firstname LIKE '%$searchQuery%' OR 
                                                         voters_id LIKE '%$searchQuery%'";

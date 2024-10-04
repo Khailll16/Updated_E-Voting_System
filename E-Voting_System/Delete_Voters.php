@@ -103,46 +103,46 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="Voters-list-title">
                                     <h2 style="font-weight: 550;" class="header" id="breadcrup-title">DELETE VOTER</h2>
                                 </div>
+                                <div class="voters-list-content">
+                                    <div class="back-button">
+                                        <button class="button-back"><a href="Voters_Page_Admin.php" style="color:white; display:flex; align-items:center; gap: 3px;"><i class="bx bx-arrow-back"></i>Back</a></button>
+                                    </div>
 
-                                <div class="back-button">
-                                    <button class="button-back"><a href="Voters_Page_Admin.php" style="color:white; display:flex; align-items:center; gap: 3px;"><i class="bx bx-arrow-back"></i>Back</a></button>
-                                </div>
+                                    <div id="addvoters-popup" class="addvoters-popup">
 
-                                <div id="addvoters-popup" class="addvoters-popup">
+                                        <div class="addvoters-popup-forms">
 
-                                    <div class="addvoters-popup-forms">
+                                            <form action="" method="POST">
 
-                                        <form action="" method="POST">
+                                                <div class="container">
+                                                    <div class="warning-description">
+                                                        <i style="font-size: 90px; color: red;" class="bx bx-alarm-exclamation"></i>
+                                                        <h2>Are you sure?</h2>
+                                                        <p>Once you delete, you will not be able to recover</p>
+                                                    </div>
 
-                                            <div class="container">
-                                                <div class="warning-description">
-                                                    <i style="font-size: 90px; color: red;" class="bx bx-alarm-exclamation"></i>
-                                                    <h2>Are you sure?</h2>
-                                                    <p>Once you delete, you will not be able to recover</p>
-                                                </div>
-
-                                                <div class="content-wrapper">
-                                                    <div class="profile-section">
-                                                        <div class="image-container">
-                                                            <img id="profile-picture" src="Voters/<?php echo $row['voters_photo'] ?>" alt="">
+                                                    <div class="content-wrapper">
+                                                        <div class="profile-section">
+                                                            <div class="image-container">
+                                                                <img id="profile-picture" src="Voters/<?php echo $row['voters_photo'] ?>" alt="">
+                                                            </div>
+                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['voters_firstname'] ?> <?php echo $row['voters_lastname'] ?></p>
+                                                            <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo $row['grade_id'] ?> - <?php echo $row['section_id'] ?></p>
                                                         </div>
-                                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['voters_firstname']?> <?php echo $row['voters_lastname']?></p>
-                                                        <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo $row['grade_id'] ?> - <?php echo $row['section_id'] ?></p>
+                                                    </div>
+
+                                                    <div class="buttons">
+                                                        <button type="submit" name="btnDelete" class="update-btn">
+                                                            <i class="fas fa-trash-alt"></i> Delete
+                                                        </button>
                                                     </div>
                                                 </div>
+                                            </form>
+                                        </div>
 
-                                                <div class="buttons">
-                                                    <button type="submit" name="btnDelete" class="update-btn">
-                                                        <i class="fas fa-trash-alt"></i> Delete
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
                                     </div>
 
                                 </div>
-
-
                             </div>
 
                         </div>

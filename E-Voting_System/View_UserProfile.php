@@ -79,7 +79,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         }
                                         ?>
                                     </div>
-
+                                <div class="voters-list-content">
                                     <div class="add-button">
                                         <button class="button-add"><a href="Edit_UserProfile.php?id=<?php echo $row['id']; ?>" style=" color:white; display:flex; align-items:center; gap: 3px;"><i class="bx bxs-edit"></i>Edit</a></button>
                                     </div>
@@ -124,7 +124,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                     </div>
 
-
+                                </div>
                             </div>
 
                         </div>

@@ -61,41 +61,41 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="Voters-list-title">
                                     <h2 style="font-weight: 550;" class="header" id="breadcrup-title">VIEW CANDIDATE</h2>
                                 </div>
+                                <div class="voters-list-content">
+                                    <div class="back-button">
+                                        <button class="button-back"><a href="Candidates_Page_Admin.php" style="color: white;"><i class='bx bx-arrow-back'></i>Back</a></button>
+                                    </div>
 
-                                <div class="back-button">
-                                    <button class="button-back"><a href="Candidates_Page_Admin.php" style="color: white;"><i class='bx bx-arrow-back'></i>Back</a></button>
-                                </div>
+                                    <div id="addvoters-popup" class="addvoters-popup">
 
-                                <div id="addvoters-popup" class="addvoters-popup">
-
-                                    <div class="addvoters-popup-forms">
-                                        <form action="" method="POST">
-                                            <?php
-                                            if (isset($_GET['id'])) {
-                                                $id = $_GET['id'];
-
-
-                                                $sql = "SELECT * from `candidates` where `id` = '$id'";
-                                                $result = mysqli_query($conn, $sql);
+                                        <div class="addvoters-popup-forms">
+                                            <form action="" method="POST">
+                                                <?php
+                                                if (isset($_GET['id'])) {
+                                                    $id = $_GET['id'];
 
 
-                                                if (!$result) {
-                                                    die("Invalid query: " . $conn->error);
-                                                } else {
-                                                    $row = mysqli_fetch_assoc($result);
+                                                    $sql = "SELECT * from `candidates` where `id` = '$id'";
+                                                    $result = mysqli_query($conn, $sql);
+
+
+                                                    if (!$result) {
+                                                        die("Invalid query: " . $conn->error);
+                                                    } else {
+                                                        $row = mysqli_fetch_assoc($result);
+                                                    }
                                                 }
-                                            }
-                                            ?>
-                                            <div class="container">
-                                                <div class="profile-section">
-                                                    <div class="image-container">
-                                                        <img id="profile-picture" src="Candidates/<?php echo $row['candidate_profile'] ?>" alt="">
+                                                ?>
+                                                <div class="container">
+                                                    <div class="profile-section">
+                                                        <div class="image-container">
+                                                            <img id="profile-picture" src="Candidates/<?php echo $row['candidate_profile'] ?>" alt="">
+                                                        </div>
+                                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['candidate_firstname']; ?> <?php echo $row['candidate_lastname']; ?></p>
+                                                        <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo $row['position_id'] ?></p>
                                                     </div>
-                                                    <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['candidate_firstname']; ?> <?php echo $row['candidate_lastname']; ?></p>
-                                                    <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo $row['position_id'] ?></p>
-                                                </div>
 
-                                                <div class=" form-section">
+                                                    <div class=" form-section">
 
                                                         <label for="">First Name
                                                             <input style="border: 1px solid #24724D" type="text" name="cfname" class="input-field" value="<?php echo $row['candidate_firstname'] ?>" disabled>
@@ -103,7 +103,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <label for="">Last Name
                                                             <input style="border: 1px solid #24724D" type="text" name="clname" class="input-field" value="<?php echo $row['candidate_lastname'] ?>" disabled>
                                                         </label>
-                                                        <label for="">Last Name
+                                                        <label for="">Position
                                                             <input style="border: 1px solid #24724D" type="text" name="position" class="input-field" value="<?php echo $row['position_id'] ?>" disabled>
                                                         </label>
                                                         <label style="display: flex; justify-content: end; " for="">Platform
@@ -112,12 +112,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     </div>
 
                                                 </div>
-                                        </form>
+                                            </form>
+                                        </div>
+
                                     </div>
 
                                 </div>
-
-
                             </div>
 
                         </div>

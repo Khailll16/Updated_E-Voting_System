@@ -174,7 +174,7 @@ i {
   cursor: pointer;
 }
 
-.sikhay-logo{ 
+.sikhay-logo {
   /* display: flex; */
   align-items: center;
   margin-bottom: 15px;
@@ -306,6 +306,7 @@ i {
 .top_content {
   background-color: rgb(36, 114, 77);
   padding: 8px 18px;
+  border-bottom: 2.9px solid #dcdcdc;
 }
 
 /*------BreadCrump------*/
@@ -378,7 +379,7 @@ i {
   background-color: #24724D;
   border: transparent;
   border-radius: 30px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .entries-search-bar-container {
@@ -495,33 +496,45 @@ table {
   border-collapse: collapse;
   margin-bottom: 20px;
   border-radius: 23px 23px 0px 0px;
-  border-spacing: 0 15px; /* Add vertical space between rows */
+  border-spacing: 0 15px;
+  /* Add vertical space between rows */
   width: 100%;
 }
+
 .voters-list-content {
   border-radius: 8px;
   background: #ffffff;
   border-top: 3px solid #d2d6de;
   width: 100%;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   padding: 18px;
 }
 
-.pagination button {
+.pagination-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entries p {
+  font-size: 15px;
+}
+
+.p .pagination button {
   display: flex;
   align-items: center;
   gap: 14px;
   color: #24724D;
-  font-size: 15px;
+  font-size: 14.9px;
   cursor: pointer;
   border-radius: 50px;
   border: transparent;
   background-color: #ECECEC;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .pagination {
-  text-align: end;
+  align-items: center;
   display: flex;
   gap: 6px;
 }
@@ -534,7 +547,8 @@ table {
 .pagination .bx {
   color: white;
   background-color: #24724D;
-  padding: 10px;
+  padding: 7.8px;
+  font-size: 15px;
 }
 
 .pagination button {
@@ -547,7 +561,7 @@ table {
   border-radius: 50px;
   border: transparent;
   background-color: #ECECEC;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .pagination .bxs-left-arrow {
@@ -568,12 +582,13 @@ table {
 
 .pagination p {
   background-color: #24724D;
-  padding: 5px 20px;
+  padding: 5px 18px;
   color: white;
   border-radius: 10px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  margin: 0px 6px 0px 6px;
 }
 
 
@@ -590,9 +605,11 @@ td {
   text-align: center;
   color: #4A4A4A;
 }
+
 tr {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
+
 tr:hover td {
   background-color: #f0f0f0;
   cursor: pointer;
@@ -610,7 +627,7 @@ tr:hover td {
 
 .update {
   font-size: 15px;
-  padding: 5px ;
+  padding: 5px;
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -621,7 +638,8 @@ tr:hover td {
   border-radius: 10px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
-.update .bx{
+
+.update .bx {
   font-size: 25px;
 }
 
@@ -638,7 +656,8 @@ tr:hover td {
   border-radius: 10px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
-.delete .bx{
+
+.delete .bx {
   font-size: 25px;
 }
 
@@ -895,7 +914,7 @@ tr:hover td {
 }
 
 .save-btn:hover {
-  background-color: #218838;
+  opacity: 0.9;
 }
 
 .addposition-close-form-btn {

@@ -61,7 +61,7 @@
                             <div class="Voters-list-title">
                                 <h2 style="font-weight: 550;" class="header" id="breadcrup-title">EDIT BALLOT</h2>
                             </div>
-
+                        <div class="voters-list-content">
                             <div class="back-button">
                                 <button class="button-back"><a href="BallotPosition_Page_Admin.php"
                                         style="color: white;"><i class="bx bx-arrow-back"></i>Back</a></button>
@@ -167,7 +167,7 @@
 
                             </div>
 
-
+                        </div>
                         </div>
 
                     </div>

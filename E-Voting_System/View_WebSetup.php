@@ -80,47 +80,46 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         }
                                         ?>
                                     </div>
-
-                                    <div class="back-button">
-                                        <button class="button-add"><a href="Edit_WebSetup.php?id=<?php echo $row['id']; ?>" style="color: white; display:flex; align-items:center; gap: 3px;"><i class="bx bxs-edit"></i>Update</a></button>
-                                    </div>
-
-                                    <div id="addvoters-popup" class="addvoters-popup">
-
-                                        <div class="addvoters-popup-forms">
-                                            <form action="" method="POST">
-                                                <div class="container">
-                                                    <div class="profile-section">
-                                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;">Logo</p>
-                                                        <div class="image-container">
-                                                            <img id="profile-picture" src="Organization/<?php echo $row['logo'] ?>" alt="" style="background-color: white;">
-                                                        </div>
-                                                        <input type="file" id="file-input" name="orglogo" class="file-input" accept="image/*" onchange="previewImage(event)">
-                                                    </div>
-
-                                                    <div class="form-section">
-
-                                                        <label for="" style="text-align: start; margin-left: 25px; margin-bottom: 10px;">Name of organization</label>
-                                                        <input style="border:1px solid #24724D;" type="text" name="orgname" class="input-field" value="<?php echo $row['organization_name'] ?>" disabled>
-
-                                                        <label for="" style="text-align: start; margin-left: 25px; margin-bottom: 10px;">Number</label>
-                                                        <input style="border:1px solid #24724D;" type="text" name="number" class="input-field" value="<?php echo $row['admin_number'] ?>" disabled>
-
-                                                        <label for="" style="text-align: start; margin-left: 25px; margin-bottom: 10px;">Address</label>
-                                                        <input style="border:1px solid #24724D;" type="text" name="address" class="input-field" value="<?php echo $row['school_address'] ?>" disabled>
-
-                                                    </div>
-                                                <?php
-                                            }
-                                                ?>
-                                                </div>
+                                    <div class="voters-list-content">
+                                        <div class="back-button">
+                                            <button class="button-add"><a href="Edit_WebSetup.php?id=<?php echo $row['id']; ?>" style="color: white; display:flex; align-items:center; gap: 3px;"><i class="bx bxs-edit"></i>Update</a></button>
                                         </div>
-                                        </form>
 
+                                        <div id="addvoters-popup" class="addvoters-popup">
+
+                                            <div class="addvoters-popup-forms">
+                                                <form action="" method="POST">
+                                                    <div class="container">
+                                                        <div class="profile-section">
+                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;">Logo</p>
+                                                            <div class="image-container">
+                                                                <img id="profile-picture" src="Organization/<?php echo $row['logo'] ?>" alt="" style="background-color: white;">
+                                                            </div>
+                                                            <input type="file" id="file-input" name="orglogo" class="file-input" accept="image/*" onchange="previewImage(event)">
+                                                        </div>
+
+                                                        <div class="form-section">
+
+                                                            <label for="" style="text-align: start; margin-left: 25px; margin-bottom: 10px;">Name of organization</label>
+                                                            <input style="border:1px solid #24724D;" type="text" name="orgname" class="input-field" value="<?php echo $row['organization_name'] ?>" disabled>
+
+                                                            <label for="" style="text-align: start; margin-left: 25px; margin-bottom: 10px;">Number</label>
+                                                            <input style="border:1px solid #24724D;" type="text" name="number" class="input-field" value="<?php echo $row['admin_number'] ?>" disabled>
+
+                                                            <label for="" style="text-align: start; margin-left: 25px; margin-bottom: 10px;">Address</label>
+                                                            <input style="border:1px solid #24724D;" type="text" name="address" class="input-field" value="<?php echo $row['school_address'] ?>" disabled>
+
+                                                        </div>
+                                                    <?php
+                                                }
+                                                    ?>
+                                                    </div>
+                                            </div>
+                                            </form>
+
+                                        </div>
                                     </div>
-
                             </div>
-
 
                         </div>
 

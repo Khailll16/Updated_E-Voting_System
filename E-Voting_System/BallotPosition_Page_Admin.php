@@ -10,7 +10,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     <html>
 
     <head>
-        <link rel="stylesheet" href="BalloPosition_Admin.css">
+        <link rel="stylesheet" href="BallotPosition_Admin.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="icon" href="Images/Black Retro Minimalist Vegan Cafe Logo (26).png">
         <title>Admin Ballot Position Page | SIKHAY</title>
@@ -65,8 +65,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 ?>
                             </div>
 
-                            <h2 style="font-weight: 550;" class="header" id="breadcrup-title">BALLOT POSITIONS</h2>
-
+                            <h2 style="font-weight: 550;  margin-bottom: 15px;" class="header" id="breadcrup-title">BALLOT POSITIONS</h2>
+                        <div class="voters-list-content">           
                             <div class="edit-button">
                                 <button class="button-edit"><a href="Edit_BallotTitle.php?id=<?php echo $row['id']; ?>"><i class="bx bxs-edit"></i>Edit</a></button>
                             </div>
@@ -209,7 +209,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
 
                             </div>
-
+                        </div>
                     </div>
                 </div>
             </div>

@@ -306,6 +306,7 @@ i {
 .top_content {
   background-color: rgb(36, 114, 77);
   padding: 8px 18px;
+  border-bottom: 2.9px solid #dcdcdc;
 }
 
 
@@ -386,7 +387,7 @@ i {
   background-color: #24724D;
   border: transparent;
   border-radius: 30px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
 }
 
@@ -505,20 +506,14 @@ table {
   margin-bottom: 20px;
   border-radius: 23px 23px 0px 0px;
 }
-
-.pagination button {
+.pagination-content {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 14px;
-  color: #24724D;
-  font-size: 15px;
-  cursor: pointer;
-  border-radius: 50px;
-  border: transparent;
-  background-color: #ECECEC;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
-
+.entries p {
+  font-size: 15px;
+}
 .pagination {
   display: flex;
   gap: 6px;
@@ -532,20 +527,8 @@ table {
 .pagination .bx {
   color: white;
   background-color: #24724D;
-  padding: 10px;
-}
-
-.pagination button {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  color: #24724D;
+  padding: 7.8px;
   font-size: 15px;
-  cursor: pointer;
-  border-radius: 50px;
-  border: transparent;
-  background-color: #ECECEC;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .pagination .bxs-left-arrow {
@@ -564,14 +547,28 @@ table {
   padding-left: 25px;
 }
 
+.pagination button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #24724D;
+  font-size: 14.9px;
+  cursor: pointer;
+  border-radius: 50px;
+  border: transparent;
+  background-color: #ECECEC;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
 .pagination p {
   background-color: #24724D;
-  padding: 5px 20px;
+  padding: 5px 18px;
   color: white;
   border-radius: 10px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  margin: 0px 6px 0px 6px;
 }
 
 th {
@@ -752,7 +749,7 @@ a {
 }
 
 .save-btn:hover {
-  background-color: #218838;
+  opacity: 0.9;
 }
 
 .close-form-btn {
@@ -1012,7 +1009,7 @@ a {
 }
 
 .save-btn:hover {
-  background-color: #218838;
+  opacity: 0.9;
 }
 
 .addCandidates_close-form-btn {

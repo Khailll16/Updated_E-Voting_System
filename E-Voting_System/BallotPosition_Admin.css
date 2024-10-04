@@ -113,10 +113,9 @@ body {
 }
 
 .top_content {
-  margin: 0%;
-  padding: 0%;
   background-color: #24724D;
   padding: 8px 18px;
+  border-bottom: 2.9px solid #dcdcdc;
 }
 
 .top_content li {

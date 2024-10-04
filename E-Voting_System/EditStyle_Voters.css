@@ -236,6 +236,7 @@ i {
 .top_content {
   background-color: rgb(36, 114, 77);
   padding: 8px 18px;
+  border-bottom: 2.9px solid #dcdcdc;
 }
 
 .nav-burger {

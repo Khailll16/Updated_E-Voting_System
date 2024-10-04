@@ -10,8 +10,8 @@
 
         $image = time().$_FILES["candidate-photo"]['name'];
         if(move_uploaded_file($_FILES['candidate-photo']['tmp_name'], $_SERVER['DOCUMENT_ROOT']. 
-        '/E-Voting_System/Candidates/'.$image)){
-            $target_file = $_SERVER['DOCUMENT_ROOT'].'/E-Voting_System/Candidates/'.$image;
+        '/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Candidates/'.$image)){
+            $target_file = $_SERVER['DOCUMENT_ROOT'].'/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Candidates/'.$image;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             $picname = basename($_FILES['candidate-photo']['name']);
             $photo = time().$picname;

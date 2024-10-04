@@ -11,8 +11,8 @@
         
         $image = time().$_FILES["votersprofile"]['name'];
         if(move_uploaded_file($_FILES['votersprofile']['tmp_name'], $_SERVER['DOCUMENT_ROOT']. 
-        '/E-Voting_System/Voters/'.$image)){
-            $target_file = $_SERVER['DOCUMENT_ROOT'].'/E-Voting_System/Voters/'.$image;
+        '/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Voters/'.$image)){
+            $target_file = $_SERVER['DOCUMENT_ROOT'].'/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Voters/'.$image;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             $picname = basename($_FILES['votersprofile']['name']);
             $photo = time().$picname;

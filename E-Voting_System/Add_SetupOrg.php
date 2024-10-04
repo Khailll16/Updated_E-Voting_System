@@ -9,8 +9,8 @@
         
         $image = time().$_FILES["logo"]['name'];
         if(move_uploaded_file($_FILES['logo']['tmp_name'], $_SERVER['DOCUMENT_ROOT']. 
-        '/E-Voting_System/Organization/'.$image)){
-            $target_file = $_SERVER['DOCUMENT_ROOT'].'/E-Voting_System/Organization/'.$image;
+        '/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Organization/'.$image)){
+            $target_file = $_SERVER['DOCUMENT_ROOT'].'/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Organization/'.$image;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             $picname = basename($_FILES['logo']['name']);
             $photo = time().$picname;

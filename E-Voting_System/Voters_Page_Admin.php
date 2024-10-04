@@ -73,9 +73,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
                                 <div class="voters-list-content">
                                     <div class="add-button">
-                                        <button id="addvoters_openPopup" class="button-add"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16"><g fill="currentColor"><path d="M12.5 16a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0a3 3 0 0 1 6 0"/>
-                                        <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/></g>
-                                    </svg>New</button>
+                                        <button id="addvoters_openPopup" class="button-add"><i class='bx bxs-user-plus icon'></i>New</button>
                                     </div>
 
                                     <div class="voters-list-container">
@@ -214,16 +212,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </table>
 
                                                 <div class="pagination-content">
-                                                    <?php
-                                                    include "database_connect.php";
-
-                                                    $sql = "SELECT * FROM voters";
-                                                    $query = $conn->query($sql);
-                                                   
-                                                    echo "<div class='entries'>";
-                                                    echo "<p>Showing 1 to $query->num_rows  of  $query->num_rows  entries</p>";
-                                                    echo "</div>";
-                                                    ?>
                                                     <div class="pagination">
                                                         <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
                                                         <p>1</p>

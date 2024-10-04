@@ -80,12 +80,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     <div class="voters-list-container">
                                         <table class="voters-table">
 
-
                                             <!--------ENTRIES SEARCH BAR CONTAINER-------->
                                             <div class="entries-search-bar-container">
                                                 <div class="selector-entries">
                                                     <label>Show</label>
-                                                    <select name="specialization" leng="">
+                                                    <select name="entries" id="entries">
                                                         <option>10</option>
                                                         <option>25</option>
                                                         <option>50</option>
@@ -94,43 +93,42 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     <label>Entries</label>
                                                 </div>
 
+                                                <!-- Separate filter form for position -->
                                                 <div class="grade-section">
                                                     <div class="grade-selection">
-                                                        <select name="" id="">
-                                                            <option>Position</option>
-                                                            <?php
-                                                            $sql = "SELECT * FROM positions WHERE
-                                                        descrip LIKE '%$searchQuery%' OR
-                                                        max_vote LIKE '%$searchQuery%'";
-                                                            $result = $conn->query($sql);
+                                                        <form method="POST" action="">
+                                                            <select name="filter_position" id="filter_position" onchange="this.form.submit()">
+                                                                <option value="">Select Position</option>
+                                                                <?php
+                                                                // Fetch all positions from the database
+                                                                $sql = "SELECT * FROM positions";
+                                                                $result = $conn->query($sql);
 
-                                                            if (!$result) {
-                                                                die("Invalid query: " . $conn->error);
-                                                            } else {
-
-                                                                while ($row = mysqli_fetch_assoc($result)) {
-
-                                                                    echo "<option value='" . $row['descrip'] . "'>" . $row['descrip'] . "</option>";
+                                                                if (!$result) {
+                                                                    die("Invalid query: " . $conn->error);
+                                                                } else {
+                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                        // Keep selected option when reloading the page
+                                                                        $selected = isset($_POST['filter_position']) && $_POST['filter_position'] == $row['descrip'] ? 'selected' : '';
+                                                                        echo "<option value='" . $row['descrip'] . "' $selected>" . $row['descrip'] . "</option>";
+                                                                    }
                                                                 }
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                                ?>
+                                                            </select>
+                                                        </form>
                                                     </div>
                                                 </div>
 
-                                                <!-- Moved search-bar to the end -->
+                                                <!-- Separate search form -->
                                                 <div class="search-bar">
                                                     <div class="search-container">
                                                         <form method="POST" action="">
                                                             <i class="bx bx-search icon"></i>
-                                                            <input type="text" class="search-input" name="search" placeholder="Search..." value="<?php echo $searchQuery; ?>">
+                                                            <input type="text" class="search-input" name="search" placeholder="Search..." value="<?php echo isset($_POST['search']) ? $_POST['search'] : ''; ?>">
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
 
                                             <div class="table-container">
                                                 <table class="voters-list">
@@ -141,9 +139,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     </tr>
 
                                                     <?php
-                                                    $sql = "SELECT * FROM positions WHERE
-                                                descrip LIKE '%$searchQuery%' OR
-                                                max_vote LIKE '%$searchQuery%'";
+                                                    // Handle the position filter separately
+                                                    $positionFilter = isset($_POST['filter_position']) ? $_POST['filter_position'] : '';
+
+                                                    // Handle the search query separately
+                                                    $searchQuery = isset($_POST['search']) ? $_POST['search'] : '';
+
+                                                    // Base SQL query
+                                                    $sql = "SELECT * FROM positions WHERE 1";
+
+                                                    // Add position filter to SQL if a position is selected
+                                                    if ($positionFilter != '') {
+                                                        $sql .= " AND descrip = '$positionFilter'";
+                                                    }
+
+                                                    // Add search filter to SQL if a search query is entered
+                                                    if ($searchQuery != '') {
+                                                        $sql .= " AND (descrip LIKE '%$searchQuery%' OR max_vote LIKE '%$searchQuery%')";
+                                                    }
+
                                                     $result = $conn->query($sql);
 
                                                     if (!$result) {
@@ -151,12 +165,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     } else {
                                                         while ($row = mysqli_fetch_assoc($result)) {
                                                     ?>
-
                                                             <tr>
-
                                                                 <td> <?php echo $row['descrip']; ?> </td>
                                                                 <td> <?php echo $row['max_vote']; ?> </td>
-
                                                                 <td style="padding: 8px 0px;">
                                                                     <div class="actions-button">
                                                                         <a href="Edit_Positions.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i></button></a>
@@ -177,11 +188,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </table>
                                     </div>
-                                </div>
+
                             </div>
                         </div>
 

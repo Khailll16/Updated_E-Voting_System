@@ -145,7 +145,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 FROM candidates 
                                                 LEFT JOIN positions ON candidates.position_id = positions.id
                                                 WHERE candidate_lastname LIKE '%$searchQuery%' 
-                                                OR candidate_firstname LIKE '%$searchQuery%'";
+                                                OR candidate_firstname LIKE '%$searchQuery%' 
+                                                OR position_id LIKE '%$searchQuery%'";
                                                     $result = $conn->query($sql);
 
                                                     if (!$result) {

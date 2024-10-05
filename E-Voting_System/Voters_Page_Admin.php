@@ -175,7 +175,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         LEFT JOIN sections AS section_table ON voters.section_id = section_table.id
                                                         WHERE voters_lastname LIKE '%$searchQuery%' OR 
                                                         voters_firstname LIKE '%$searchQuery%' OR 
-                                                        voters_id LIKE '%$searchQuery%'";
+                                                        voters_id LIKE '%$searchQuery%' OR
+                                                        grade_id LIKE '%$searchQuery%' OR
+                                                        section_id LIKE '%$searchQuery%'";
                                                         $result = $conn->query($sql);
 
                                                         if (!$result) {

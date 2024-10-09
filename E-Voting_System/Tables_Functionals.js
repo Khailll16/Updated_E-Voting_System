@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const entriesSelect = document.getElementById('entries');   // Dropdown for selecting entries per page
     const prevBtn = document.querySelector('.prev-btn');        // Previous button
     const nextBtn = document.querySelector('.next-btn');        // Next button
-    const pageNumElement = document.querySelector('.pagination p');  // Page number display
+    const pageNumElement = document.getElementById('page-numbers');  // Page number display (span)
     const showingEntries = document.querySelector('.entries p'); // "Showing X to Y of Z entries" text
 
     let currentPage = 1;
@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Update the pagination text
         showingEntries.textContent = `Showing ${start} to ${end} of ${totalRows} entries`;
+
+        // Update the page number (just show the current page)
         pageNumElement.textContent = currentPage;
 
         // Enable/Disable pagination buttons based on the current page

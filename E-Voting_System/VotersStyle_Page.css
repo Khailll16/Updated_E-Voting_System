@@ -563,7 +563,7 @@ table {
   padding-left: 25px;
 }
 
-.pagination p {
+#page-numbers {
   background-color: #24724D;
   padding: 5px 18px;
   color: white;

@@ -230,7 +230,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
 
                                     <div class="form-group-button">
-                                        <button type="button" class="addCandidates_close-form-btn"><svg fill="#24724D" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: #24724D;" viewBox="0 0 512 512" xml:space="preserve">
+                                        <button type="button" class="reset_close-form-btn"><svg fill="#24724D" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: #24724D;" viewBox="0 0 512 512" xml:space="preserve">
                                                 <g>
                                                     <g>
                                                         <path d="M256,0C114.615,0,0,114.615,0,256s114.615,256,256,256c118.252,0,218.898-81.941,247.035-192h-67.912

@@ -89,11 +89,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <div class="entries-search-bar-container">
                                                 <div class="selector-entries">
                                                     <label>Show</label>
-                                                    <select name="specialization" leng="">
-                                                        <option>10</option>
-                                                        <option>25</option>
-                                                        <option>50</option>
-                                                        <option>100</option>
+                                                    <select name="entries" id="entries" onchange="loadTable(1)">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
                                                     </select>
                                                     <label>Entries</label>
                                                 </div>
@@ -192,7 +192,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                                 <tr>
                                                                     <td style="padding-top: 7px;">
-                                                                        <img src="Voters/<?php echo $row['voters_photo'] ?>" width='60px' style='background-color: #ddd; border-radius: 3px;' />
+                                                                        <img src="Voters/<?php echo $row['voters_photo'] ?>" width='41px' style='background-color: #ddd; border-radius: 3px;' />
                                                                     </td>
                                                                     <td> <?php echo $row['voters_lastname']; ?> </td>
                                                                     <td> <?php echo $row['voters_firstname']; ?> </td>
@@ -231,9 +231,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     echo "</div>";
                                                     ?>
                                                     <div class="pagination">
-                                                        <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
-                                                        <p>1</p>
-                                                        <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
+                                                        <button class="prev-btn" onclick="loadTable(currentPage - 1)"><i class='bx bxs-left-arrow'></i> Prev</button>
+                                                        <span id="page-numbers"></span> <!-- This will hold the current page number -->
+                                                        <button class="next-btn" onclick="loadTable(currentPage + 1)">Next <i class='bx bxs-right-arrow'></i></button>
                                                     </div>
                                                 </div>
 
@@ -522,6 +522,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                     </div>
                 </div>
+                <script src="Tables_Functionals.js"></script>
                 <script src="displayPopUpForm.js"></script>
                 <script src="hamburger-navbar.js"></script>
                 <script src="displayPopUpMessage.js"></script>

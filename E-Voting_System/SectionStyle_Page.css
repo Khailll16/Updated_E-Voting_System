@@ -580,7 +580,7 @@ table {
   padding-left: 25px;
 }
 
-.pagination p {
+#page-numbers {
   background-color: #24724D;
   padding: 5px 18px;
   color: white;
@@ -1324,4 +1324,9 @@ tr:hover td {
 
 .delete-content p {
   font-weight: lighter;
+}
+
+button.active {
+  background-color: #4CAF50;
+  color: white;
 }

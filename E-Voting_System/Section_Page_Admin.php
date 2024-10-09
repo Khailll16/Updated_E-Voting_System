@@ -87,11 +87,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <div class="entries-search-bar-container">
                                                 <div class="selector-entries">
                                                     <label>Show</label>
-                                                    <select name="entries" id="entries">
-                                                        <option>10</option>
-                                                        <option>25</option>
-                                                        <option>50</option>
-                                                        <option>100</option>
+                                                    <select name="entries" id="entries" onchange="loadTable(1)">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
                                                     </select>
                                                     <label>Entries</label>
                                                 </div>
@@ -192,10 +192,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     echo "</div>";
                                                     ?>
                                                     <div class="pagination">
-                                                        <a href=""><button class="prev-btn"><i class='bx bxs-left-arrow'></i> Prev </button></a>
-                                                        <p>1</p>
-                                                        <a href=""><button class="next-btn"> Next <i class='bx bxs-right-arrow'></i></button></a>
+                                                        <button class="prev-btn" onclick="loadTable(currentPage - 1)"><i class='bx bxs-left-arrow'></i> Prev</button>
+                                                        <span id="page-numbers"></span> <!-- This will hold the current page number -->
+                                                        <button class="next-btn" onclick="loadTable(currentPage + 1)">Next <i class='bx bxs-right-arrow'></i></button>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </table>

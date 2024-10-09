@@ -595,3 +595,16 @@ i {
   gap: 10px;
   padding-top: 15px;
 }
+.reset_close-form-btn {
+  background-color: white;
+  justify-content: space-between;
+  padding: 10px 20px;
+  color: #24724D;
+  border: 2px solid #24724D;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

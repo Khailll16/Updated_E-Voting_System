@@ -37,7 +37,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
                                 <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
                                 <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                                <a style="border-radius: 0px 0px 15px 15px;" href="LogoutPage_Admin.php"><i class='bx bx-log-out icon'></i>Sign out</a>
+                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
                             </div>
                         </nav>
 
@@ -58,33 +58,33 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         ?>
                             <div class="notification" id="notification">
                                 <?php
-                                    if (isset($_GET['insert_msg'])) {
-                                        echo "<p><i class='bx bxs-check-circle'></i> Success!</p>";
-                                        echo htmlspecialchars($_GET['insert_msg']);
-                                    }
+                                if (isset($_GET['insert_msg'])) {
+                                    echo "<p><i class='bx bxs-check-circle'></i> Success!</p>";
+                                    echo htmlspecialchars($_GET['insert_msg']);
+                                }
                                 ?>
                             </div>
 
                             <h2 style="font-weight: 550;  margin-bottom: 15px;" class="header" id="breadcrup-title">BALLOT POSITIONS</h2>
-                        <div class="voters-list-content">           
-                            <div class="edit-button">
-                                <button class="button-edit"><a href="Edit_BallotTitle.php?id=<?php echo $row['id']; ?>"><i class="bx bxs-edit"></i>Edit</a></button>
-                            </div>
+                            <div class="voters-list-content">
+                                <div class="edit-button">
+                                    <button class="button-edit"><a href="Edit_BallotTitle.php?id=<?php echo $row['id']; ?>"><i class="bx bxs-edit"></i>Edit</a></button>
+                                </div>
 
-                            <div class="dashboard-content">
+                                <div class="dashboard-content">
 
-                                <!----DASHBOARD TITLE---->
-                                <div class="ballot-section">
-                                    <h3 class="official-ballot">OFFICIAL BALLOT</h3>
-                                    <div class="ballot-title">
-                                    <img src="Images/<?php echo $row['logo_ballot'] ?>" alt="" width="120px">
-                                        <h1 style="color:#4A4A4A;"><?php echo $row['title']; ?></h1>
-                                    </div>
-                                <?php
-                            }
-                        ?>
+                                    <!----DASHBOARD TITLE---->
+                                    <div class="ballot-section">
+                                        <h3 class="official-ballot">OFFICIAL BALLOT</h3>
+                                        <div class="ballot-title">
+                                            <img src="Images/<?php echo $row['logo_ballot'] ?>" alt="" width="120px">
+                                            <h1 style="color:#4A4A4A;"><?php echo $row['title']; ?></h1>
+                                        </div>
+                                    <?php
+                                }
+                                    ?>
 
-                                <?php
+                                    <?php
                                     // SQL query to fetch candidates for President
                                     $sql = "SELECT * FROM `candidates` WHERE position_id = 'President'";
                                     $result = $conn->query($sql);
@@ -93,34 +93,34 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     if (!$result) {
                                         die("Invalid query: " . $conn->error);
                                     }
-                                ?>
+                                    ?>
 
-                                <h3>PRESIDENT</h3>
+                                    <h3>PRESIDENT</h3>
 
-                                <?php
+                                    <?php
                                     // Loop through each row and display candidate data
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <div class="candidate">
-                                        <div class="details-voter">
-                                            <label>
-                                                <!-- Radio button for selecting the candidate -->
-                                                <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
-                                                <!-- Display candidate image -->
-                                                <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
-                                                <!-- Display candidate name and button -->
-                                                <div class="candidate-info">
-                                                    <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
-                                                    <button><i class="bx bx-play"></i>View</button>
-                                                </div>
-                                            </label>
+                                    ?>
+                                        <div class="candidate">
+                                            <div class="details-voter">
+                                                <label>
+                                                    <!-- Radio button for selecting the candidate -->
+                                                    <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
+                                                    <!-- Display candidate image -->
+                                                    <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
+                                                    <!-- Display candidate name and button -->
+                                                    <div class="candidate-info">
+                                                        <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
+                                                        <button><i class="bx bx-play"></i>View</button>
+                                                    </div>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                <?php
+                                    <?php
                                     }
-                                ?>
+                                    ?>
 
-                                <?php
+                                    <?php
                                     // SQL query to fetch candidates for President
                                     $sql = "SELECT * FROM `candidates` WHERE position_id = 'Vice President'";
                                     $result = $conn->query($sql);
@@ -129,34 +129,34 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     if (!$result) {
                                         die("Invalid query: " . $conn->error);
                                     }
-                                ?>
+                                    ?>
 
-                                <h3>VICE PRESIDENT</h3>
+                                    <h3>VICE PRESIDENT</h3>
 
-                                <?php
+                                    <?php
                                     // Loop through each row and display candidate data
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <div class="candidate">
-                                        <div class="details-voter">
-                                            <label>
-                                                <!-- Radio button for selecting the candidate -->
-                                                <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
-                                                <!-- Display candidate image -->
-                                                <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
-                                                <!-- Display candidate name and button -->
-                                                <div class="candidate-info">
-                                                    <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
-                                                    <button><i class="bx bx-play"></i>View</button>
-                                                </div>
-                                            </label>
+                                    ?>
+                                        <div class="candidate">
+                                            <div class="details-voter">
+                                                <label>
+                                                    <!-- Radio button for selecting the candidate -->
+                                                    <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
+                                                    <!-- Display candidate image -->
+                                                    <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
+                                                    <!-- Display candidate name and button -->
+                                                    <div class="candidate-info">
+                                                        <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
+                                                        <button><i class="bx bx-play"></i>View</button>
+                                                    </div>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                <?php
+                                    <?php
                                     }
-                                ?>
+                                    ?>
 
-                                <?php
+                                    <?php
                                     // SQL query to fetch candidates for President
                                     $sql = "SELECT * FROM `candidates` WHERE position_id = 'Secretary'";
                                     $result = $conn->query($sql);
@@ -165,34 +165,34 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     if (!$result) {
                                         die("Invalid query: " . $conn->error);
                                     }
-                                ?>
+                                    ?>
 
-                                <h3>SECRETARY</h3>
+                                    <h3>SECRETARY</h3>
 
-                                <?php
+                                    <?php
                                     // Loop through each row and display candidate data
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <div class="candidate">
-                                        <div class="details-voter">
-                                            <label>
-                                                <!-- Radio button for selecting the candidate -->
-                                                <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
-                                                <!-- Display candidate image -->
-                                                <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
-                                                <!-- Display candidate name and button -->
-                                                <div class="candidate-info">
-                                                    <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
-                                                    <button><i class="bx bx-play"></i>View</button>
-                                                </div>
-                                            </label>
+                                    ?>
+                                        <div class="candidate">
+                                            <div class="details-voter">
+                                                <label>
+                                                    <!-- Radio button for selecting the candidate -->
+                                                    <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
+                                                    <!-- Display candidate image -->
+                                                    <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
+                                                    <!-- Display candidate name and button -->
+                                                    <div class="candidate-info">
+                                                        <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
+                                                        <button><i class="bx bx-play"></i>View</button>
+                                                    </div>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                <?php
+                                    <?php
                                     }
-                                ?>
+                                    ?>
 
-                                <?php
+                                    <?php
                                     // SQL query to fetch candidates for President
                                     $sql = "SELECT * FROM `candidates` WHERE position_id = 'Treasurer'";
                                     $result = $conn->query($sql);
@@ -201,72 +201,72 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     if (!$result) {
                                         die("Invalid query: " . $conn->error);
                                     }
-                                ?>
+                                    ?>
 
-                                <h3>TREASURER</h3>
+                                    <h3>TREASURER</h3>
 
-                                <?php
+                                    <?php
                                     // Loop through each row and display candidate data
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <div class="candidate">
-                                        <div class="details-voter">
-                                            <label>
-                                                <!-- Radio button for selecting the candidate -->
-                                                <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
-                                                <!-- Display candidate image -->
-                                                <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
-                                                <!-- Display candidate name and button -->
-                                                <div class="candidate-info">
-                                                    <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
-                                                    <button><i class="bx bx-play"></i>View</button>
-                                                </div>
-                                            </label>
+                                    ?>
+                                        <div class="candidate">
+                                            <div class="details-voter">
+                                                <label>
+                                                    <!-- Radio button for selecting the candidate -->
+                                                    <input type="radio" name="president" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
+                                                    <!-- Display candidate image -->
+                                                    <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo $row['candidate_firstname']; ?>">
+                                                    <!-- Display candidate name and button -->
+                                                    <div class="candidate-info">
+                                                        <?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>
+                                                        <button><i class="bx bx-play"></i>View</button>
+                                                    </div>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                <?php
+                                    <?php
                                     }
-                                ?>
+                                    ?>
 
 
-                                <div class="form-group-button">
-                                    <button type="button" class="addCandidates_close-form-btn"><svg fill="#24724D" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: #24724D;" viewBox="0 0 512 512" xml:space="preserve">
-                                            <g>
+                                    <div class="form-group-button">
+                                        <button type="button" class="addCandidates_close-form-btn"><svg fill="#24724D" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: #24724D;" viewBox="0 0 512 512" xml:space="preserve">
                                                 <g>
-                                                    <path d="M256,0C114.615,0,0,114.615,0,256s114.615,256,256,256c118.252,0,218.898-81.941,247.035-192h-67.912
+                                                    <g>
+                                                        <path d="M256,0C114.615,0,0,114.615,0,256s114.615,256,256,256c118.252,0,218.898-81.941,247.035-192h-67.912
                                                     c-26.55,73.368-96.47,128-179.123,128c-105.869,0-192-86.131-192-192S150.131,64,256,64c63.013,0,118.685,29.652,154.629,76.106
                                                     l-85.803,64.352H512V0l-86.65,64.928C374.073,24.008,317.339,0,256,0z"></path>
+                                                    </g>
                                                 </g>
-                                            </g>
-                                        </svg>Reset</button>
-                                    <button type="submit" class="save-btn"><svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: white;" viewBox="0 0 407.096 407.096" xml:space="preserve">
-                                            <g>
+                                            </svg>Reset</button>
+                                        <button type="submit" class="save-btn"><svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: white;" viewBox="0 0 407.096 407.096" xml:space="preserve">
                                                 <g>
-                                                    <path d="M402.115,84.008L323.088,4.981C319.899,1.792,315.574,0,311.063,0H17.005C7.613,0,0,7.614,0,17.005v373.086
+                                                    <g>
+                                                        <path d="M402.115,84.008L323.088,4.981C319.899,1.792,315.574,0,311.063,0H17.005C7.613,0,0,7.614,0,17.005v373.086
                                                         c0,9.392,7.613,17.005,17.005,17.005h373.086c9.392,0,17.005-7.613,17.005-17.005V96.032
                                                         C407.096,91.523,405.305,87.197,402.115,84.008z M300.664,163.567H67.129V38.862h233.535V163.567z"></path>
-                                                    <path d="M214.051,148.16h43.08c3.131,0,5.668-2.538,5.668-5.669V59.584c0-3.13-2.537-5.668-5.668-5.668h-43.08
+                                                        <path d="M214.051,148.16h43.08c3.131,0,5.668-2.538,5.668-5.669V59.584c0-3.13-2.537-5.668-5.668-5.668h-43.08
                                                         c-3.131,0-5.668,2.538-5.668,5.668v82.907C208.383,145.622,210.92,148.16,214.051,148.16z"></path>
+                                                    </g>
                                                 </g>
-                                            </g>
-                                        </svg>
-                                        Submit</button>
+                                            </svg>
+                                            Submit</button>
+
+                                    </div>
+
+                                    <div class="logo-sikhay-submit">
+                                        <img src="Images/sikhay-new-logo.png" alt="">
+                                        <p>Providing easier ways to VOTE and be HEARD.</p>
+                                    </div>
+
+
+                                    </div>
+
+
+
 
                                 </div>
-
-                                <div class="logo-sikhay-submit">
-                                    <img src="Images/sikhay-new-logo.png" alt="">
-                                    <p>Providing easier ways to VOTE and be HEARD.</p>
-                                </div>
-
-
-                                </div>
-
-
-
-
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -388,9 +388,46 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
             </nav>
 
 
+            <!--LOGOUT FORM---->
+
+            <div id="logout_popup" class="logout_popup" style="display: none;">
+                <div class="logout_popup-content">
+
+                    <div class="logout_popup-top">
+                        <h2>SIGN OUT</h2>
+                    </div>
+
+                    <div class="logout_popup-forms">
+                        <form action="LogoutPage_Admin.php" method="POST">
+                            <div class="warning-logout-description">
+                                <p>Are you sure you want to sign out?</p>   
+                            </div>
+                            <div class="form-group-button">
+                                <button type="button" class="logout_close-form-btn"><svg width="15px" height="15px" fill="#24724D" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z" fill="#24724D"></path>
+                                    </svg>
+                                    Close</button>
+                                <button type="submit" class="save-btn">
+                                    <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: white;" viewBox="0 0 512 512" xml:space="preserve">
+                                        <g>
+                                            <g>
+                                                <path d="M504.5,75.5c-9.6-9.6-25.2-9.6-34.9,0L192.4,352.7L42.3,202.7c-9.6-9.6-25.2-9.6-34.9,0c-9.6,9.6-9.6,25.2,0,34.9L174.9,404.1
+                                                        c9.6,9.6,25.2,9.6,34.9,0l305.7-305.7C514.1,100.7,514.1,85.1,504.5,75.5z" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    Yes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
-        <script src="Election_Title.js"></script>
+        <script src="displayPopUpForm.js"></script>
         <script src="hamburger-navbar.js"></script>
         <script src="displayPopUpMessage.js"></script>
     </body>

@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap');
 
-*{
+* {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root{
+:root {
     --body-color: #ffffff;
     --sidebar-color: #FFF;
     --primary-color: #FDC323;
@@ -19,16 +19,19 @@
     --tran-04: all 0.4s ease;
     --tran-05: all 0.5s ease;
 }
-body{
+
+body {
     height: 100vh;
     background: #F8F8FF;
     transition: var(--tran-05);
 
 }
-.button-container button{
+
+.button-container button {
     background-color: #24724D;
 }
-.notification{
+
+.notification {
     display: none;
     background-color: #F7F7F6;
     color: #24724D;
@@ -43,24 +46,25 @@ body{
     border-radius: 20px;
     z-index: 1000;
     animation: fadeIn 0.5s;
-    
-  }
-  .welcome-message{
+
+}
+
+.welcome-message {
     display: flex;
     flex-direction: column;
     text-align: center;
     gap: 8px;
 }
 
-  .notification p {
+.notification p {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
-  }
+}
 
 /* ------SideBar------ */
-.sidebar{
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
@@ -74,20 +78,22 @@ body{
     border-bottom: 0px;
     border-left: 0px;
 }
+
 /* ------Reusable CSS------ */
-.sidebar .text{
+.sidebar .text {
     font-size: 16px;
     font-weight: 500;
     white-space: nowrap;
 }
-.sidebar .image{
+
+.sidebar .image {
     min-width: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.sidebar li{
+.sidebar li {
     height: 50px;
     margin-top: 10px;
     list-style: none;
@@ -95,7 +101,7 @@ body{
     align-items: center;
 }
 
-.sidebar li .icon{
+.sidebar li .icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,30 +110,33 @@ body{
 }
 
 .sidebar li .icon,
-.sidebar li .text{
+.sidebar li .text {
     color: var(--text-color);
     transition: var(--tran-02);
 }
 
-.sidebar header .image-text{
+.sidebar header .image-text {
     display: flex;
     align-items: center;
 }
 
-.top_content{
+.top_content {
     margin: 0%;
     padding: 0%;
     background-color: #24724D;
     padding: 8px 18px;
     border-bottom: 2.9px solid #dcdcdc;
 }
-.top_content li{
+
+.top_content li {
     list-style: none;
 }
-.top_content span{
-    color:white;
+
+.top_content span {
+    color: white;
 }
-.top_content .search-box{
+
+.top_content .search-box {
     background-color: var(--primary-color-light);
     border-radius: 100px;
     border: 1px solid #000;
@@ -139,7 +148,8 @@ body{
     margin-left: 400px;
     margin-top: 16px;
 }
-.search-box input{
+
+.search-box input {
     height: 90%;
     width: 90%;
     outline: none;
@@ -150,7 +160,8 @@ body{
     background-color: var(--primary-color-light);
     transition: var(--tran-05);
 }
-.sidebar li a{
+
+.sidebar li a {
     height: 100%;
     width: 100%;
     text-decoration: none;
@@ -159,23 +170,27 @@ body{
     border-radius: 100px;
     transition: var(--tran-04);
 }
-.sidebar li a:hover{
+
+.sidebar li a:hover {
     background-color: var(--primary-color);
     --text-color: #FFFFFF;
     border-radius: 100px;
-    background: rgb(15,162,92);
-    background: linear-gradient(90deg, rgba(15,162,92,1) 0%, rgba(229,207,0,1) 93%, rgba(229,207,0,1) 100%);
+    background: rgb(15, 162, 92);
+    background: linear-gradient(90deg, rgba(15, 162, 92, 1) 0%, rgba(229, 207, 0, 1) 93%, rgba(229, 207, 0, 1) 100%);
 }
-.sidebar .menu-bar{
+
+.sidebar .menu-bar {
     height: calc(100% - 10px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-i{
+
+i {
     cursor: pointer;
 }
-.sikhay-logo{ 
+
+.sikhay-logo {
     /* display: flex; */
     align-items: center;
     margin-bottom: 15px;
@@ -189,33 +204,34 @@ i{
 
 
 /*----side bar profile----*/
-.sidebar .sidebar-profile{
+.sidebar .sidebar-profile {
     position: relative;
     padding: 10px 14px;
 }
 
-.sidebar-profile .image-text img{
+.sidebar-profile .image-text img {
     width: 55px;
     border-radius: 50%;
     background-color: white;
     border: 3px solid #24724D;
 }
 
-.sidebar-profile .image-text{
+.sidebar-profile .image-text {
     display: flex;
     align-items: center;
 }
 
-.sidebar-profile .header-text{
-  padding: 10px;
+.sidebar-profile .header-text {
+    padding: 10px;
 }
 
-.sidebar-profile p{
+.sidebar-profile p {
     font-weight: 500;
     font-size: 16px;
     color: #24724D;
 }
-.sidebar-profile span{
+
+.sidebar-profile span {
     font-weight: lighter;
     color: #24724D;
 }
@@ -243,9 +259,10 @@ i{
     cursor: pointer;
 }
 
-.menu{
+.menu {
     padding: 10px 14px;
 }
+
 .menu-content {
     display: none;
     background-color: #F5F5F5;
@@ -257,14 +274,16 @@ i{
     z-index: 1000;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     opacity: 0;
-    transform: translateY(-20px); 
-    transition: opacity 0.4s ease, transform 0.4s ease; 
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
+
 .menu-content.show {
     display: block;
     opacity: 1;
-    transform: translateY(0); 
+    transform: translateY(0);
 }
+
 .menu-content h2 {
     color: #4A4A4A;
     display: flex;
@@ -284,9 +303,10 @@ i{
     padding: 10px 20px;
     font-weight: lighter;
 }
-.menu-content .icon{
-   font-size: 30px;
-   color: #4A4A4A;
+
+.menu-content .icon {
+    font-size: 30px;
+    color: #4A4A4A;
 }
 
 .menu-content a:hover {
@@ -304,17 +324,19 @@ i{
 
 /*------BreadCrump------*/
 
-.breadcrumb-content{
+.breadcrumb-content {
     display: inline-block;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.breadcrumb{
+
+.breadcrumb {
     display: flex;
     gap: 15px;
     font-size: 16px;
 }
-.breadcrumb li a{
+
+.breadcrumb li a {
     text-decoration: none;
     color: white;
     height: 100%;
@@ -342,6 +364,7 @@ i{
     justify-content: space-around;
     align-items: center;
 }
+
 .button-container button {
     padding: 0px;
     width: 270px;
@@ -353,49 +376,59 @@ i{
     flex-wrap: wrap;
     gap: 15px;
 }
+
 .btn {
     position: relative;
     padding: 15px 30px;
     color: white;
     border: none;
     border-radius: 5px;
-    flex: 1 1 200px; /* Flex-grow, flex-shrink, flex-basis */
+    flex: 1 1 200px;
+    /* Flex-grow, flex-shrink, flex-basis */
     box-sizing: border-box;
 }
+
 @media screen and (max-width: 600px) {
     .btn {
-        flex: 1 1 100%; /* Full width on small screens */
+        flex: 1 1 100%;
+        /* Full width on small screens */
     }
 }
-.button-container .btn{
+
+.button-container .btn {
     border-radius: 14px;
 }
-.btn .icon{
+
+.btn .icon {
     position: absolute;
     top: 3px;
     right: 10px;
     z-index: 0;
-    font-size:100px;
+    font-size: 100px;
     color: #FFFFFF;
-    cursor:unset;
+    cursor: unset;
 }
+
 .btn:hover .icon {
     font-size: 110px;
     transition: 1s;
 }
-.inner{
+
+.inner {
     text-align: left;
     padding: 0px 0px 0px 15px;
-    
+
 }
-.inner h3{
+
+.inner h3 {
     font-size: 38px;
     font-weight: bold;
     margin: 0 0 10px 0;
     white-space: nowrap;
     padding: 0;
 }
-.btn p{
+
+.btn p {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -403,6 +436,7 @@ i{
     margin-inline-end: 0px;
     font-weight: normal;
 }
+
 .btn>.small-box-footer {
     position: relative;
     text-align: center;
@@ -416,11 +450,13 @@ i{
     font-weight: lighter;
     border-radius: 0px 0px 14px 14px;
 }
+
 .btn>.small-box-footer:hover {
     color: #ffffff;
     background: rgba(0, 0, 0, 0.15);
 }
-.votes-participation{
+
+.votes-participation {
     margin-top: 15px;
     border-radius: 8px;
     background: #ffffff;
@@ -429,12 +465,142 @@ i{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     padding: 18px;
 }
-  @keyframes fadeIn {
+
+@keyframes fadeIn {
     from {
-      opacity: 0;
+        opacity: 0;
     }
+
     to {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-  
+}
+
+/*LOGOUT FORM*/
+
+.logout_popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.logout_popup-content {
+    background-color: #F7F7F6;
+    margin-inline: auto;
+    margin-top: 25px;
+    padding: 0px 0px 20px 0px;
+    border: 4px solid #24724D;
+    border-radius: 30px;
+    width: 25%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s;
+}
+
+.logout_popup-top {
+    width: 100%;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    background: #24724D;
+    border-radius: 20px 20px 0px 0px;
+    padding-top: 10px;
+}
+
+.logout_popup-top h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+    color: white;
+}
+
+.logout_popup-forms {
+    width: 100%;
+}
+
+.warning-logout-description {
+    text-align: center;
+    color: #24724D;
+    margin: 25px 0px 10px 0px;
+}
+
+.logout_close-form-btn {
+    background-color: white;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: #24724D;
+    border: 2px solid #24724D;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logout_close {
+    color: #24724D;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: default;
+}
+
+.logout_close:hover,
+.logout_close:focus {
+    color: #24724D;
+    text-decoration: none;
+}
+
+.form-group-button {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 15px;
+}
+
+.save-btn {
+    background-color: #24724D;
+    justify-content: space-between;
+    padding: 10px 25px;
+    color: white;
+    border: 2px solid #24724D;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.save-btn:hover {
+    opacity: 0.9;
+}
+
+.logout_close-form-btn {
+    background-color: white;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: #24724D;
+    border: 2px solid #24724D;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.icons-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

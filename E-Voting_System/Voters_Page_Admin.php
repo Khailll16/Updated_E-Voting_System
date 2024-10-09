@@ -45,7 +45,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
                                 <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
                                 <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                                <a style="border-radius: 0px 0px 15px 15px;" href="LogoutPage_Admin.php"><i class='bx bx-log-out icon'></i>Sign out</a>
+                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
                             </div>
                         </nav>
 
@@ -73,9 +73,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
                                 <div class="voters-list-content">
                                     <div class="add-button">
-                                        <button id="addvoters_openPopup" class="button-add"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16"><g fill="currentColor"><path d="M12.5 16a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0a3 3 0 0 1 6 0"/>
-                                        <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/></g>
-                                    </svg>New</button>
+                                        <button id="addvoters_openPopup" class="button-add"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+                                                <g fill="currentColor">
+                                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
+                                                    <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4" />
+                                                </g>
+                                            </svg>New</button>
                                     </div>
 
                                     <div class="voters-list-container">
@@ -98,22 +101,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <div class="grade-section">
                                                     <div class="grade-selection">
                                                         <select name="filter_grade" id="filter_grade" onchange="this.form.submit()">
-                                                        <option value="">Select Grade</option>
-                                                        <?php
-                                                                // Fetch all sections from the database
-                                                                $sql = "SELECT * FROM sections";
-                                                                $result = $conn->query($sql);
+                                                            <option value="">Select Grade</option>
+                                                            <?php
+                                                            // Fetch all sections from the database
+                                                            $sql = "SELECT * FROM sections";
+                                                            $result = $conn->query($sql);
 
-                                                                if (!$result) {
-                                                                    die("Invalid query: " . $conn->error);
-                                                                } else {
-                                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                                        // Keep selected option when reloading the page
-                                                                        $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['grade'] ? 'selected' : '';
-                                                                        echo "<option value='" . $row['grade'] . "' $selected>" . $row['grade'] . "</option>";
-                                                                    }
+                                                            if (!$result) {
+                                                                die("Invalid query: " . $conn->error);
+                                                            } else {
+                                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                                    // Keep selected option when reloading the page
+                                                                    $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['grade'] ? 'selected' : '';
+                                                                    echo "<option value='" . $row['grade'] . "' $selected>" . $row['grade'] . "</option>";
                                                                 }
-                                                                ?>
+                                                            }
+                                                            ?>
                                                         </select>
                                                     </div>
                                                     <div class="grade-selection">
@@ -121,7 +124,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <select name="filter_section" id="filter_section" onchange="this.form.submit()">
                                                                 <option value="">Select Section</option>
                                                                 <?php
-                                                                
+
                                                                 $sql = "SELECT * FROM sections";
                                                                 $result = $conn->query($sql);
 
@@ -129,7 +132,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                     die("Invalid query: " . $conn->error);
                                                                 } else {
                                                                     while ($row = mysqli_fetch_assoc($result)) {
-                                                                        
+
                                                                         $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['section'] ? 'selected' : '';
                                                                         echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
                                                                     }
@@ -222,7 +225,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                     $sql = "SELECT * FROM voters";
                                                     $query = $conn->query($sql);
-                                                   
+
                                                     echo "<div class='entries'>";
                                                     echo "<p>Showing 1 to $query->num_rows  of  $query->num_rows  entries</p>";
                                                     echo "</div>";
@@ -366,20 +369,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     </ul>
                                 </div>
 
-
                                 <!-----BUTTON CONTENT------>
                                 <div class="bottom-content">
 
                                     <!-----LOG OUT------>
                                     <li class="">
 
-                                    </li>
 
                                 </div>
 
-
                             </div>
-
 
                         </nav>
 
@@ -390,7 +389,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                         <div id="addvoters-popup" class="addvoters-popup">
                             <div class="addvoters-popup-content">
-                                <span class="voters-close">&times;</span>
                                 <div class="addvoters-popup-top">
                                     <h2>NEW VOTER</h2>
                                 </div>
@@ -482,9 +480,49 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
                             </div>
                         </div>
+
+
+
+                        <!--LOGOUT FORM---->
+
+                        <div id="logout_popup" class="logout_popup" style="display: none;">
+                            <div class="logout_popup-content">
+
+                                <div class="logout_popup-top">
+                                    <h2>SIGN OUT</h2>
+                                </div>
+
+                                <div class="logout_popup-forms">
+                                    <form action="LogoutPage_Admin.php" method="POST">
+                                        <div class="warning-logout-description">
+                                            <p>Are you sure you want to sign out?</p>
+                                        </div>
+                                        <div class="form-group-button">
+                                            <button type="button" class="logout_close-form-btn"><svg width="15px" height="15px" fill="#24724D" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z" fill="#24724D"></path>
+                                                </svg>
+                                                Close</button>
+                                            <button type="submit" class="save-btn">
+                                                <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: white;" viewBox="0 0 512 512" xml:space="preserve">
+                                                    <g>
+                                                        <g>
+                                                            <path d="M504.5,75.5c-9.6-9.6-25.2-9.6-34.9,0L192.4,352.7L42.3,202.7c-9.6-9.6-25.2-9.6-34.9,0c-9.6,9.6-9.6,25.2,0,34.9L174.9,404.1
+                                                        c9.6,9.6,25.2,9.6,34.9,0l305.7-305.7C514.1,100.7,514.1,85.1,504.5,75.5z" />
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                Yes
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
-                <script src="Election_Title.js"></script>
+                <script src="displayPopUpForm.js"></script>
                 <script src="hamburger-navbar.js"></script>
                 <script src="displayPopUpMessage.js"></script>
     </body>

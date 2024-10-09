@@ -45,7 +45,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
                                 <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
                                 <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                                <a style="border-radius: 0px 0px 15px 15px;" href="LogoutPage_Admin.php"><i class='bx bx-log-out icon'></i>Sign out</a>
+                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
                             </div>
                         </nav>
 
@@ -74,8 +74,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <div class="voters-list-content">
                                     <div class="add-button">
                                         <button id="addposition-openPopup" class="button-add"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m5 11h-4v4h-2v-4H7v-2h4V7h2v4h4z"/>
-                                        </svg>New</button>
+                                                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m5 11h-4v4h-2v-4H7v-2h4V7h2v4h4z" />
+                                            </svg>New</button>
                                     </div>
 
 
@@ -186,7 +186,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                     $sql = "SELECT * FROM sections";
                                                     $query = $conn->query($sql);
-                                                   
+
                                                     echo "<div class='entries'>";
                                                     echo "<p>Showing 1 to $query->num_rows  of  $query->num_rows  entries</p>";
                                                     echo "</div>";
@@ -352,7 +352,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                         <div id="addposition-popup" class="addposition-popup">
                             <div class="addposition-popup-content">
-                                <span class="addposition-close">&times;</span>
                                 <div class="addposition-popup-top">
                                     <h2>NEW SECTION</h2>
                                 </div>
@@ -405,10 +404,50 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         </div>
 
 
+
+                        <!--LOGOUT FORM---->
+
+                        <div id="logout_popup" class="logout_popup" style="display: none;">
+                            <div class="logout_popup-content">
+
+                                <div class="logout_popup-top">
+                                    <h2>SIGN OUT</h2>
+                                </div>
+
+                                <div class="logout_popup-forms">
+                                    <form action="LogoutPage_Admin.php" method="POST">
+                                        <div class="warning-logout-description">
+                                            <p>Are you sure you want to sign out?</p>
+                                        </div>
+                                        <div class="form-group-button">
+                                            <button type="button" class="logout_close-form-btn"><svg width="15px" height="15px" fill="#24724D" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z" fill="#24724D"></path>
+                                                </svg>
+                                                Close</button>
+                                            <button type="submit" class="save-btn">
+                                                <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: white;" viewBox="0 0 512 512" xml:space="preserve">
+                                                    <g>
+                                                        <g>
+                                                            <path d="M504.5,75.5c-9.6-9.6-25.2-9.6-34.9,0L192.4,352.7L42.3,202.7c-9.6-9.6-25.2-9.6-34.9,0c-9.6,9.6-9.6,25.2,0,34.9L174.9,404.1
+                                                        c9.6,9.6,25.2,9.6,34.9,0l305.7-305.7C514.1,100.7,514.1,85.1,504.5,75.5z" />
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                Yes
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                     </div>
                 </div>
 
-                <script src="Election_Title.js"></script>
+                <script src="displayPopUpForm.js"></script>
                 <script src="hamburger-navbar.js"></script>
                 <script src="displayPopUpMessage.js"></script>
                 <script src="Tables_Functionals.js"></script>

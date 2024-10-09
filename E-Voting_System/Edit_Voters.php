@@ -166,9 +166,26 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <label for="">Grade
                                                             <input type="text" name="grade" class="input-field" value="<?php echo $row['grade_id'] ?>">
                                                         </label>
-                                                        <label for="">Section
-                                                            <input type="text" name="section" class="input-field" value="<?php echo $row['section_id'] ?>">
+                                                        <label for="" style="justify-content: end; display: flex;">Section
+                                                            <select class="input-field" name="position">
+                                                                <option value="<?php echo $row['section_id'] ?>" selected="">- Select -</option>
+                                                                <?php
+                                                                $sql = "SELECT * FROM sections";
+                                                                $result = $conn->query($sql);
+
+                                                                if (!$result) {
+                                                                    die("Invalid query: " . $conn->error);
+                                                                } else {
+
+                                                                    while ($row = mysqli_fetch_assoc($result)) {
+
+                                                                        echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </select>
                                                         </label>
+
                                                         <label for="">Password
                                                             <input type="password" name="voterspword" class="input-field" value="<?php echo $row['voters_password'] ?>">
                                                         </label>

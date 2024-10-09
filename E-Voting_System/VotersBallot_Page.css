@@ -22,7 +22,7 @@ main {
 
 .ballot-section {
     width: 100%;
-    max-width: 1350px;
+    max-width: 900px;
     margin: 20px auto;
     border: 3px solid #24724D;
     border-radius: 25px;
@@ -245,13 +245,11 @@ main {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
-    margin: 10px 40px;
+    margin: 10px;
 }
-.candidate{
 
-}
 /* Responsive Styles */
 @media (max-width: 1200px) {
     .grid-container {

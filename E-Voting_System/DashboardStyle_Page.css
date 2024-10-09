@@ -466,16 +466,6 @@ i {
     padding: 18px;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
 /*LOGOUT FORM*/
 
 .logout_popup {
@@ -603,4 +593,14 @@ i {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

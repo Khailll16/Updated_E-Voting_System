@@ -22,7 +22,7 @@ main {
 
 .ballot-section {
     width: 100%;
-    max-width: 900px;
+    max-width: 1350px;
     margin: 20px auto;
     border: 3px solid #24724D;
     border-radius: 25px;
@@ -242,4 +242,27 @@ main {
 .summary-button {
     text-align: center;
     margin: 40px 0px 35px 0px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+    margin: 10px 40px;
+}
+.candidate{
+
+}
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columns */
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        /* 1 column */
+    }
 }

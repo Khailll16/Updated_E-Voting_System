@@ -42,6 +42,7 @@
                     }
                 ?>
             <form action="">
+                    <div class="grid-container">
                         <?php
                                     // SQL query to fetch candidates for President
                                     $sql = "SELECT * FROM `candidates` WHERE position_id = 'President'";
@@ -53,7 +54,6 @@
                                     }
                                 ?>
 
-                                <h3>PRESIDENT</h3>
 
                                 <?php
                                     // Loop through each row and display candidate data
@@ -89,8 +89,6 @@
                                     }
                                 ?>
 
-                                <h3>VICE PRESIDENT</h3>
-
                                 <?php
                                     // Loop through each row and display candidate data
                                     while ($row = mysqli_fetch_assoc($result)) {
@@ -125,7 +123,6 @@
                                     }
                                 ?>
 
-                                <h3>SECRETARY</h3>
 
                                 <?php
                                     // Loop through each row and display candidate data
@@ -161,8 +158,6 @@
                                     }
                                 ?>
 
-                                <h3>TREASURER</h3>
-
                                 <?php
                                     // Loop through each row and display candidate data
                                     while ($row = mysqli_fetch_assoc($result)) {
@@ -186,7 +181,7 @@
                             }
                         ?>
 
-
+                    </div>
                 <div class="form-group-button">
                     <button type="reset" class="addCandidates_close-form-btn"><svg fill="#24724D" version="1.1"
                             id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

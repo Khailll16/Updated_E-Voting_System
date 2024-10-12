@@ -44,15 +44,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                     <?php
                     // SQL query to fetch distinct positions and their candidates using a LEFT JOIN
                     $sql_positions = "
-                    SELECT positions.descrip AS position_name, candidates.*
-                    FROM positions
-                    LEFT JOIN candidates ON positions.id = candidates.position_id
-                    ORDER BY positions.id";
-                    $result_positions = $conn->query($sql_positions);
+                        SELECT positions.descrip AS position_name, candidates.*
+                        FROM positions
+                        LEFT JOIN candidates ON positions.id = CAST(candidates.position_id AS UNSIGNED)
+                        ORDER BY positions.id";
 
-                    // Check if query succeeded
+                    // Execute the query and check for errors
+                    $result_positions = $conn->query($sql_positions);
                     if (!$result_positions) {
-                        die("Error fetching positions and candidates: " . $conn->error); // Debugging: check if query failed
+                        die("Error in SQL query: " . $conn->error);  // Display SQL errors, if any
+                    }
+
+                    // Debug: Check if any rows are returned
+                    if (mysqli_num_rows($result_positions) === 0) {
+                        echo "No positions or candidates found.";
                     }
 
                     // To keep track of the current position header and prevent repeating it
@@ -75,7 +80,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                                             <!-- Radio button for selecting the candidate -->
                                             <input type="radio" name="<?php echo htmlspecialchars($current_position); ?>" value="<?php echo $row['candidate_firstname'] . ' ' . $row['candidate_lastname']; ?>">
                                             <!-- Display candidate image -->
-                                            <img src="Candidates/<?php echo htmlspecialchars($row['candidate_profile']); ?>" alt="<?php echo htmlspecialchars($row['candidate_firstname']); ?>">
+                                            <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo htmlspecialchars($row['candidate_firstname']); ?>">
                                             <!-- Display candidate name and button -->
                                             <div class="candidate-info">
                                                 <?php echo htmlspecialchars($row['candidate_firstname'] . ' ' . $row['candidate_lastname']); ?>
@@ -86,7 +91,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                                 </div>
                             <?php } else { ?>
                                 <!-- No candidates for this position -->
-                                <p style="text-align: center; ">No candidates found for this position.</p>
+                                <p style="text-align: center;">No candidates found for this position.</p>
                             <?php } ?>
                         </div>
                     <?php
@@ -95,10 +100,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
 
                     <div class="form-group-button">
                         <button type="reset" class="addCandidates_close-form-btn">
-                            <svg fill="#24724D" version="1.1" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 512 512">
+                            <svg fill="#24724D" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: #24724D;" viewBox="0 0 512 512" xml:space="preserve">
                                 <g>
                                     <g>
-                                        <path d="M256,0C114.615,0,0,114.615,0,256s114.615,256,256,256c118.252,0,218.898-81.941,247.035-192h-67.912..."></path>
+                                        <path d="M256,0C114.615,0,0,114.615,0,256s114.615,256,256,256c118.252,0,218.898-81.941,247.035-192h-67.912
+                                                    c-26.55,73.368-96.47,128-179.123,128c-105.869,0-192-86.131-192-192S150.131,64,256,64c63.013,0,118.685,29.652,154.629,76.106
+                                                    l-85.803,64.352H512V0l-86.65,64.928C374.073,24.008,317.339,0,256,0z"></path>
                                     </g>
                                 </g>
                             </svg>
@@ -106,10 +113,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                         </button>
 
                         <button type="submit" class="save-btn">
-                            <svg fill="#000000" version="1.1" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 407.096 407.096">
+                            <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: white;" viewBox="0 0 407.096 407.096" xml:space="preserve">
                                 <g>
                                     <g>
-                                        <path d="M402.115,84.008L323.088,4.981C319.899,1.792,315.574,0,311.063,0H17.005C7.613,0,0,7.614,0,17.005v373.086..."></path>
+                                        <path d="M402.115,84.008L323.088,4.981C319.899,1.792,315.574,0,311.063,0H17.005C7.613,0,0,7.614,0,17.005v373.086
+                                                        c0,9.392,7.613,17.005,17.005,17.005h373.086c9.392,0,17.005-7.613,17.005-17.005V96.032
+                                                        C407.096,91.523,405.305,87.197,402.115,84.008z M300.664,163.567H67.129V38.862h233.535V163.567z"></path>
+                                        <path d="M214.051,148.16h43.08c3.131,0,5.668-2.538,5.668-5.669V59.584c0-3.13-2.537-5.668-5.668-5.668h-43.08
+                                                        c-3.131,0-5.668,2.538-5.668,5.668v82.907C208.383,145.622,210.92,148.16,214.051,148.16z"></path>
                                     </g>
                                 </g>
                             </svg>
@@ -122,7 +133,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                         <p>Providing easier ways to VOTE and be HEARD.</p>
                     </div>
                 </form>
-
 
 
             </div>

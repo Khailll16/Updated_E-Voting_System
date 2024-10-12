@@ -52,12 +52,6 @@ main {
     border-bottom: 3px solid #24724D;
 }
 
-.candidate {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-}
 
 .candidate button {
     background-color: #24724D;
@@ -77,8 +71,7 @@ main {
     width: 100%;
     margin-top: 15px;
     color: #343434;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 16px;
 }
 
 .candidate a {
@@ -245,22 +238,33 @@ main {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 5 columns */
     gap: 25px;
     margin: 10px;
 }
 
-/* Responsive Styles */
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
     .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 columns */
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
     }
 }
 
 @media (max-width: 768px) {
     .grid-container {
-        grid-template-columns: 1fr;
-        /* 1 column */
+        grid-template-columns: 1fr; /* 1 column */
     }
+}
+
+.grid-item {
+    text-align: left;
+}
+
+/* Center "No candidates found" message in the second column */
+.no-candidates {
+    grid-column: 2 / 3;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px; /* Optional: Ensure height to center vertically */
 }

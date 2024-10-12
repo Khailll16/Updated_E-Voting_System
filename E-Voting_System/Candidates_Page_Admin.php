@@ -146,7 +146,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 LEFT JOIN positions ON candidates.position_id = positions.id
                                                 WHERE candidate_lastname LIKE '%$searchQuery%' 
                                                 OR candidate_firstname LIKE '%$searchQuery%' 
-                                                OR position_id LIKE '%$searchQuery%'";
+                                                OR positions.descrip LIKE '%$searchQuery%'";
                                                     $result = $conn->query($sql);
 
                                                     if (!$result) {
@@ -163,7 +163,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                 <td> <?php echo $row['candidate_lastname']; ?> </td>
                                                                 <td> <?php echo $row['candidate_firstname']; ?> </td>
                                                                 <td>
-                                                                    <?php echo $row['position_id']; ?>
+                                                                    <?php echo $row['descrip']; ?> <!-- Modified to display position description -->
                                                                 </td>
                                                                 <td style="padding: 8px 0px;">
                                                                     <div class="actions-button">
@@ -378,7 +378,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                     while ($row = mysqli_fetch_assoc($result)) {
 
-                                                        echo "<option value='" . $row['descrip'] . "'>" . $row['descrip'] . "</option>";
+                                                        echo "<option value='" . $row['id'] . "'>" . $row['descrip'] . "</option>";
                                                     }
                                                 }
                                                 ?>

@@ -6,7 +6,6 @@ include "Add_Voters.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
-
     // Start by checking if the form is submitted and delete the position
     function deleteVoter()
     {
@@ -27,16 +26,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
         deleteVoter();
     }
 
-
-
-
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-
-
-        $sql = "SELECT * from `voters` where `id` = '$id'";
+        
+        // Updated query to fetch the voter details using the voter `id`
+        $sql = "SELECT voters.*, 
+                sections.grade AS grade, 
+                sections.section AS section 
+                FROM voters 
+                LEFT JOIN sections ON voters.grade_id = sections.id
+                WHERE voters.id = '$id'";  // Add the WHERE clause to filter by voter `id`
+                
         $result = mysqli_query($conn, $sql);
-
 
         if (!$result) {
             die("Invalid query: " . $conn->error);
@@ -44,8 +45,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
             $row = mysqli_fetch_assoc($result);
         }
     }
-
-
 ?>
 
     <!DOCTYPE html>
@@ -74,8 +73,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         <div class="breadcrumb-content">
                             <ol class="breadcrumb">
                                 <li><a href="#"><i class='bx bxs-dashboard icon'></i> Home</a></li>
-                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i
-                                            class='bx bxs-chevron-right'></i> Voters </a></li>
+                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> Voters </a></li>
                             </ol>
                         </div>
 
@@ -126,7 +124,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                 <img id="profile-picture" src="Voters/<?php echo $row['voters_photo'] ?>" alt="">
                                                             </div>
                                                             <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['voters_firstname'] ?> <?php echo $row['voters_lastname'] ?></p>
-                                                            <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo $row['grade_id'] ?> - <?php echo $row['section_id'] ?></p>
+                                                            <!-- Display grade and section descriptions -->
+                                                            <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;">
+                                                                <?php echo $row['grade'] ?> - <?php echo $row['section'] ?>
+                                                            </p>
                                                         </div>
                                                     </div>
 

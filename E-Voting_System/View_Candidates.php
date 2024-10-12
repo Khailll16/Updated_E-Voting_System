@@ -32,8 +32,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         <div class="breadcrumb-content">
                             <ol class="breadcrumb">
                                 <li><a href="#"><i class='bx bxs-dashboard icon'></i> Home</a></li>
-                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i
-                                            class='bx bxs-chevron-right'></i> Candidates </a></li>
+                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> Candidates </a></li>
                             </ol>
                         </div>
 
@@ -43,8 +42,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
                                 <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
                                 <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i
-                                        class='bx bx-log-out icon'></i>Sign out</a>
+                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
                             </div>
                         </nav>
 
@@ -74,10 +72,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 if (isset($_GET['id'])) {
                                                     $id = $_GET['id'];
 
-
-                                                    $sql = "SELECT * from `candidates` where `id` = '$id'";
+                                                    // Updated query to join with positions and get description
+                                                    $sql = "SELECT candidates.*, positions.descrip 
+                                                            FROM candidates 
+                                                            LEFT JOIN positions ON candidates.position_id = positions.id 
+                                                            WHERE candidates.id = '$id'";
                                                     $result = mysqli_query($conn, $sql);
-
 
                                                     if (!$result) {
                                                         die("Invalid query: " . $conn->error);
@@ -92,10 +92,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <img id="profile-picture" src="Candidates/<?php echo $row['candidate_profile'] ?>" alt="">
                                                         </div>
                                                         <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['candidate_firstname']; ?> <?php echo $row['candidate_lastname']; ?></p>
-                                                        <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo $row['position_id'] ?></p>
+                                                        <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;"><?php echo $row['descrip']; ?></p> <!-- Display position description -->
                                                     </div>
 
-                                                    <div class=" form-section">
+                                                    <div class="form-section">
 
                                                         <label for="">First Name
                                                             <input style="border: 1px solid #24724D" type="text" name="cfname" class="input-field" value="<?php echo $row['candidate_firstname'] ?>" disabled>
@@ -104,9 +104,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <input style="border: 1px solid #24724D" type="text" name="clname" class="input-field" value="<?php echo $row['candidate_lastname'] ?>" disabled>
                                                         </label>
                                                         <label for="">Position
-                                                            <input style="border: 1px solid #24724D" type="text" name="position" class="input-field" value="<?php echo $row['position_id'] ?>" disabled>
+                                                            <input style="border: 1px solid #24724D" type="text" name="position" class="input-field" value="<?php echo $row['descrip']; ?>" disabled> <!-- Display position description -->
                                                         </label>
-                                                        <label style="display: flex; justify-content: end; " for="">Platform
+                                                        <label style="display: flex; justify-content: end;" for="">Platform
                                                             <textarea class="input-field" name="cplatforms" rows="7" style="resize: vertical; color:black; border: 1px solid #24724D" disabled><?php echo $row['platform']; ?></textarea>
                                                         </label>
                                                     </div>

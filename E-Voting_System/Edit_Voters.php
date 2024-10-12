@@ -179,7 +179,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                                     while ($row = mysqli_fetch_assoc($result)) {
 
-                                                                        echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
+                                                                        echo "<option value='" . $row['id'] . "'>" . $row['section'] . "</option>";
                                                                     }
                                                                 }
                                                                 ?>

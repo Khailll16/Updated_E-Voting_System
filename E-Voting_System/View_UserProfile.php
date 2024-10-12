@@ -42,7 +42,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
                                 <a href="#"><i class='bx bxs-user-detail icon'></i> User Profile</a>
                                 <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                                <a style="border-radius: 0px 0px 15px 15px;" href="LogoutPage_Admin.php"><i
+                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i
                                         class='bx bx-log-out icon'></i>Sign out</a>
                             </div>
                         </nav>
@@ -79,52 +79,52 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         }
                                         ?>
                                     </div>
-                                <div class="voters-list-content">
-                                    <div class="add-button">
-                                        <button class="button-add"><a href="Edit_UserProfile.php?id=<?php echo $row['id']; ?>" style=" color:white; display:flex; align-items:center; gap: 3px;"><i class="bx bxs-edit"></i>Edit</a></button>
-                                    </div>
+                                    <div class="voters-list-content">
+                                        <div class="add-button">
+                                            <button class="button-add"><a href="Edit_UserProfile.php?id=<?php echo $row['id']; ?>" style=" color:white; display:flex; align-items:center; gap: 3px;"><i class="bx bxs-edit"></i>Edit</a></button>
+                                        </div>
 
-                                    <div id="addvoters-popup" class="addvoters-popup">
+                                        <div id="addvoters-popup" class="addvoters-popup">
 
-                                        <div class="addvoters-popup-forms">
-                                            <form action="" method="POST">
+                                            <div class="addvoters-popup-forms">
+                                                <form action="" method="POST">
 
-                                                <div class="container">
-                                                    <div class="profile-section">
-                                                        <div class="image-container">
-                                                            <img id="profile-picture" src="Images/<?php echo $row['admin_profile'] ?>" alt="">
+                                                    <div class="container">
+                                                        <div class="profile-section">
+                                                            <div class="image-container">
+                                                                <img id="profile-picture" src="Images/<?php echo $row['admin_profile'] ?>" alt="">
+                                                            </div>
+                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></p>
+                                                            <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;">Administrator</p>
                                                         </div>
-                                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></p>
-                                                        <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;">Administrator</p>
+
+                                                        <div class="form-section">
+
+                                                            <label for="">First Name
+                                                                <input style="border: 1px solid #24724D" type="text" name="admin_fname" class="input-field" value="<?php echo $row['firstname'] ?>" disabled>
+                                                            </label>
+                                                            <label for="">Last Name
+                                                                <input style="border: 1px solid #24724D" type="text" name="admin_lname" class="input-field" value="<?php echo $row['lastname'] ?>" disabled>
+                                                            </label>
+                                                            <label for="">Username
+                                                                <input style="border: 1px solid #24724D" type="text" name="admin_username" class="input-field" value="<?php echo $row['admin_username'] ?>" disabled>
+                                                            </label>
+                                                            <label for="">Password
+                                                                <input style="border: 1px solid #24724D" type="password" name="admin_pass" class="input-field" value="<?php echo $row['admin_password'] ?>" disabled>
+                                                            </label>
+
+                                                        <?php
+                                                    }
+                                                        ?>
+                                                        </div>
                                                     </div>
+                                                </form>
 
-                                                    <div class="form-section">
-
-                                                        <label for="">First Name
-                                                            <input style="border: 1px solid #24724D" type="text" name="admin_fname" class="input-field" value="<?php echo $row['firstname'] ?>" disabled>
-                                                        </label>
-                                                        <label for="">Last Name
-                                                            <input style="border: 1px solid #24724D" type="text" name="admin_lname" class="input-field" value="<?php echo $row['lastname'] ?>" disabled>
-                                                        </label>
-                                                        <label for="">Username
-                                                            <input style="border: 1px solid #24724D" type="text" name="admin_username" class="input-field" value="<?php echo $row['admin_username'] ?>" disabled>
-                                                        </label>
-                                                        <label for="">Password
-                                                            <input style="border: 1px solid #24724D" type="password" name="admin_pass" class="input-field" value="<?php echo $row['admin_password'] ?>" disabled>
-                                                        </label>
-
-                                                    <?php
-                                                }
-                                                    ?>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            </div>
 
                                         </div>
 
                                     </div>
-
-                                </div>
                             </div>
 
                         </div>
@@ -273,8 +273,49 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
 
                 </nav>
+
+
+                <!--LOGOUT FORM---->
+
+                <div id="logout_popup" class="logout_popup" style="display: none;">
+                    <div class="logout_popup-content">
+
+                        <div class="logout_popup-top">
+                            <h2>SIGN OUT</h2>
+                        </div>
+
+                        <div class="logout_popup-forms">
+                            <form action="LogoutPage_Admin.php" method="POST">
+                                <div class="warning-logout-description">
+                                    <p>Are you sure you want to sign out?</p>
+                                </div>
+                                <div class="form-group-button">
+                                    <button type="button" class="logout_close-form-btn"><svg width="15px" height="15px" fill="#24724D" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z" fill="#24724D"></path>
+                                        </svg>
+                                        Close</button>
+                                    <button type="submit" class="save-btn">
+                                        <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: white;" viewBox="0 0 512 512" xml:space="preserve">
+                                            <g>
+                                                <g>
+                                                    <path d="M504.5,75.5c-9.6-9.6-25.2-9.6-34.9,0L192.4,352.7L42.3,202.7c-9.6-9.6-25.2-9.6-34.9,0c-9.6,9.6-9.6,25.2,0,34.9L174.9,404.1
+                                                        c9.6,9.6,25.2,9.6,34.9,0l305.7-305.7C514.1,100.7,514.1,85.1,504.5,75.5z" />
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        Yes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
+
+        <script src="displayPopUpForm.js"></script>
         <script src="hamburger-navbar.js"></script>
         <script src="Edit_Voters_Profile.js"></script>
         <script src="displayPopUpMessage.js"></script>

@@ -529,6 +529,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                     </div>
                 </div>
+                <script src="Filter_Grade-Section.js"></script>
                 <script src="Tables_Functionals.js"></script>
                 <script src="displayPopUpForm.js"></script>
                 <script src="hamburger-navbar.js"></script>

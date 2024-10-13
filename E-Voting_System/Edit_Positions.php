@@ -287,6 +287,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                 </nav>
 
+
+                
                 <!--LOGOUT FORM---->
 
                 <div id="logout_popup" class="logout_popup" style="display: none;">
@@ -322,7 +324,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         </div>
                     </div>
                 </div>
-                
+
+
+
             </div>
         </div>
         <script src="displayPopUpForm.js"></script>

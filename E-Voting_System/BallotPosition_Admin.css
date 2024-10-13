@@ -408,8 +408,7 @@ i {
   width: 100%;
   margin-top: 15px;
   color: #343434;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 16px;
 }
 
 .candidate input {
@@ -590,6 +589,13 @@ i {
   text-decoration: none;
 }
 .form-group-button {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 15px;
+    padding-bottom: 80px;
+}
+.form-group-button1 {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -607,4 +613,36 @@ i {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 5 columns */
+  gap: 25px;
+  margin: 10px;
+}
+
+@media (max-width: 992px) {
+  .grid-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+      grid-template-columns: 1fr; /* 1 column */
+  }
+}
+
+.grid-item {
+  text-align: left;
+}
+
+/* Center "No candidates found" message in the second column */
+.no-candidates {
+  grid-column: 2 / 3;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px; /* Optional: Ensure height to center vertically */
 }

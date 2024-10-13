@@ -387,6 +387,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                         <!--------ADD VOTERS POP UP FORM----------->
 
+                        <?php
+                        include "database_connect.php";
+
+                        if (isset($_POST['grade'])) {
+                            $grade = mysqli_real_escape_string($conn, $_POST['grade']);
+                            $sql = "SELECT section FROM sections WHERE grade = '$grade'";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                echo "<option value='' selected=''>- Select Section -</option>";
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
+                                }
+                            } else {
+                                echo "<option value=''>No sections available</option>";
+                            }
+                        }
+                        ?>
+
+
+
                         <div id="addvoters-popup" class="addvoters-popup">
                             <div class="addvoters-popup-content">
                                 <div class="addvoters-popup-top">
@@ -405,44 +426,30 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </div>
                                         <div class="form-group-position">
                                             <label for="Grade" class="col-sm-3 control-label">Grade</label>
-                                            <select class="form-position" id="grade" name="grade" required="">
-                                                <option value="" selected="">- Select -</option>
+                                            <select class="form-position" id="grade" name="grade" required="" onchange="fetchSections(this.value)">
+                                                <option value="" selected="">- Select Grade -</option>
                                                 <?php
-                                                $sql = "SELECT * FROM sections";
+                                                $sql = "SELECT DISTINCT grade FROM sections";
                                                 $result = $conn->query($sql);
 
                                                 if (!$result) {
                                                     die("Invalid query: " . $conn->error);
                                                 } else {
-
                                                     while ($row = mysqli_fetch_assoc($result)) {
-
                                                         echo "<option value='" . $row['grade'] . "'>" . $row['grade'] . "</option>";
                                                     }
                                                 }
                                                 ?>
                                             </select>
                                         </div>
+
                                         <div class="form-group-position">
-                                            <label for="position" class="col-sm-3 control-label">Section</label>
+                                            <label for="Section" class="col-sm-3 control-label">Section</label>
                                             <select class="form-position" id="section" name="section" required="">
-                                                <option value="" selected="">- Select -</option>
-                                                <?php
-                                                $sql = "SELECT * FROM sections";
-                                                $result = $conn->query($sql);
-
-                                                if (!$result) {
-                                                    die("Invalid query: " . $conn->error);
-                                                } else {
-
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-
-                                                        echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
-                                                    }
-                                                }
-                                                ?>
+                                                <option value="" selected="">- Select Section -</option>
                                             </select>
                                         </div>
+
                                         <div class="form-group-title">
                                             <label for="voters-password">Password</label>
                                             <input type="password" id="voterspassword" name="voterspassword" class="input-size" value="" required>

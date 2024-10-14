@@ -183,7 +183,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <img src="Images/sikhay-new-logo.png" alt="">
                                             <p>Providing easier ways to VOTE and be HEARD.</p>
                                         </div>
-
+                                    </form>
 
                                     </div>
 

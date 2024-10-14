@@ -109,7 +109,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                     ?>
 
                     <div class="form-group-button">
-                        <button type="reset" class="addCandidates_close-form-btn">
+                        <button type="reset" class="reset_close-form-btn">
                             <svg fill="#24724D" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: #24724D;" viewBox="0 0 512 512" xml:space="preserve">
                                 <g>
                                     <g>

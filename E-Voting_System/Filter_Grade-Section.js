@@ -1,5 +1,3 @@
-// fetch_sections.js
-
 function fetchSections(grade) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "fetch_sections.php", true);

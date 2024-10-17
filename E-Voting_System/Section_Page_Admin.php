@@ -8,6 +8,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
         $searchQuery = mysqli_real_escape_string($conn, $_POST['search']);
     }
 
+    // Determine the sorting order for the table columns
+    $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'grade'; // Default sorting by grade
+    $sortOrder = isset($_GET['order']) && $_GET['order'] == 'desc' ? 'DESC' : 'ASC'; // Default to ascending order
+
+    // Toggle sort order for next click
+    $toggleSortOrder = $sortOrder == 'ASC' ? 'desc' : 'asc';
 ?>
 
     <!DOCTYPE html>
@@ -16,6 +22,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     <head>
         <link rel="stylesheet" href="SectionStyle_Page.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Font Awesome for icons -->
         <link rel="icon" href="Images/Black Retro Minimalist Vegan Cafe Logo (26).png">
         <title>Admin Sections Page | SIKHAY</title>
 
@@ -135,17 +142,32 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                 <table class="voters-list" style="border-spacing: 0 15px;">
                                                     <tr style="border-radius: 11px;">
-                                                        <th style="border-radius: 11px 0px 0px 11px;">Grades</th>
-                                                        <th>Sections</th>
-                                                        <th>Maximum Student</th>
+                                                        <th style="border-radius: 11px 0px 0px 11px;">
+                                                            Grades
+                                                            <a style="color: white; margin-left: 6px;" href="?sort=grade&order=<?php echo $toggleSortOrder; ?>">
+                                                                <i class="fas fa-sort-<?php echo $sortColumn == 'grade' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i>
+                                                            </a>
+                                                        </th>
+                                                        <th>
+                                                            Sections
+                                                            <a style="color: white; margin-left: 6px;" href="?sort=section&order=<?php echo $toggleSortOrder; ?>">
+                                                                <i class="fas fa-sort-<?php echo $sortColumn == 'section' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i>
+                                                            </a>
+                                                        </th>
+                                                        <th>
+                                                            Maximum Student
+                                                            <a style="color: white; margin-left: 6px;" href="?sort=max_student&order=<?php echo $toggleSortOrder; ?>">
+                                                                <i class="fas fa-sort-<?php echo $sortColumn == 'max_student' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i>
+                                                            </a>
+                                                        </th>
                                                         <th style="border-radius: 0px 11px 11px 0px;">Actions</th>
                                                     </tr>
 
                                                     <?php
                                                     $sectionFilter = isset($_POST['filter_section']) ? $_POST['filter_section'] : '';
-
                                                     $searchQuery = isset($_POST['search']) ? $_POST['search'] : '';
 
+                                                    // Modify the query to include sorting
                                                     $sql = "SELECT * FROM sections WHERE 1";
 
                                                     if ($sectionFilter != '') {
@@ -155,6 +177,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     if ($searchQuery != '') {
                                                         $sql .= " AND (grade LIKE '%$searchQuery%' OR section LIKE '%$searchQuery%' OR max_student LIKE '%$searchQuery%')";
                                                     }
+
+                                                    // Append sorting clause
+                                                    $sql .= " ORDER BY $sortColumn $sortOrder";
 
                                                     $result = $conn->query($sql);
 
@@ -336,13 +361,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     <!-----LOG OUT------>
                                     <li class="">
 
-                                    </li>
 
                                 </div>
 
-
                             </div>
-
 
                         </nav>
 

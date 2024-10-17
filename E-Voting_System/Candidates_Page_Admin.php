@@ -9,6 +9,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
         $searchQuery = mysqli_real_escape_string($conn, $_POST['search']);
     }
 
+    // Determine sorting order and column
+    $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'candidate_lastname'; // Default to sorting by Last Name
+    $sortOrder = isset($_GET['order']) && $_GET['order'] == 'desc' ? 'DESC' : 'ASC'; // Default to ASC order
+    $toggleSortOrder = $sortOrder == 'ASC' ? 'desc' : 'asc'; // Toggle for next click
 ?>
 
     <!DOCTYPE html>
@@ -17,6 +21,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     <head>
         <link rel="stylesheet" href="CandidatesStyle_Page.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
         <link rel="icon" href="Images/Black Retro Minimalist Vegan Cafe Logo (26).png">
         <title>Admin Candidates Page | SIKHAY</title>
 
@@ -127,26 +132,40 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </div>
                                             </div>
 
-
-
-
                                             <div class="table-container">
                                                 <table class="voters-list">
                                                     <tr style="border-radius: 11px;">
                                                         <th style="border-radius: 11px 0px 0px 11px;">Photo</th>
-                                                        <th>Last Name</th>
-                                                        <th>First Name</th>
-                                                        <th>Position</th>
+                                                        <th>
+                                                            Last Name
+                                                            <a href="?sort=candidate_lastname&order=<?php echo $toggleSortOrder; ?>" style="color: white; margin-left: 6px;">
+                                                                <i class="fas fa-sort-<?php echo $sortColumn == 'candidate_lastname' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i>
+                                                            </a>
+                                                        </th>
+                                                        <th>
+                                                            First Name
+                                                            <a href="?sort=candidate_firstname&order=<?php echo $toggleSortOrder; ?>" style="color: white; margin-left: 6px;">
+                                                                <i class="fas fa-sort-<?php echo $sortColumn == 'candidate_firstname' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i>
+                                                            </a>
+                                                        </th>
+                                                        <th>
+                                                            Position
+                                                            <a href="?sort=descrip&order=<?php echo $toggleSortOrder; ?>" style="color: white; margin-left: 6px;">
+                                                                <i class="fas fa-sort-<?php echo $sortColumn == 'descrip' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i>
+                                                            </a>
+                                                        </th>
                                                         <th style="border-radius: 0px 11px 11px 0px;">Actions</th>
                                                     </tr>
 
                                                     <?php
+                                                    // Modify the query to include sorting
                                                     $sql = "SELECT candidates.*, positions.descrip 
-                                                FROM candidates 
-                                                LEFT JOIN positions ON candidates.position_id = positions.id
-                                                WHERE candidate_lastname LIKE '%$searchQuery%' 
-                                                OR candidate_firstname LIKE '%$searchQuery%' 
-                                                OR positions.descrip LIKE '%$searchQuery%'";
+                                                            FROM candidates 
+                                                            LEFT JOIN positions ON candidates.position_id = positions.id
+                                                            WHERE candidate_lastname LIKE '%$searchQuery%' 
+                                                            OR candidate_firstname LIKE '%$searchQuery%' 
+                                                            OR positions.descrip LIKE '%$searchQuery%'
+                                                            ORDER BY $sortColumn $sortOrder";
                                                     $result = $conn->query($sql);
 
                                                     if (!$result) {
@@ -158,13 +177,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                             <tr>
                                                                 <td style="padding-top: 7px;">
-                                                                    <img src="Candidates/<?php echo $row['candidate_profile'] ?>" data-id="<?php echo $row['id']; ?>" width='41px' style='background-color: #ddd; border-radius: 3px;'>
+                                                                    <img src="Candidates/<?php echo $row['candidate_profile'] ?>" data-id="<?php echo $row['id']; ?>" width='41px' style='background-color: #ddd; border-radius: 3px;' />
                                                                 </td>
                                                                 <td> <?php echo $row['candidate_lastname']; ?> </td>
                                                                 <td> <?php echo $row['candidate_firstname']; ?> </td>
-                                                                <td>
-                                                                    <?php echo $row['descrip']; ?> <!-- Modified to display position description -->
-                                                                </td>
+                                                                <td> <?php echo $row['descrip']; ?> </td> <!-- Display the position description -->
                                                                 <td style="padding: 8px 0px;">
                                                                     <div class="actions-button">
                                                                         <a href="View_Candidates.php?id=<?php echo $row['id']; ?>"><button class="view"><i class='bx bx-play'></i></button></a>
@@ -221,11 +238,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 }
                                 ?>
 
-                                <!-----SIDEBAR TOP CONTENT-->
+                                <!-----SIDEBAR TOP CONTENT------>
                                 <div class="sidebar-content">
                                     <div class="sidebar-top-content">
 
-                                        <!------SIKHAY LOGO-->
+                                        <!------SIKHAY LOGO------>
                                         <div class="sikhay-logo">
                                             <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="78px">
                                             <div class="school-name">
@@ -328,25 +345,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     </ul>
                                 </div>
 
-
                                 <!-----BUTTON CONTENT------>
                                 <div class="bottom-content">
 
                                     <!-----LOG OUT------>
                                     <li class="">
-
+                                        <!-- Logout link here -->
                                     </li>
 
                                 </div>
 
-
                             </div>
-
 
                         </nav>
 
                         <!------ADD CANDIDATES FORM POP UP----------->
-
 
                         <div id="addCandidates_popup" class="addCandidates_popup">
                             <div class="addCandidates_popup-content">
@@ -358,11 +371,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     <form action="Add_Candidate.php" autocomplete="off" enctype="multipart/form-data" method="POST">
                                         <div class="form-group-title">
                                             <label for="update-candidate-firstname">Firstname</label>
-                                            <input type="update-candidate-firstname" id="update-candidate-firstname" name="candidate-firstname" class="input-size" value="" required>
+                                            <input type="text" id="update-candidate-firstname" name="candidate-firstname" class="input-size" value="" required>
                                         </div>
                                         <div class="form-group-title">
                                             <label for="update-candidate-lastname">Lastname</label>
-                                            <input type="update-candidate-lastname" id="update-candidate-lastname" name="candidate-lastname" class="input-size" value="" required>
+                                            <input type="text" id="update-candidate-lastname" name="candidate-lastname" class="input-size" value="" required>
                                         </div>
                                         <div class="form-group-position">
                                             <label for="position" class="col-sm-3 control-label">Position</label>

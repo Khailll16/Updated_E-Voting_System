@@ -121,7 +121,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <input type="text" name="section" class="input-field" value="<?php echo $row['section'] ?>">
                                                         </label>
                                                         <label for="">Grade
-                                                            <input type="text" name="grade" class="input-field" value="<?php echo $row['grade'] ?>">
+                                                            <input type="number" name="grade" class="input-field" value="<?php echo $row['grade'] ?>">
                                                         </label>
                                                         <label for="">Maximum Student
                                                             <input type="number" name="maximum" class="input-field" value="<?php echo $row['max_student'] ?>">

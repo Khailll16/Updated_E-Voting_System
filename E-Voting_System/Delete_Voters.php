@@ -126,7 +126,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['voters_firstname'] ?> <?php echo $row['voters_lastname'] ?></p>
                                                             <!-- Display grade and section descriptions -->
                                                             <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;">
-                                                                <?php echo $row['grade'] ?> - <?php echo $row['section'] ?>
+                                                                <?php echo $row['grade_id'] ?> - <?php echo $row['section_id'] ?>
                                                             </p>
                                                         </div>
                                                     </div>

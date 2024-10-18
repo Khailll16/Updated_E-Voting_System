@@ -447,9 +447,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         <input type="text" id="voterslastname" name="voterslastname" class="input-size" required>
                                     </div>
 
-                                    <div class="form-group-position">
+                                    <div style="margin-left:27px" class="form-group-position">
                                         <label for="grade" class="col-sm-3 control-label">Grade</label>
-                                        <select class="form-position" id="grade" name="grade" required onchange="fetchSections(this.value)">
+                                        <select style="width:68.5%" class="form-position" id="grade" name="grade" required onchange="fetchSections(this.value)">
                                             <option value="" selected>- Select Grade -</option>
                                             <?php
                                             // Fetch distinct grades from sections table, sorted alphabetically

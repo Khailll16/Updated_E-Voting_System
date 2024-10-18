@@ -954,7 +954,7 @@ tr:hover td {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 15px;
+  margin-left: 18px;
   margin-bottom: 15px;
 }
 
@@ -967,7 +967,7 @@ tr:hover td {
 
 .form-group-position select {
   display: flex;
-  width: 66.8%;
+  width: 67.6%;
   padding: 10px;
   border: 1px solid #959191;
   border-radius: 4px;

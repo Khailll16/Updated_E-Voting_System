@@ -122,7 +122,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             if (!$result) {
                                                 die("Invalid query: " . $conn->error);
                                             } else {
-                                                header("Location: Voters_Page_Admin.php?insert_msg=Voter has been updated successfully");
+                                                header("Location: Voters_Page_Admin.php?insert_msg=Voter have been updated successfully");
                                                 exit();
                                             }
                                         }

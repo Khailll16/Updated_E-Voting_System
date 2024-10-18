@@ -124,7 +124,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 if (!$result) {
                                                     die("Invalid query: " . $conn->error);
                                                 } else {
-                                                    header("Location: BallotPosition_Page_Admin.php?insert_msg=Ballot has been edit successfully");
+                                                    header("Location: BallotPosition_Page_Admin.php?insert_msg=Ballot have been updated successfully");
                                                     exit();
                                                 }
                                             }

@@ -31,8 +31,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         <div class="breadcrumb-content">
                             <ol class="breadcrumb">
                                 <li><a href="Dashboard_Page.php"><i class='bx bxs-dashboard icon'></i> Home</a></li>
-                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i
-                                            class='bx bxs-chevron-right'></i> User Profile </a></li>
+                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> User Profile </a></li>
                             </ol>
                         </div>
 
@@ -42,8 +41,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
                                 <a href="#"><i class='bx bxs-user-detail icon'></i> User Profile</a>
                                 <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i
-                                        class='bx bx-log-out icon'></i>Sign out</a>
+                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
                             </div>
                         </nav>
 
@@ -63,7 +61,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 if (!$result) {
                                     die("Invalid query: " . $conn->error);
                                 } else {
-                                    ($row = mysqli_fetch_assoc($result))
+                                    ($row = mysqli_fetch_assoc($result));
+
+                                    // Hash the password for display
+                                    $hashed_password = password_hash($row['admin_password'], PASSWORD_DEFAULT);
 
                                 ?>
 
@@ -76,6 +77,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         if (isset($_GET['insert_msg'])) {
                                             echo "<p><i class='bx bxs-check-circle'></i> Success!</p>";
                                             echo htmlspecialchars($_GET['insert_msg']);
+                                        }
+                                        if (isset($_GET['insert_msg1'])) {
+                                            echo "<p><i class='bx bxs-x-circle'></i> Unsuccessful!</p>";
+                                            echo htmlspecialchars($_GET['insert_msg1']);
                                         }
                                         ?>
                                     </div>
@@ -110,7 +115,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                 <input style="border: 1px solid #24724D" type="text" name="admin_username" class="input-field" value="<?php echo $row['admin_username'] ?>" disabled>
                                                             </label>
                                                             <label for="">Password
-                                                                <input style="border: 1px solid #24724D" type="password" name="admin_pass" class="input-field" value="<?php echo $row['admin_password'] ?>" disabled>
+                                                                <input style="border: 1px solid #24724D" type="password" name="admin_pass" class="input-field" value="<?php echo $hashed_password ?>" disabled>
                                                             </label>
 
                                                         <?php

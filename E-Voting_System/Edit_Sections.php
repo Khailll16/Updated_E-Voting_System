@@ -97,6 +97,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 $grade = $_POST['grade'];
                                                 $maxstudent = $_POST['maximum'];
 
+                                                // Update section details
                                                 $sql = "UPDATE `sections` set `grade` = '$grade',`section` = '$section',`max_student` = '$maxstudent' where `id` = '$pos_id' ";
 
                                                 $result = mysqli_query($conn, $sql);
@@ -104,8 +105,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 if (!$result) {
                                                     die("Invalid query: " . $conn->error);
                                                 } else {
-                                                    header("Location: Section_Page_Admin.php?insert_msg=Section has been edit successfully");
-                                                    exit();
+                                                    // Update voters that belong to this section
+                                                    $update_voters_sql = "UPDATE `voters` SET `section_id` = '$section', `grade_id` = '$grade' WHERE `section_id` = (SELECT section FROM sections WHERE id = '$pos_id')";
+                                                    $voters_result = mysqli_query($conn, $update_voters_sql);
+
+                                                    if (!$voters_result) {
+                                                        die("Error updating voters: " . $conn->error);
+                                                    } else {
+                                                        header("Location: Section_Page_Admin.php?insert_msg=Section have been updated successfully");
+                                                        exit();
+                                                    }
                                                 }
                                             }
 

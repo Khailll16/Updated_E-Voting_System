@@ -31,8 +31,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         <div class="breadcrumb-content">
                             <ol class="breadcrumb">
                                 <li><a href="Dashboard_Page.php"><i class='bx bxs-dashboard icon'></i> Home</a></li>
-                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i
-                                            class='bx bxs-chevron-right'></i> User Profile </a></li>
+                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> User Profile </a></li>
                             </ol>
                         </div>
 
@@ -42,8 +41,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
                                 <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
                                 <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i
-                                        class='bx bx-log-out icon'></i>Sign out</a>
+                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
                             </div>
                         </nav>
 
@@ -74,10 +72,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             if (isset($_GET['id'])) {
                                                 $id = $_GET['id'];
 
-
-                                                $sql = "SELECT * FROM `admin` where `id` = '$id'";
+                                                // Fetch the current admin information
+                                                $sql = "SELECT * FROM `admin` WHERE `id` = '$id'";
                                                 $result = mysqli_query($conn, $sql);
-
 
                                                 if (!$result) {
                                                     die("Invalid query: " . $conn->error);
@@ -85,57 +82,74 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     $row = mysqli_fetch_assoc($result);
                                                 }
                                             }
-                                            ?>
 
-                                            <?php
-
+                                            // When the form is submitted
                                             if (isset($_POST['update-admin'])) {
                                                 if (isset($_GET['id_new'])) {
                                                     $idnew = $_GET['id_new'];
                                                 }
 
+                                                // Fetch form values
                                                 $adminfirstn = $_POST['admin_fname'];
                                                 $adminlastn = $_POST['admin_lname'];
                                                 $adminuser = $_POST['admin_username'];
                                                 $adminpass = $_POST['admin_pass'];
+                                                $current_password = $_POST['current_password'];
 
-                                                $query = "SELECT admin_profile FROM `admin` WHERE id = '$idnew'";
+                                                // Check current password (hashed)
+                                                $query = "SELECT admin_password FROM `admin` WHERE id = '$idnew'";
                                                 $result = mysqli_query($conn, $query);
                                                 $row = mysqli_fetch_assoc($result);
-                                                $photo = $row['admin_profile'];
+                                                $hashed_password = $row['admin_password'];
 
-                                                if (isset($_FILES['adminprofile']['name']) && $_FILES['adminprofile']['name'] != '') {
-                                                    $size = $_FILES['adminprofile']['size'];
-                                                    $temp = $_FILES['adminprofile']['tmp_name'];
-                                                    $type = $_FILES['adminprofile']['type'];
-                                                    $picturename = $_FILES['adminprofile']['name'];
+                                                if (password_verify($current_password, $hashed_password)) {
+                                                    // If current password is correct
 
-                                                    if (!empty($photo)) {
-                                                        unlink("Images/$photo");
+                                                    // Hash the new password if the user updated it
+                                                    if (!empty($adminpass)) {
+                                                        $adminpass = password_hash($adminpass, PASSWORD_DEFAULT);
+                                                    } else {
+                                                        // Keep the old password if no new password was entered
+                                                        $adminpass = $hashed_password;
                                                     }
-                                                    move_uploaded_file($temp, "Images/$picturename");
+
+                                                    // Update profile picture
+                                                    $photo = $row['admin_profile'];
+                                                    if (isset($_FILES['adminprofile']['name']) && $_FILES['adminprofile']['name'] != '') {
+                                                        $temp = $_FILES['adminprofile']['tmp_name'];
+                                                        $picturename = $_FILES['adminprofile']['name'];
+
+                                                        if (!empty($photo)) {
+                                                            unlink("Images/$photo");
+                                                        }
+                                                        move_uploaded_file($temp, "Images/$picturename");
+                                                    } else {
+                                                        $picturename = $photo;
+                                                    }
+
+                                                    // Update the admin information
+                                                    $sql = "UPDATE `admin` SET 
+                                                        `firstname` = '$adminfirstn',
+                                                        `lastname` = '$adminlastn',
+                                                        `admin_username` = '$adminuser',
+                                                        `admin_password` = '$adminpass',
+                                                        `admin_profile` = '$picturename' 
+                                                        WHERE `id` = '$idnew'";
+
+                                                    $result = mysqli_query($conn, $sql);
+
+                                                    if (!$result) {
+                                                        die("Invalid query: " . $conn->error);
+                                                    } else {
+                                                        header("Location: View_UserProfile.php?insert_msg=Account has been updated successfully");
+                                                        exit();
+                                                    }
                                                 } else {
-                                                    $picturename = $photo;
-                                                }
-
-                                                $sql = "UPDATE `admin` SET 
-                                                    `firstname` = '$adminfirstn',
-                                                    `lastname` = '$adminlastn',
-                                                    `admin_username` = '$adminuser',
-                                                    `admin_password` = '$adminpass',
-                                                    `admin_profile` = '$picturename' 
-                                                    WHERE `id` = '$idnew'";
-
-                                                $result = mysqli_query($conn, $sql);
-
-                                                if (!$result) {
-                                                    die("Invalid query: " . $conn->error);
-                                                } else {
-                                                    header("Location: View_UserProfile.php?insert_msg=Account has been edit successfully");
+                                                    // If current password is incorrect
+                                                    header("Location: View_UserProfile.php?insert_msg1=Account has been updated successfully");
                                                     exit();
                                                 }
                                             }
-
                                             ?>
 
                                             <form action="Edit_UserProfile.php?id_new=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
@@ -167,8 +181,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <label for="">Username
                                                             <input type="text" name="admin_username" class="input-field" value="<?php echo $row['admin_username'] ?>">
                                                         </label>
-                                                        <label for="">Password
-                                                            <input type="password" name="admin_pass" class="input-field" value="<?php echo $row['admin_password'] ?>">
+                                                        <label for="">New Password
+                                                            <input type="password" name="admin_pass" class="input-field" placeholder="Enter new password (optional)">
+                                                        </label>
+                                                        <label for="">Current Password (required)
+                                                            <input type="password" name="current_password" class="input-field" placeholder="Enter current password">
                                                         </label>
 
                                                         <div class="buttons">

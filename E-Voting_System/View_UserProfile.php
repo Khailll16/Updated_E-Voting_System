@@ -77,8 +77,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         if (isset($_GET['insert_msg'])) {
                                             echo "<p><i class='bx bxs-check-circle'></i> Success!</p>";
                                             echo htmlspecialchars($_GET['insert_msg']);
-                                        }
-                                        if (isset($_GET['insert_msg1'])) {
+                                        }else if(isset($_GET['insert_msg1'])) {
                                             echo "<p><i class='bx bxs-x-circle'></i> Unsuccessful!</p>";
                                             echo htmlspecialchars($_GET['insert_msg1']);
                                         }

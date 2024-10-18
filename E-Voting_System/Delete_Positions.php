@@ -80,7 +80,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 $result = $conn->query($sql);
 
                                                 if ($result) {
-                                                    header("Location: Position_Page_Admin.php?insert_msg=Position has been deleted successfully");
+                                                    header("Location: Position_Page_Admin.php?insert_msg=Position have been deleted successfully");
                                                     exit();
                                                 } else {
                                                     echo "Error deleting position: " . $conn->error;

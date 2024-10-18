@@ -39,13 +39,13 @@
         $votersid = substr(str_shuffle($set), 0, 15);
 
         if(empty($orgname)){
-            header("Location: SetUp_Organization.php?message=Firstname of the voter is required");
+            header("Location: SetUp_Organization.php?message=School name of the organization is required");
             exit();  
         }elseif(empty($schladdress)){
-            header("Location: SetUp_Organization.php?message=Lastname of the voter is required");
+            header("Location: SetUp_Organization.php?message=School address of the organization is required");
             exit(); 
         }elseif(empty($number)){
-            header("Location: SetUp_Organization.php?message=Grade of the voter is required");
+            header("Location: SetUp_Organization.php?message=Number of the organization is required");
             exit();
         }else{
             $sql = "INSERT INTO setup (organization_name, school_address, admin_number, logo) 
@@ -56,7 +56,7 @@
                 die("Query Failed: " . $conn->error);
             }
             else{
-                header("Location: SetUp_Organization.php?insert_msg=New voters has been added successfully");
+                header("Location: SetUp_Organization.php?insert_msg=New organization have been added successfully");
                 exit();   
             }
         }

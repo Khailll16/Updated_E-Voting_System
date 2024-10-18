@@ -146,7 +146,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     }
                                                 } else {
                                                     // If current password is incorrect
-                                                    header("Location: View_UserProfile.php?insert_msg1=Account has been updated successfully");
+                                                    header("Location: View_UserProfile.php?insert_msg1=Current password is incorrect. Please try again");
                                                     exit();
                                                 }
                                             }

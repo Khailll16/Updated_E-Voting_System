@@ -34,7 +34,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                 sections.grade AS grade, 
                 sections.section AS section 
                 FROM voters 
-                LEFT JOIN sections ON voters.grade_id = sections.id
+                LEFT JOIN sections ON voters.section_id = sections.id
                 WHERE voters.id = '$id'";  // Add the WHERE clause to filter by voter `id`
                 
         $result = mysqli_query($conn, $sql);
@@ -126,7 +126,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['voters_firstname'] ?> <?php echo $row['voters_lastname'] ?></p>
                                                             <!-- Display grade and section descriptions -->
                                                             <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;">
-                                                                <?php echo $row['grade_id'] ?> - <?php echo $row['section_id'] ?>
+                                                                <?php echo $row['grade'] ?> - <?php echo $row['section'] ?>
                                                             </p>
                                                         </div>
                                                     </div>

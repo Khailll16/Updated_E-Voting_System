@@ -21,8 +21,7 @@ main {
 }
 
 .ballot-section {
-    width: 100%;
-    max-width: 900px;
+    width: 60%;
     margin: 20px auto;
     border: 3px solid #24724D;
     border-radius: 25px;
@@ -39,17 +38,16 @@ main {
 }
 
 .ballot-title h1 {
-    border-left: 3px solid #24724D;
     padding: 36px 0px 36px 30px;
     color:#4A4A4A;
 }
 
 .ballot-title {
     display: flex;
-    gap: 50px;
     align-items: center;
     padding: 0px 0px 0px 40px;
     border-bottom: 3px solid #24724D;
+    justify-content: center;
 }
 
 
@@ -238,7 +236,7 @@ main {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 5 columns */
+    grid-template-columns: repeat(4, 1fr); /* 5 columns */
     gap: 25px;
     margin: 10px;
 }

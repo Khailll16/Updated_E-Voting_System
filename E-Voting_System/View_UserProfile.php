@@ -61,11 +61,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 if (!$result) {
                                     die("Invalid query: " . $conn->error);
                                 } else {
-                                    ($row = mysqli_fetch_assoc($result));
-
-                                    // Hash the password for display
-                                    $hashed_password = password_hash($row['admin_password'], PASSWORD_DEFAULT);
-
+                                    $row = mysqli_fetch_assoc($result);
                                 ?>
 
                                     <div class="Voters-list-title">
@@ -114,7 +110,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                 <input style="border: 1px solid #24724D" type="text" name="admin_username" class="input-field" value="<?php echo $row['admin_username'] ?>" disabled>
                                                             </label>
                                                             <label for="">Password
-                                                                <input style="border: 1px solid #24724D" type="password" name="admin_pass" class="input-field" value="<?php echo $hashed_password ?>" disabled>
+                                                                <input style="border: 1px solid #24724D" type="password" name="admin_pass" class="input-field" value="********" disabled>
                                                             </label>
 
                                                         <?php
@@ -149,7 +145,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         if (!$result) {
                             die("Invalid query: " . $conn->error);
                         } else {
-                            ($row = mysqli_fetch_assoc($result));
+                            $row = mysqli_fetch_assoc($result);
                         }
                         ?>
 
@@ -176,8 +172,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         if (!$result) {
                                             die("Invalid query: " . $conn->error);
                                         } else {
-                                            ($row = mysqli_fetch_assoc($result))
-
+                                            $row = mysqli_fetch_assoc($result);
                                         ?>
                                             <span class="image">
                                                 <img id="picture-admin" src="Images/<?php echo $row['admin_profile'] ?>" alt="">

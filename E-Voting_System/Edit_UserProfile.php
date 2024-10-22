@@ -148,7 +148,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     }
                                                 } else {
                                                     // If current password is incorrect
-                                                    echo "<p style='color: red;'>Password verification failed!</p>";
                                                     header("Location: View_UserProfile.php?insert_msg1=Current password is incorrect. Please try again");
                                                     exit();
                                                 }

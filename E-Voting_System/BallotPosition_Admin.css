@@ -364,8 +364,7 @@ i {
 }
 
 .ballot-section {
-  width: 100%;
-  max-width: 900px;
+  width: 75%;
   margin: 20px auto;
   border: 3px solid #24724D;
   background-color: #F7F7F6;
@@ -384,14 +383,13 @@ i {
 
 .ballot-title {
   display: flex;
-  gap: 50px;
+  justify-content: center;
   align-items: center;
   padding: 0px 0px 0px 40px;
   border: 0 solid #24724D;
 }
 
 .ballot-title h1 {
-  border-left: 3px solid #24724D;
   padding: 36px 0px 36px 30px;
 }
 
@@ -618,7 +616,7 @@ i {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 5 columns */
+  grid-template-columns: repeat(4, 1fr); /* 5 columns */
   gap: 25px;
   margin: 10px;
 }

@@ -48,7 +48,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                 <div id="addvoters-popup" class="addvoters-popup">
 
                     <div class="addvoters-popup-forms">
-                        <form action="" method="POST">
                             <?php
                             if (isset($_GET['id'])) {
                                 $id = $_GET['id'];
@@ -93,7 +92,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                                 </div>
 
                             </div>
-                        </form>
                     </div>
 
                 </div>

@@ -681,8 +681,7 @@ a {
 }
 
 .ballot-section {
-  width: 100%;
-  max-width: 900px;
+  width: 75%;
   margin: 20px auto;
   border: 3px 0px 0px 0px solid #24724D;
   border-bottom: transparent;
@@ -707,14 +706,13 @@ a {
 
 .ballot-title {
   display: flex;
-  gap: 50px;
   align-items: center;
   padding: 0px 0px 0px 40px;
   border: 3px solid #24724D;
+  justify-content: center;
 }
 
 .ballot-title h1 {
-  border-left: 3px solid #24724D;
   padding: 36px 0px 36px 30px;
 }
 

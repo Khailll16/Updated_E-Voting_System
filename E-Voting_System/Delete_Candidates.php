@@ -14,7 +14,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
         $result = $conn->query($sql);
 
         if ($result) {
-            header("Location: Candidates_Page_Admin.php?insert_msg=Candidate have been deleted successfully");
+            header("Location: Candidates_Page_Admin.php?insert_msg=Candidate has been deleted successfully");
             exit();
         } else {
             echo "Error deleting Candidate: " . $conn->error;

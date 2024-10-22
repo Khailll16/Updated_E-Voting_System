@@ -60,7 +60,7 @@
                 die("Query Failed: " . $conn->error);
             }
             else{
-                header("Location: Candidates_Page_Admin.php?insert_msg=New Candidate have been added successfully");
+                header("Location: Candidates_Page_Admin.php?insert_msg=New Candidate has been added successfully");
                 exit();   
             }
         }

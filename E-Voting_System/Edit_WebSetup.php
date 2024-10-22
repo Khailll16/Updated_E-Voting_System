@@ -130,7 +130,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 if (!$result) {
                                                     die("Invalid query: " . $conn->error);
                                                 } else {
-                                                    header("Location: View_WebSetup.php?insert_msg=Organization have been updated successfully");
+                                                    header("Location: View_WebSetup.php?insert_msg=Organization has been updated successfully");
                                                     exit();
                                                 }
                                             }

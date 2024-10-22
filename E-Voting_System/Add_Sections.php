@@ -22,7 +22,7 @@ if (isset($_POST['add_section'])) {
         if (!$result) {
             die("Query Failed: " . $conn->error);
         } else {
-            header("Location: Section_Page_Admin.php?insert_msg=New section have been added successfully");
+            header("Location: Section_Page_Admin.php?insert_msg=New section has been added successfully");
             exit();
         }
     }

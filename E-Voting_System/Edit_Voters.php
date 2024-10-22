@@ -4,6 +4,89 @@ include "database_connect.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        // Fetch the voter with their current grade and section
+        $sql = "SELECT voters.*, sections.grade, sections.section FROM voters
+                LEFT JOIN sections ON voters.section_id = sections.id
+                WHERE voters.id = '$id'";
+        $result = mysqli_query($conn, $sql);
+        if (!$result) {
+            die("Invalid query: " . $conn->error);
+        } else {
+            $voter = mysqli_fetch_assoc($result); // Store the current voter details
+        }
+    }
+
+    if (isset($_POST['update-voters'])) {
+        $idnew = $_GET['id'];
+        $fname = $_POST['votersfname'];
+        $lname = $_POST['voterslname'];
+        $grade = $_POST['grade'];
+        $section = $_POST['section'];
+        $pword = $_POST['voterspword'];
+
+        // Fetch the current photo of the voter
+        $query = "SELECT voters_photo FROM voters WHERE id = '$idnew'";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+        $photo = $row['voters_photo'];
+
+        // Handle profile picture update
+        if (isset($_FILES['updatephoto']['name']) && $_FILES['updatephoto']['name'] != '') {
+            $temp = $_FILES['updatephoto']['tmp_name'];
+            $picturename = $_FILES['updatephoto']['name'];
+
+            if (!empty($photo)) {
+                unlink("Voters/$photo"); // Delete old photo
+            }
+            move_uploaded_file($temp, "Voters/$picturename"); // Upload new photo
+        } else {
+            $picturename = $photo; // Keep old photo if no new one is uploaded
+        }
+
+        // Fetch the section details based on both grade and section
+        $section_query = "SELECT id, max_student FROM sections WHERE grade = '$grade' AND section = '$section'";
+        $section_result = mysqli_query($conn, $section_query);
+
+        if (mysqli_num_rows($section_result) == 0) {
+            die("Section not found or invalid Grade/Section combination.");
+        }
+
+        $section_row = mysqli_fetch_assoc($section_result);
+        $section_id = $section_row['id'];
+        $max_student = $section_row['max_student'];
+
+        // Count the number of current students in the section
+        $count_query = "SELECT COUNT(*) as student_count FROM voters WHERE section_id = '$section_id'";
+        $count_result = mysqli_query($conn, $count_query);
+        $count_row = mysqli_fetch_assoc($count_result);
+        $current_student_count = $count_row['student_count'];
+
+        // Check if the section has reached its maximum number of students
+        if ($current_student_count >= $max_student) {
+            header("Location: Voters_Page_Admin.php?message=The maximum number of students for this section has been reached.");
+            exit();
+        }
+
+        // Update the voters table with the fetched section_id
+        $sql = "UPDATE `voters` SET 
+                `voters_firstname` = '$fname',
+                `voters_lastname` = '$lname',
+                `grade_id` = '$grade',
+                `section_id` = '$section_id',
+                `voters_password` = '$pword',
+                `voters_photo` = '$picturename' 
+                WHERE `id` = '$idnew'";
+
+        $result = mysqli_query($conn, $sql);
+        if (!$result) {
+            die("Invalid query: " . $conn->error);
+        } else {
+            header("Location: Voters_Page_Admin.php?insert_msg=Voter has been updated successfully");
+            exit();
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +114,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                     <div class="breadcrumb-content">
                         <ol class="breadcrumb">
                             <li><a href="#"><i class='bx bxs-dashboard icon'></i> Home</a></li>
-                            <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i
-                                        class='bx bxs-chevron-right'></i> Voters </a></li>
+                            <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> Voters </a></li>
                         </ol>
                     </div>
 
@@ -42,8 +124,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                             <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
                             <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
                             <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                            <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i
-                                    class='bx bx-log-out icon'></i>Sign out</a>
+                            <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
                         </div>
                     </nav>
 
@@ -62,73 +143,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                             </div>
                             <div class="voters-list-content">
                                 <div class="back-button">
-                                    <button class="button-back"><a href="Voters_Page_Admin.php" style="color: white;"><i
-                                                class="bx bx-arrow-back"></i>Back</a></button>
+                                    <button class="button-back"><a href="Voters_Page_Admin.php" style="color: white;"><i class="bx bx-arrow-back"></i>Back</a></button>
                                 </div>
 
                                 <div id="addvoters-popup" class="addvoters-popup">
 
                                     <div class="addvoters-popup-forms">
-                                        <?php
-
-                                        if (isset($_GET['id'])) {
-                                            $id = $_GET['id'];
-                                            $sql = "SELECT * from `voters` where `id` = '$id'";
-                                            $result = mysqli_query($conn, $sql);
-                                            if (!$result) {
-                                                die("Invalid query: " . $conn->error);
-                                            } else {
-                                                $voter = mysqli_fetch_assoc($result);
-                                            }
-                                        }
-
-                                        if (isset($_POST['update-voters'])) {
-                                            $idnew = $_GET['id_new'];
-                                            $fname = $_POST['votersfname'];
-                                            $lname = $_POST['voterslname'];
-                                            $grade = $_POST['grade'];
-                                            $section = $_POST['section'];
-                                            $pword = $_POST['voterspword'];
-
-                                            $query = "SELECT voters_photo FROM voters WHERE id = '$idnew'";
-                                            $result = mysqli_query($conn, $query);
-                                            $row = mysqli_fetch_assoc($result);
-                                            $photo = $row['voters_photo'];
-
-                                            if (isset($_FILES['updatephoto']['name']) && $_FILES['updatephoto']['name'] != '') {
-                                                $size = $_FILES['updatephoto']['size'];
-                                                $temp = $_FILES['updatephoto']['tmp_name'];
-                                                $type = $_FILES['updatephoto']['type'];
-                                                $picturename = $_FILES['updatephoto']['name'];
-
-                                                if (!empty($photo)) {
-                                                    unlink("Voters/$photo");
-                                                }
-                                                move_uploaded_file($temp, "Voters/$picturename");
-                                            } else {
-                                                $picturename = $photo;
-                                            }
-
-                                            $sql = "UPDATE `voters` SET 
-                                                `voters_firstname` = '$fname',
-                                                `voters_lastname` = '$lname',
-                                                `grade_id` = '$grade',
-                                                `section_id` = '$section',
-                                                `voters_password` = '$pword',
-                                                `voters_photo` = '$picturename' 
-                                                WHERE `id` = '$idnew'";
-
-                                            $result = mysqli_query($conn, $sql);
-                                            if (!$result) {
-                                                die("Invalid query: " . $conn->error);
-                                            } else {
-                                                header("Location: Voters_Page_Admin.php?insert_msg=Voter have been updated successfully");
-                                                exit();
-                                            }
-                                        }
-                                        ?>
-
-                                        <form action="Edit_Voters.php?id_new=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
+                                        <form action="Edit_Voters.php?id=<?php echo $voter['id']; ?>" method="POST" enctype="multipart/form-data">
                                             <div class="container">
                                                 <div class="profile-section">
                                                     <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;">Choose profile picture</p>
@@ -155,12 +176,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <select class="input-field" id="grade" name="grade" required onchange="fetchSections(this.value)">
                                                             <option value="" selected>- Select Grade -</option>
                                                             <?php
-                                                            // Fetch distinct grades from sections table
-                                                            $sql = "SELECT DISTINCT grade FROM sections";
+                                                            // Fetch distinct grades from sections table, sorted in ascending order
+                                                            $sql = "SELECT DISTINCT grade FROM sections ORDER BY grade ASC";
                                                             $result = $conn->query($sql);
                                                             if ($result) {
                                                                 while ($row = mysqli_fetch_assoc($result)) {
-                                                                    $selected = ($row['grade'] == $voter['grade_id']) ? "selected" : "";
+                                                                    $selected = ($row['grade'] == $voter['grade']) ? "selected" : "";
                                                                     echo "<option value='" . $row['grade'] . "' $selected>" . $row['grade'] . "</option>";
                                                                 }
                                                             }
@@ -172,13 +193,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <select class="input-field" id="section" name="section" required>
                                                             <option value="" selected>- Select Section -</option>
                                                             <?php
-                                                            // Fetch sections related to the current grade
-                                                            $grade = $voter['grade_id'];
+                                                            // Fetch sections related to the voter's current grade
+                                                            $grade = $voter['grade'];
                                                             $sql = "SELECT section FROM sections WHERE grade = '$grade'";
                                                             $result = $conn->query($sql);
                                                             if ($result) {
                                                                 while ($row = mysqli_fetch_assoc($result)) {
-                                                                    $selected = ($row['section'] == $voter['section_id']) ? "selected" : "";
+                                                                    $selected = ($row['section'] == $voter['section']) ? "selected" : "";
                                                                     echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
                                                                 }
                                                             }
@@ -197,7 +218,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </div>
                                             </div>
                                         </form>
-
 
                                     </div>
 
@@ -254,7 +274,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                         ?>
                                             <span class="image">
-                                                <img id="picture-admin" src="Images/<?php echo $row['admin_profile'] ?>" alt="">
+                                                <img id="picture-admin" src="Images/<?php echo $row['admin_profile'] ?>" alt="admin">
                                             </span>
                                             <div class="text header-text">
                                                 <p id="name-admin"><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></p>
@@ -335,56 +355,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                             </ul>
                         </div>
 
-
-                        <!-----BUTTON CONTENT------>
-                        <div class="bottom-content">
-
-                            <!-----LOG OUT------>
-                            <li class="">
-
-                            </li>
-
-                        </div>
-
-
                     </div>
 
                 </nav>
-
-                <!--LOGOUT FORM------>
-                <div id="logout_popup" class="logout_popup" style="display: none;">
-                    <div class="logout_popup-content">
-
-                        <div class="logout_popup-top">
-                            <h2>SIGN OUT</h2>
-                        </div>
-
-                        <div class="logout_popup-forms">
-                            <form action="LogoutPage_Admin.php" method="POST">
-                                <div class="warning-logout-description">
-                                    <p>Are you sure you want to sign out?</p>
-                                </div>
-                                <div class="form-group-button">
-                                    <button type="button" class="logout_close-form-btn"><svg width="15px" height="15px" fill="#24724D" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z" fill="#24724D"></path>
-                                        </svg>
-                                        Close</button>
-                                    <button type="submit" class="save-btn">
-                                        <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" style="fill: white;" viewBox="0 0 512 512" xml:space="preserve">
-                                            <g>
-                                                <g>
-                                                    <path d="M504.5,75.5c-9.6-9.6-25.2-9.6-34.9,0L192.4,352.7L42.3,202.7c-9.6-9.6-25.2-9.6-34.9,0c-9.6,9.6-9.6,25.2,0,34.9L174.9,404.1
-                                                        c9.6,9.6,25.2,9.6,34.9,0l305.7-305.7C514.1,100.7,514.1,85.1,504.5,75.5z" />
-                                                </g>
-                                            </g>
-                                        </svg>
-                                        Yes
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <script src="Filter_Grade-Section.js"></script>

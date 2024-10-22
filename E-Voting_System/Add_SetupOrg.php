@@ -56,7 +56,7 @@
                 die("Query Failed: " . $conn->error);
             }
             else{
-                header("Location: SetUp_Organization.php?insert_msg=New organization have been added successfully");
+                header("Location: SetUp_Organization.php?insert_msg=New organization has been added successfully");
                 exit();   
             }
         }

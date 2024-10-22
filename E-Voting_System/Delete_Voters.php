@@ -15,7 +15,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
         $result = $conn->query($sql);
 
         if ($result) {
-            header("Location: Voters_Page_Admin.php?insert_msg=Voter have been deleted successfully");
+            header("Location: Voters_Page_Admin.php?insert_msg=Voter has been deleted successfully");
             exit();
         } else {
             echo "Error deleting Voter: " . $conn->error;

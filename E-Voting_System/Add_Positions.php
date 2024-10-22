@@ -20,7 +20,7 @@
                 die("Query Failed: " . $conn->error);
             }
             else{
-                header("Location: Position_Page_Admin.php?insert_msg=New position have been added successfully");
+                header("Location: Position_Page_Admin.php?insert_msg=New position has been added successfully");
                 exit();   
             }
         }

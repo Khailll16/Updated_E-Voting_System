@@ -79,7 +79,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 $result = $conn->query($sql);
 
                                                 if ($result) {
-                                                    header("Location: Section_Page_Admin.php?insert_msg=Section have been deleted successfully");
+                                                    header("Location: Section_Page_Admin.php?insert_msg=Section has been deleted successfully");
                                                     exit();
                                                 } else {
                                                     echo "Error deleting section: " . $conn->error;

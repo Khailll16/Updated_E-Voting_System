@@ -85,9 +85,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                             // When the form is submitted
                                             if (isset($_POST['update-admin'])) {
-                                                if (isset($_GET['id_new'])) {
-                                                    $idnew = $_GET['id_new'];
-                                                }
+                                                $idnew = $_GET['id_new'] ?? $id;
 
                                                 // Fetch form values
                                                 $adminfirstn = $_POST['admin_fname'];
@@ -101,6 +99,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 $result = mysqli_query($conn, $query);
                                                 $row = mysqli_fetch_assoc($result);
                                                 $hashed_password = $row['admin_password'];
+
+                                                // Debugging: print the current password and hashed password
+                                                echo "<p>Current entered password: $current_password</p>";
+                                                echo "<p>Hashed password in database: $hashed_password</p>";
 
                                                 if (password_verify($current_password, $hashed_password)) {
                                                     // If current password is correct
@@ -146,6 +148,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     }
                                                 } else {
                                                     // If current password is incorrect
+                                                    echo "<p style='color: red;'>Password verification failed!</p>";
                                                     header("Location: View_UserProfile.php?insert_msg1=Current password is incorrect. Please try again");
                                                     exit();
                                                 }

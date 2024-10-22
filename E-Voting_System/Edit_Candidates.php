@@ -124,7 +124,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             if (!$result) {
                                                 die("Invalid query: " . $conn->error);
                                             } else {
-                                                header("Location: Candidates_Page_Admin.php?insert_msg=Candidate have been updated successfully");
+                                                header("Location: Candidates_Page_Admin.php?insert_msg=Candidate has been updated successfully");
                                                 exit();
                                             }
                                         }

@@ -364,7 +364,6 @@ i {
 }
 
 .ballot-section {
-  width: 75%;
   margin: 20px auto;
   border: 3px solid #24724D;
   background-color: #F7F7F6;
@@ -616,20 +615,26 @@ i {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 5 columns */
+  grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
   gap: 25px;
   margin: 10px;
 }
 
+@media (max-width: 1200px) {
+  .grid-container {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns for medium-large screens */
+  }
+}
+
 @media (max-width: 992px) {
   .grid-container {
-      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+      grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
   }
 }
 
 @media (max-width: 768px) {
   .grid-container {
-      grid-template-columns: 1fr; /* 1 column */
+      grid-template-columns: 1fr; /* 1 column for small screens */
   }
 }
 
@@ -645,4 +650,7 @@ i {
   justify-content: center;
   align-items: center;
   min-height: 100px; /* Optional: Ensure height to center vertically */
+  color: #343434;
 }
+
+

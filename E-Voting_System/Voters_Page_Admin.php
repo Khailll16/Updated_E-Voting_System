@@ -5,6 +5,9 @@ include "Add_Voters.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     $searchQuery = '';
+    $selectedGrade = ''; // To store selected grade
+    $selectedSection = ''; // To store selected section
+
     if (isset($_POST['search'])) {
         $searchQuery = mysqli_real_escape_string($conn, $_POST['search']);
     }
@@ -13,6 +16,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'voters_lastname'; // Default to sorting by Last Name
     $sortOrder = isset($_GET['order']) && $_GET['order'] == 'desc' ? 'DESC' : 'ASC'; // Default to ASC order
     $toggleSortOrder = $sortOrder == 'ASC' ? 'desc' : 'asc'; // Toggle for next click
+
+    // Capture selected grade and section
+    if (isset($_POST['filter_grade'])) {
+        $selectedGrade = mysqli_real_escape_string($conn, $_POST['filter_grade']);
+    }
+
+    if (isset($_POST['filter_section'])) {
+        $selectedSection = mysqli_real_escape_string($conn, $_POST['filter_section']);
+    }
 ?>
 
     <!DOCTYPE html>
@@ -30,11 +42,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
         <div class="main-container">
 
             <!-----RIGHT SIDE CONTENT------>
+
             <div class="right-side">
 
                 <div class="right-side-content">
 
                     <!-----PROFILE ADMIN------>
+
                     <div class="top_content">
 
                         <div class="breadcrumb-content">
@@ -57,11 +71,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                     </div>
 
                     <!----DASHBOARD---->
+
                     <div class="dashboard-body">
 
                         <div class="dashboard-content">
 
                             <!----DASHBOARD TITLE---->
+
                             <div class="second-content">
 
                                 <div class="Voters-list-title">
@@ -79,6 +95,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     }
                                     ?>
                                 </div>
+
                                 <div class="voters-list-content">
                                     <div class="add-button">
                                         <button id="addvoters_openPopup" class="button-add"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
@@ -93,6 +110,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         <table class="voters-table">
 
                                             <!--------ENTRIES SEARCH BAR CONTAINER-------->
+
                                             <div class="entries-search-bar-container">
                                                 <div class="selector-entries">
                                                     <label>Show</label>
@@ -107,39 +125,42 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                 <div class="grade-section">
                                                     <div class="grade-selection">
-                                                        <select name="filter_grade" id="filter_grade" onchange="this.form.submit()">
-                                                            <option value="">Select Grade</option>
-                                                            <?php
-                                                            // Fetch all sections from the database
-                                                            $sql = "SELECT * FROM sections";
-                                                            $result = $conn->query($sql);
-
-                                                            if (!$result) {
-                                                                die("Invalid query: " . $conn->error);
-                                                            } else {
-                                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                                    // Keep selected option when reloading the page
-                                                                    $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['grade'] ? 'selected' : '';
-                                                                    echo "<option value='" . $row['grade'] . "' $selected>" . $row['grade'] . "</option>";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="grade-selection">
                                                         <form method="POST" action="">
-                                                            <select name="filter_section" id="filter_section" onchange="this.form.submit()">
-                                                                <option value="">Select Section</option>
+                                                            <select name="filter_grade" id="filter_grade" onchange="this.form.submit()">
+                                                                <option value="">Select Grade</option>
                                                                 <?php
-                                                                $sql = "SELECT * FROM sections";
+                                                                $sql = "SELECT DISTINCT grade FROM sections ORDER BY grade ASC";
                                                                 $result = $conn->query($sql);
 
                                                                 if (!$result) {
                                                                     die("Invalid query: " . $conn->error);
                                                                 } else {
                                                                     while ($row = mysqli_fetch_assoc($result)) {
-                                                                        $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['section'] ? 'selected' : '';
-                                                                        echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
+                                                                        $selected = ($selectedGrade == $row['grade']) ? 'selected' : '';
+                                                                        echo "<option value='" . $row['grade'] . "' $selected>" . $row['grade'] . "</option>";
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </form>
+                                                    </div>
+
+                                                    <div class="grade-selection">
+                                                        <form method="POST" action="">
+                                                            <select name="filter_section" id="filter_section" onchange="this.form.submit()">
+                                                                <option value="">Select Section</option>
+                                                                <?php
+                                                                if ($selectedGrade) {
+                                                                    $sql = "SELECT section FROM sections WHERE grade = '$selectedGrade'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if (!$result) {
+                                                                        die("Invalid query: " . $conn->error);
+                                                                    } else {
+                                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                                            $selected = ($selectedSection == $row['section']) ? 'selected' : '';
+                                                                            echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
+                                                                        }
                                                                     }
                                                                 }
                                                                 ?>
@@ -173,16 +194,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         </tr>
 
                                                         <?php
-                                                        $sql = "SELECT voters.*, grade_table.grade, section_table.section 
-                                                        FROM voters 
-                                                        LEFT JOIN sections AS grade_table ON voters.grade_id = grade_table.id
-                                                        LEFT JOIN sections AS section_table ON voters.section_id = section_table.id
-                                                        WHERE voters_lastname LIKE '%$searchQuery%' OR 
-                                                        voters_firstname LIKE '%$searchQuery%' OR 
-                                                        voters_id LIKE '%$searchQuery%' OR
-                                                        grade_id LIKE '%$searchQuery%' OR
-                                                        section_id LIKE '%$searchQuery%'
-                                                        ORDER BY $sortColumn $sortOrder";
+                                                        $sql = "SELECT voters.*, sections.grade, sections.section 
+                                                                FROM voters 
+                                                                LEFT JOIN sections ON voters.section_id = sections.id
+                                                                WHERE (voters_lastname LIKE '%$searchQuery%' OR 
+                                                                       voters_firstname LIKE '%$searchQuery%' OR 
+                                                                       voters_id LIKE '%$searchQuery%')";
+
+                                                        if ($selectedGrade) {
+                                                            $sql .= " AND sections.grade = '$selectedGrade'";
+                                                        }
+
+                                                        if ($selectedSection) {
+                                                            $sql .= " AND sections.section = '$selectedSection'";
+                                                        }
+
+                                                        $sql .= " ORDER BY $sortColumn $sortOrder";
                                                         $result = $conn->query($sql);
 
                                                         if (!$result) {
@@ -198,7 +225,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                     <td> <?php echo $row['voters_lastname']; ?> </td>
                                                                     <td> <?php echo $row['voters_firstname']; ?> </td>
                                                                     <td> <?php echo $row['voters_id']; ?> </td>
-                                                                    <td> <?php echo $row['grade_id']; ?> </td>
+                                                                    <td> <?php echo $row['grade']; ?> </td>
                                                                     <td> <?php echo $row['section']; ?> </td>
                                                                     <td style="padding: 8px 0px;">
                                                                         <div class="actions-button">
@@ -242,9 +269,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         </div>
 
                         <!-----SIDE BAR------>
+
                         <nav class="sidebar">
 
                             <!-----MENU BAR------>
+
                             <div class="menu-bar">
                                 <?php
                                 $sql = "SELECT * FROM `setup`";
@@ -258,10 +287,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 ?>
 
                                 <!-----SIDEBAR TOP CONTENT------>
+
                                 <div class="sidebar-content">
                                     <div class="sidebar-top-content">
 
                                         <!------SIKHAY LOGO------>
+
                                         <div class="sikhay-logo">
                                             <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="78px">
                                             <div class="school-name">
@@ -271,6 +302,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </div>
 
                                         <!-----PROFILE ADMIN------>
+
                                         <header class="sidebar-profile">
                                             <div class="image-text">
                                                 <?php
@@ -300,12 +332,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
 
                                 <!-----MENU------>
+
                                 <div class="menu">
 
                                     <!-----MENU LINKS------>
+
                                     <ul class="menu-links">
 
                                         <!-----DASHBOARD------>
+
                                         <li class="nav-link">
                                             <a href="Dashboard_Page.php">
                                                 <i class='bx bxs-dashboard icon'></i>
@@ -314,6 +349,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----VOTES------>
+
                                         <li class="nav-link">
                                             <a href="Votes_Page_Admin.php">
                                                 <i class='bx bxs-box icon'></i>
@@ -322,6 +358,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----Sections------>
+
                                         <li class="nav-link">
                                             <a href="Section_Page_Admin.php">
                                                 <i class='bx bxs-objects-horizontal-left icon'></i>
@@ -330,6 +367,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----VOTERS------>
+
                                         <li class="nav-link">
                                             <a href="Voters_Page_Admin.php">
                                                 <i class='bx bxs-group icon'></i>
@@ -338,6 +376,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----POSITIONS------>
+
                                         <li class="nav-link">
                                             <a href="Position_Page_Admin.php">
                                                 <i class='bx bxs-objects-horizontal-left icon'></i>
@@ -346,6 +385,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----CANDIDATES------>
+
                                         <li class="nav-link">
                                             <a href="Candidates_Page_Admin.php">
                                                 <i class='bx bxs-user-account icon'></i>
@@ -354,6 +394,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----BALLOT POSITIONS------>
+
                                         <li class="nav-link">
                                             <a href="BallotPosition_Page_Admin.php">
                                                 <i class='bx bxs-detail icon'></i>
@@ -365,6 +406,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
 
                                 <!-----BUTTON CONTENT------>
+
                                 <div class="bottom-content">
 
                                     <!-----LOG OUT------>
@@ -378,26 +420,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         </nav>
 
                         <!--------ADD VOTERS POP UP FORM----------->
-
-                        <?php
-                        include "database_connect.php";
-
-                        if (isset($_POST['grade'])) {
-                            $grade = mysqli_real_escape_string($conn, $_POST['grade']);
-                            $sql = "SELECT section FROM sections WHERE grade = '$grade'";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                echo "<option value='' selected=''>- Select Section -</option>";
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<option value='" . $row['section'] . "'>" . $row['section'] . "</option>";
-                                }
-                            } else {
-                                echo "<option value=''>No sections available</option>";
-                            }
-                        }
-                        ?>
-
                         <div id="addvoters-popup" class="addvoters-popup">
                             <div class="addvoters-popup-content">
                                 <div class="addvoters-popup-top">
@@ -473,6 +495,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         <!--LOGOUT FORM---->
                         <div id="logout_popup" class="logout_popup" style="display: none;">
                             <div class="logout_popup-content">
+
                                 <div class="logout_popup-top">
                                     <h2>SIGN OUT</h2>
                                 </div>

@@ -107,7 +107,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     <div class="grade-selection">
                                                         <form method="POST" action="">
                                                             <select name="filter_section" id="filter_section" onchange="this.form.submit()">
-                                                                <option value="">Select Section</option>
+                                                                <option value="">All Section</option>
                                                                 <?php
                                                                 // Fetch all sections from the database
                                                                 $sql = "SELECT * FROM sections";

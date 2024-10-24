@@ -5,6 +5,8 @@ include "Add_Candidate.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     $searchQuery = '';
+    $selectedPosition = ''; // Variable to store the selected position
+
     if (isset($_POST['search'])) {
         $searchQuery = mysqli_real_escape_string($conn, $_POST['search']);
     }
@@ -13,6 +15,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'candidate_lastname'; // Default to sorting by Last Name
     $sortOrder = isset($_GET['order']) && $_GET['order'] == 'desc' ? 'DESC' : 'ASC'; // Default to ASC order
     $toggleSortOrder = $sortOrder == 'ASC' ? 'desc' : 'asc'; // Toggle for next click
+
+    // Check if a position is selected
+    if (isset($_POST['position']) && $_POST['position'] != '') {
+        $selectedPosition = mysqli_real_escape_string($conn, $_POST['position']);
+    }
 ?>
 
     <!DOCTYPE html>
@@ -31,11 +38,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
         <div class="main-container">
 
             <!-----RIGHT SIDE CONTENT------>
+
             <div class="right-side">
 
                 <div class="right-side-content">
 
                     <!-----PROFILE ADMIN------>
+
                     <div class="top_content">
 
                         <div class="breadcrumb-content">
@@ -58,11 +67,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                     </div>
 
                     <!----DASHBOARD---->
+
                     <div class="dashboard-body">
 
                         <div class="dashboard-content">
 
                             <!----DASHBOARD TITLE---->
+
                             <div class="second-content">
 
                                 <div class="Voters-list-title">
@@ -77,6 +88,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     }
                                     ?>
                                 </div>
+
                                 <div class="voters-list-content">
                                     <div class="add-button">
                                         <button id="addCandidates_openPopup" class="button-add"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16"><g fill="currentColor"><path d="M12.5 16a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0a3 3 0 0 1 6 0"/>
@@ -87,6 +99,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     <div class="voters-list-container">
                                         <table class="voters-table">
                                             <!--------ENTRIES SEARCH BAR CONTAINER-------->
+
                                             <div class="entries-search-bar-container">
                                                 <div class="selector-entries">
                                                     <label>Show</label>
@@ -101,27 +114,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                 <div class="grade-section">
                                                     <div class="grade-selection">
-                                                        <select name="" id="">
-                                                            <option>Position</option>
-                                                            <?php
-                                                            $sql = "SELECT * FROM positions";
-                                                            $result = $conn->query($sql);
+                                                        <form method="POST" action="">
+                                                            <select name="position" onchange="this.form.submit()">
+                                                                <option value="">All Positions</option>
+                                                                <?php
+                                                                $sql = "SELECT * FROM positions";
+                                                                $result = $conn->query($sql);
 
-                                                            if (!$result) {
-                                                                die("Invalid query: " . $conn->error);
-                                                            } else {
-
-                                                                while ($row = mysqli_fetch_assoc($result)) {
-
-                                                                    echo "<option value='" . $row['descrip'] . "'>" . $row['descrip'] . "</option>";
+                                                                if (!$result) {
+                                                                    die("Invalid query: " . $conn->error);
+                                                                } else {
+                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                        $selected = ($selectedPosition == $row['descrip']) ? 'selected' : '';
+                                                                        echo "<option value='" . $row['descrip'] . "' $selected>" . $row['descrip'] . "</option>";
+                                                                    }
                                                                 }
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                                ?>
+                                                            </select>
+                                                        </form>
                                                     </div>
                                                 </div>
 
-                                                <!-- Moved search-bar to the end -->
                                                 <div class="search-bar">
                                                     <div class="search-container">
                                                         <form method="POST" action="">
@@ -158,14 +171,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     </tr>
 
                                                     <?php
-                                                    // Modify the query to include sorting
+                                                    // Modify the query to include sorting and position filtering
                                                     $sql = "SELECT candidates.*, positions.descrip 
                                                             FROM candidates 
                                                             LEFT JOIN positions ON candidates.position_id = positions.id
-                                                            WHERE candidate_lastname LIKE '%$searchQuery%' 
+                                                            WHERE (candidate_lastname LIKE '%$searchQuery%' 
                                                             OR candidate_firstname LIKE '%$searchQuery%' 
-                                                            OR positions.descrip LIKE '%$searchQuery%'
-                                                            ORDER BY $sortColumn $sortOrder";
+                                                            OR positions.descrip LIKE '%$searchQuery%')";
+
+                                                    // Add position filter if selected
+                                                    if ($selectedPosition != '') {
+                                                        $sql .= " AND positions.descrip = '$selectedPosition'";
+                                                    }
+
+                                                    // Add sorting order
+                                                    $sql .= " ORDER BY $sortColumn $sortOrder";
+
                                                     $result = $conn->query($sql);
 
                                                     if (!$result) {
@@ -223,9 +244,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
 
                         <!-----SIDE BAR------>
+
                         <nav class="sidebar">
 
                             <!-----MENU BAR------>
+
                             <div class="menu-bar">
                                 <?php
                                 $sql = "SELECT * FROM `setup`";
@@ -239,10 +262,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 ?>
 
                                 <!-----SIDEBAR TOP CONTENT------>
+
                                 <div class="sidebar-content">
                                     <div class="sidebar-top-content">
 
                                         <!------SIKHAY LOGO------>
+
                                         <div class="sikhay-logo">
                                             <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="78px">
                                             <div class="school-name">
@@ -252,6 +277,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </div>
 
                                         <!-----PROFILE ADMIN------>
+
                                         <header class="sidebar-profile">
                                             <div class="image-text">
                                                 <?php
@@ -281,12 +307,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
 
                                 <!-----MENU------>
+
                                 <div class="menu">
 
                                     <!-----MENU LINKS------>
+
                                     <ul class="menu-links">
 
                                         <!-----DASHBOARD------>
+
                                         <li class="nav-link">
                                             <a href="Dashboard_Page.php">
                                                 <i class='bx bxs-dashboard icon'></i>
@@ -295,6 +324,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----VOTES------>
+
                                         <li class="nav-link">
                                             <a href="Votes_Page_Admin.php">
                                                 <i class='bx bxs-box icon'></i>
@@ -303,6 +333,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----Sections------>
+
                                         <li class="nav-link">
                                             <a href="Section_Page_Admin.php">
                                                 <i class='bx bxs-objects-horizontal-left icon'></i>
@@ -311,6 +342,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----VOTERS------>
+
                                         <li class="nav-link">
                                             <a href="Voters_Page_Admin.php">
                                                 <i class='bx bxs-group icon'></i>
@@ -319,6 +351,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----POSITIONS------>
+
                                         <li class="nav-link">
                                             <a href="Position_Page_Admin.php">
                                                 <i class='bx bxs-objects-horizontal-left icon'></i>
@@ -327,6 +360,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----CANDIDATES------>
+
                                         <li class="nav-link">
                                             <a href="Candidates_Page_Admin.php">
                                                 <i class='bx bxs-user-account icon'></i>
@@ -335,6 +369,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </li>
 
                                         <!-----BALLOT POSITIONS------>
+
                                         <li class="nav-link">
                                             <a href="BallotPosition_Page_Admin.php">
                                                 <i class='bx bxs-detail icon'></i>
@@ -346,6 +381,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
 
                                 <!-----BUTTON CONTENT------>
+
                                 <div class="bottom-content">
 
                                     <!-----LOG OUT------>

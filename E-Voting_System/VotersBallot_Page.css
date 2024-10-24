@@ -236,20 +236,32 @@ main {
 }
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 5 columns */
+    grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
     gap: 25px;
     margin: 10px;
-}
-
-@media (max-width: 992px) {
+    align-items: center;
+  }
+  @media (max-width: 1900px) {
     .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for medium-large screens */
+        justify-content: center; /* Center the grid if there are fewer items */
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1350px) {
     .grid-container {
-        grid-template-columns: 1fr; /* 1 column */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+        justify-content: center; /* Center the grid if there are fewer items */
+    }
+}
+
+@media (max-width: 900px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr; /* 1 column for small screens */
+        justify-content: center; /* Center the grid if there are fewer items */
     }
 }
 
@@ -257,12 +269,22 @@ main {
     text-align: left;
 }
 
-/* Center "No candidates found" message in the second column */
+/* Center "No candidates found" message */
 .no-candidates {
-    grid-column: 2 / 3;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100px; /* Optional: Ensure height to center vertically */
+    color: #343434;
 }
+
+/* Flexbox for centering the grid when less than full number of candidates */
+.grid-container {
+    display: grid;
+    justify-content: center; /* Ensure candidates are centered when fewer than the full number */
+}
+
+
+  
+

@@ -21,7 +21,7 @@ main {
 }
 
 .ballot-section {
-    width: 60%;
+    width: 75%;
     margin: 20px auto;
     border: 3px solid #24724D;
     border-radius: 25px;
@@ -37,17 +37,37 @@ main {
     color: white;
 }
 
+
 .ballot-title h1 {
-    padding: 36px 0px 36px 30px;
-    color:#4A4A4A;
+    padding: 36px 0px 36px 27px;
+    color: #4A4A4A;
 }
 
 .ballot-title {
     display: flex;
-    align-items: center;
-    padding: 0px 0px 0px 40px;
-    border-bottom: 3px solid #24724D;
     justify-content: center;
+    align-items: center;
+    padding: 0px 40px 0px 40px;
+    border: 0 solid #24724D;
+    border-bottom: 3px solid #24724D;
+}
+
+.ballot-title-popup h2 {
+    padding: 36px 0px 36px 30px;
+    color: #4A4A4A;
+    border-left: 3px solid #24724D;
+    font-size: 28px;
+}
+
+.ballot-title-popup {
+    display: flex;
+    align-items: center;
+    border: 0 solid #24724D;
+    border-bottom: 3px solid #24724D;
+    gap: 21px;
+}
+.ballot-title-popup img{
+    padding-left: 20px;
 }
 
 
@@ -110,7 +130,7 @@ main {
     align-items: center;
     gap: 5px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  }
+}
 
 .save-btn {
     background-color: #24724D;
@@ -146,6 +166,7 @@ main {
     display: flex;
     gap: 50px;
     padding: 30px;
+    align-items: center;
 }
 
 .profile-section {
@@ -234,39 +255,19 @@ main {
     text-align: center;
     margin: 40px 0px 35px 0px;
 }
+
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
-    gap: 25px;
-    margin: 10px;
-    align-items: center;
-  }
-  @media (max-width: 1900px) {
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 columns for medium-large screens */
-        justify-content: center; /* Center the grid if there are fewer items */
-    }
-}
-
-@media (max-width: 1350px) {
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
-        justify-content: center; /* Center the grid if there are fewer items */
-    }
-}
-
-@media (max-width: 900px) {
-    .grid-container {
-        display: grid;
-        grid-template-columns: 1fr; /* 1 column for small screens */
-        justify-content: center; /* Center the grid if there are fewer items */
-    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 15px 0px;
 }
 
 .grid-item {
-    text-align: left;
+    display: inline-block;
+    width: 20%;
+    /* Default width for larger screens */
+    box-sizing: border-box;
 }
 
 /* Center "No candidates found" message */
@@ -275,16 +276,90 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100px; /* Optional: Ensure height to center vertically */
+    min-height: 100px;
+    /* Optional: Ensure height to center vertically */
     color: #343434;
 }
 
-/* Flexbox for centering the grid when less than full number of candidates */
-.grid-container {
-    display: grid;
-    justify-content: center; /* Ensure candidates are centered when fewer than the full number */
+.candidate {
+    margin: 15px 0px;
+}
+
+/* Responsive Styles */
+/* Medium screens (tablets, small desktops) */
+@media screen and (max-width: 1700px) {
+    .grid-item {
+        width: 33.33%;
+        /* 3 items per row */
+    }
+}
+
+/* Smaller screens (phones, small tablets) */
+@media screen and (max-width: 1100px) {
+    .grid-item {
+        width: 50%;
+        /* 2 items per row */
+    }
+}
+
+/* Extra small screens (small phones) */
+@media screen and (max-width: 900px) {
+    .grid-item {
+        width: 100%;
+        /* 1 item per row for smaller phones */
+    }
 }
 
 
-  
+.ballot-popup {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
 
+    /* Black w/ opacity */
+}
+
+.ballot_popup-content {
+    background-color: #ffffff;
+    margin-inline: auto;
+    margin-top: 25px;
+    border: 3px solid #24724D;
+    border-radius: 30px;
+    width: 40%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s;
+}
+
+.ballot-popup-forms {
+    width: 100%;
+}
+
+.form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-section label {
+    font-size: 1em;
+    font-weight: bold;
+    color: #555555;
+    margin-right: 20px;
+}
+
+.input-size {
+    width: 65%;
+    padding: 10px;
+    border: 1px solid #959191;
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: #E7E7E7;
+}

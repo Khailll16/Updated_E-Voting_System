@@ -55,7 +55,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                             <!----DASHBOARD TITLE---->
                             <div class="second-content">
                                 <?php
-                                $sql = "SELECT * FROM `admin`";
+                                $sql = "SELECT * FROM `admin` WHERE `id` = '{$_SESSION['id']}'";
                                 $result = $conn->query($sql);
 
                                 if (!$result) {
@@ -166,7 +166,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <header class="sidebar-profile">
                                     <div class="image-text">
                                         <?php
-                                        $sql = "SELECT * FROM `admin`";
+                                        $sql = "SELECT * FROM `admin` WHERE `id` = '{$_SESSION['id']}'";
                                         $result = $conn->query($sql);
 
                                         if (!$result) {

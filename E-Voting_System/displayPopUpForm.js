@@ -115,6 +115,87 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 });
 
+document.addEventListener('DOMContentLoaded', (event) => {
+    const ballotpopup = document.getElementById('ballot-popup');
+    const ballotcloseFormBtn = document.querySelectorAll('.ballot_close-form-btn');
+    const ballotopenPopupBtns = document.querySelectorAll('.ballot-openPopup');
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+
+    // Restore previously selected votes
+    restoreSelectedVotes();
+
+    // Listen for radio button changes and save them in session storage
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', function () {
+            saveVote(this.name, this.value);
+        });
+    });
+
+    ballotopenPopupBtns.forEach(button => {
+        button.addEventListener('click', function () {
+            const candidateId = this.getAttribute('data-id');
+
+            // AJAX request to fetch candidate details
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'fetch_candidate.php?id=' + candidateId, true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const candidateData = JSON.parse(xhr.responseText);
+
+                    // Update the popup content with candidate details
+                    document.getElementById('profile-picture').src = "Candidates/" + candidateData.candidate_profile;
+                    document.querySelector('.profile-section p:nth-child(2)').textContent = candidateData.candidate_firstname + ' ' + candidateData.candidate_lastname;
+                    document.querySelector('.profile-section p:nth-child(3)').textContent = candidateData.descrip;
+                    document.querySelector('.form-section p:nth-child(2)').textContent = candidateData.platform;
+
+                    // Show the popup
+                    ballotpopup.style.display = 'block';
+                }
+            };
+            xhr.send();
+        });
+    });
+
+    // Make the pop-up disappear when clicking the close button
+    ballotcloseFormBtn.forEach(button => {
+        button.addEventListener('click', function () {
+            ballotpopup.style.display = 'none'; // Hide the pop-up
+        });
+    });
+
+    // Make the pop-up disappear when clicking outside of it
+    window.addEventListener('click', function (event) {
+        if (event.target == ballotpopup) {
+            ballotpopup.style.display = 'none';
+        }
+    });
+
+    // Save selected vote to session storage
+    function saveVote(position, candidate) {
+        let votes = JSON.parse(sessionStorage.getItem('votes')) || {};
+        votes[position] = candidate;
+        sessionStorage.setItem('votes', JSON.stringify(votes));
+    }
+
+    // Restore selected votes from session storage
+    function restoreSelectedVotes() {
+        let votes = JSON.parse(sessionStorage.getItem('votes')) || {};
+
+        radioButtons.forEach(radio => {
+            if (votes[radio.name] === radio.value) {
+                radio.checked = true; // Restore the checked radio button
+            }
+        });
+    }
+});
+
+
+
+
+
+
+
+
 
 
 

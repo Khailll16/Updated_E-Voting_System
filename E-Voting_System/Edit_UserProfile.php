@@ -13,7 +13,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
         <link rel="stylesheet" href="EditStyle_Voters.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="icon" href="Images/Black Retro Minimalist Vegan Cafe Logo (26).png">
-        <title>Admin Profile Page | SIKHAY</title>
+        <title>Edit Admin Profile | SIKHAY</title>
 
     </head>
 
@@ -31,7 +31,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         <div class="breadcrumb-content">
                             <ol class="breadcrumb">
                                 <li><a href="Dashboard_Page.php"><i class='bx bxs-dashboard icon'></i> Home</a></li>
-                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> User Profile </a></li>
+                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> Edit Admin Profile </a></li>
                             </ol>
                         </div>
 
@@ -47,12 +47,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                     </div>
 
-                    <!----DASHBOARD---->
+                    <!----DASHBOARD------>
                     <div class="dashboard-body">
 
                         <div class="dashboard-content">
 
-                            <!----DASHBOARD TITLE---->
+                            <!----DASHBOARD TITLE------>
                             <div class="second-content">
 
                                 <div class="Voters-list-title">
@@ -100,8 +100,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 $row = mysqli_fetch_assoc($result);
                                                 $hashed_password = $row['admin_password'];
 
-                                                // Debugging: print the current password and hashed password
-                                                echo "<p>Current entered password: $current_password</p>";
+                                                // Debugging - remove this in production
                                                 echo "<p>Hashed password in database: $hashed_password</p>";
 
                                                 if (password_verify($current_password, $hashed_password)) {
@@ -187,7 +186,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <input type="password" name="admin_pass" class="input-field" placeholder="Enter new password (optional)">
                                                         </label>
                                                         <label for="">Current Password (required)
-                                                            <input type="password" name="current_password" class="input-field" placeholder="Enter current password">
+                                                            <input type="password" name="current_password" class="input-field" placeholder="Enter current password" required>
                                                         </label>
 
                                                         <div class="buttons">
@@ -339,17 +338,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         <div class="bottom-content">
 
                             <!-----LOG OUT------>
-                            <li class="">
-
-                            </li>
 
                         </div>
 
 
                     </div>
 
-
-                </nav>
 
                 </nav>
 
@@ -377,7 +371,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <g>
                                                 <g>
                                                     <path d="M504.5,75.5c-9.6-9.6-25.2-9.6-34.9,0L192.4,352.7L42.3,202.7c-9.6-9.6-25.2-9.6-34.9,0c-9.6,9.6-9.6,25.2,0,34.9L174.9,404.1
-                                        c9.6,9.6,25.2,9.6,34.9,0l305.7-305.7C514.1,100.7,514.1,85.1,504.5,75.5z" />
+                                                        c9.6,9.6,25.2,9.6,34.9,0l305.7-305.7C514.1,100.7,514.1,85.1,504.5,75.5z" />
                                                 </g>
                                             </g>
                                         </svg>

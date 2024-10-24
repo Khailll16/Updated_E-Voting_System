@@ -191,7 +191,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                     if (!$result) {
                                                         die("Invalid query: " . $conn->error);
-                                                    } else {
+                                                    } elseif (mysqli_num_rows($result) > 0) { // Check if there is data to display
                                                         while ($row = mysqli_fetch_assoc($result)) {
 
                                                     ?>
@@ -213,6 +213,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             </tr>
                                                     <?php
                                                         }
+                                                    } else {
+                                                        // If no data is found, display a message in the table
+                                                        echo "<tr><td colspan='7' style='text-align: center;'>No data available in table</td></tr>";
                                                     }
                                                     ?>
                                                 </table>

@@ -139,7 +139,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         </div>
                                                     </div>
                                                 <?php } else { ?>
-                                                    <div class="grid-item no-candidates">
+                                                    <div class="no-candidates" style="">
                                                         <p>No candidates found for this position.</p>
                                                     </div>
                                                 <?php } ?>

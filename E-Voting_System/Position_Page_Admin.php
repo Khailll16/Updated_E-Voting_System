@@ -108,7 +108,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <div class="grade-selection">
                                                     <form method="POST" action="">
                                                         <select name="filter_position" id="filter_position" onchange="this.form.submit()">
-                                                            <option value="">All Position</option>
+                                                            <option value="">All Positions</option>
                                                             <?php
                                                             // Fetch all positions from the database
                                                             $sql = "SELECT * FROM positions";
@@ -185,7 +185,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                 if (!$result) {
                                                     die("Invalid query: " . $conn->error);
-                                                } else {
+                                                } elseif (mysqli_num_rows($result) > 0) { // Check if there is data to display
                                                     while ($row = mysqli_fetch_assoc($result)) {
                                                 ?>
                                                         <tr>
@@ -200,6 +200,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         </tr>
                                                 <?php
                                                     }
+                                                } else {
+                                                    // If no data is found, display a message in the table
+                                                    echo "<tr><td colspan='3' style='text-align: center;'>No data available in table</td></tr>";
                                                 }
                                                 ?>
                                             </table>

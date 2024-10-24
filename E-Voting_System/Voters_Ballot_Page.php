@@ -87,13 +87,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                                             <img src="Candidates/<?php echo $row['candidate_profile']; ?>" alt="<?php echo htmlspecialchars($row['candidate_firstname']); ?>">
                                             <div class="candidate-info">
                                                 <p><?php echo htmlspecialchars($row['candidate_firstname'] . ' ' . $row['candidate_lastname']); ?></p>
-                                                <a href="Voters_BallotView.php?id=<?php echo $row['id']; ?>"><button type="button"><i class="bx bx-play"></i>View</button></a>
+                                                <a class="ballot-openPopup" data-id="<?php echo $row['id']; ?>"><button type="button"><i class="bx bx-play"></i>View</button></a>
                                             </div>
                                         </label>
                                     </div>
                                 </div>
                             <?php } else { ?>
-                                <div class="grid-item no-candidates">
+                                <div class="no-candidates">
                                     <p>No candidates found for this position.</p>
                                 </div>
                             <?php } ?>
@@ -142,9 +142,81 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                         <img src="Images/sikhay-new-logo.png" alt="">
                         <p>Providing easier ways to VOTE and be HEARD.</p>
                     </div>
+
+
+                    <div id="ballot-popup" class="ballot-popup" style="display: none;">
+                        <div class="ballot_popup-content">
+                            <?php
+                            $sql = "SELECT * FROM `ballot`";
+                            $result = $conn->query($sql);
+
+                            if (!$result) {
+                                die("Invalid query: " . $conn->error);
+                            } else {
+                                $row = mysqli_fetch_assoc($result);
+                            ?>
+                                <h3 class="official-ballot" style="border-radius: 20px 20px 0px 0px;">OFFICIAL BALLOT</h3>
+                                <div class="ballot-title-popup">
+                                    <img src="Images/school-logo-1.png" alt="" width="125px">
+                                    <h2><?php echo $row['title']; ?></h2>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                            <div class="ballot-popup-forms">
+                                <div class="back-button">
+                                    <button class="ballot_close-form-btn"><i class="bx bx-arrow-back"></i> Back</button>
+                                </div>
+                                <?php
+                                if (isset($_GET['id'])) {
+                                    $id = $_GET['id'];
+
+                                    // Updated query to join with positions and get description
+                                    $sql = "SELECT candidates.*, positions.descrip 
+                        FROM candidates 
+                        LEFT JOIN positions ON candidates.position_id = positions.id 
+                        WHERE candidates.id = '$id'";
+                                    $result = mysqli_query($conn, $sql);
+
+                                    if (!$result) {
+                                        die("Invalid query: " . $conn->error);
+                                    } else {
+                                        $row = mysqli_fetch_assoc($result);
+                                    }
+                                }
+                                ?>
+                                <div class="container">
+                                    <div class="profile-section">
+                                        <div class="image-container">
+                                            <img id="profile-picture" src="Candidates/<?php echo $row['candidate_profile'] ?>" alt="">
+                                        </div>
+                                        <!-- Display the firstname, lastname, and position description here in profile-section -->
+                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; text-align: center;">
+                                            <?php echo $row['candidate_firstname']; ?> <?php echo $row['candidate_lastname']; ?>
+                                        </p>
+                                        <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; text-align: center;">
+                                            <?php echo $row['descrip']; ?>
+                                        </p> <!-- Display position description -->
+                                    </div>
+
+                                    <!-- Form section: Changed to p tag for platform -->
+                                    <div class="form-section">
+                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; text-align: center; margin-bottom: 10px;">Platform</p>
+                                        <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; text-align: justify;">
+                                            <?php echo $row['platform']; ?>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </main>
+
+        <script src="displayPopUpForm.js"></script>
     </body>
 
     </html>

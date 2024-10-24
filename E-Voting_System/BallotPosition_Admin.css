@@ -384,8 +384,9 @@ i {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 0px 0px 40px;
+  padding: 0px 40px 0px 40px;
   border: 0 solid #24724D;
+  border-bottom: 3px solid #24724D;
 }
 
 .ballot-title h1 {
@@ -614,37 +615,20 @@ i {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 .grid-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
-  gap: 25px;
-  margin: 10px;
-}
-
-@media (max-width: 1200px) {
-  .grid-container {
-      grid-template-columns: repeat(3, 1fr); /* 3 columns for medium-large screens */
-  }
-}
-
-@media (max-width: 992px) {
-  .grid-container {
-      grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
-  }
-}
-
-@media (max-width: 768px) {
-  .grid-container {
-      grid-template-columns: 1fr; /* 1 column for small screens */
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 15px 0px;
 }
 
 .grid-item {
-  text-align: left;
+  display: inline-block;
+  width: 20%; /* Default width for larger screens */
+  box-sizing: border-box;
 }
 
-/* Center "No candidates found" message in the second column */
+/* Center "No candidates found" message */
 .no-candidates {
-  grid-column: 2 / 3;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -653,4 +637,29 @@ i {
   color: #343434;
 }
 
+.candidate {
+  margin: 15px 0px;
+}
+
+/* Responsive Styles */
+/* Medium screens (tablets, small desktops) */
+@media screen and (max-width: 1700px) {
+  .grid-item {
+      width: 33.33%; /* 3 items per row */
+  }
+}
+
+/* Smaller screens (phones, small tablets) */
+@media screen and (max-width: 1100px) {
+  .grid-item {
+      width: 50%; /* 2 items per row */
+  }
+}
+
+/* Extra small screens (small phones) */
+@media screen and (max-width: 900px) {
+  .grid-item {
+      width: 100%; /* 1 item per row for smaller phones */
+  }
+}
 

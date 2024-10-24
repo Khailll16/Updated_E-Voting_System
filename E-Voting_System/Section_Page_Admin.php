@@ -58,12 +58,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                     </div>
 
-                    <!----DASHBOARD---->
+                    <!----DASHBOARD------>
                     <div class="dashboard-body">
 
                         <div class="dashboard-content">
 
-                            <!----DASHBOARD TITLE---->
+                            <!----DASHBOARD TITLE------>
                             <div class="second-content">
 
                                 <div class="Voters-list-title">
@@ -84,7 +84,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m5 11h-4v4h-2v-4H7v-2h4V7h2v4h4z" />
                                             </svg>New</button>
                                     </div>
-
 
                                     <div class="voters-list-container">
 
@@ -107,7 +106,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     <div class="grade-selection">
                                                         <form method="POST" action="">
                                                             <select name="filter_section" id="filter_section" onchange="this.form.submit()">
-                                                                <option value="">All Section</option>
+                                                                <option value="">All Sections</option>
                                                                 <?php
                                                                 // Fetch all sections from the database
                                                                 $sql = "SELECT * FROM sections";
@@ -185,7 +184,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                     if (!$result) {
                                                         die("Invalid query: " . $conn->error);
-                                                    } else {
+                                                    } elseif (mysqli_num_rows($result) > 0) { // Check if there is data to display
                                                         while ($row = mysqli_fetch_assoc($result)) {
                                                     ?>
                                                             <tr>
@@ -201,6 +200,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             </tr>
                                                     <?php
                                                         }
+                                                    } else {
+                                                        // If no data is found, display a message in the table
+                                                        echo "<tr><td colspan='7' style='text-align: center;'>No data available in table</td></tr>";
                                                     }
                                                     ?>
                                                 </table>
@@ -230,7 +232,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                             </div>
                         </div>
 
-
                         <!-----SIDE BAR------>
                         <nav class="sidebar">
 
@@ -247,11 +248,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 }
                                 ?>
 
-                                <!-----SIDEBAR TOP CONTENT-->
+                                <!-----SIDEBAR TOP CONTENT------>
                                 <div class="sidebar-content">
                                     <div class="sidebar-top-content">
 
-                                        <!------SIKHAY LOGO-->
+                                        <!------SIKHAY LOGO------>
                                         <div class="sikhay-logo">
                                             <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="78px">
                                             <div class="school-name">
@@ -368,11 +369,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                         </nav>
 
-
-
-
                         <!--------ADD POSITION POP UP FORM----------->
-
                         <div id="addposition-popup" class="addposition-popup">
                             <div class="addposition-popup-content">
                                 <div class="addposition-popup-top">
@@ -426,10 +423,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                             </div>
                         </div>
 
-
-
                         <!--LOGOUT FORM---->
-
                         <div id="logout_popup" class="logout_popup" style="display: none;">
                             <div class="logout_popup-content">
 
@@ -463,8 +457,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
                             </div>
                         </div>
-
-
 
 
                     </div>

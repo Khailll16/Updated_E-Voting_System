@@ -36,64 +36,69 @@
         }
 
         // Image upload logic
-        $image = time().$_FILES["votersprofile"]['name'];
-        if(move_uploaded_file($_FILES['votersprofile']['tmp_name'], $_SERVER['DOCUMENT_ROOT']. 
-        '/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Voters/'.$image)){
-            $target_file = $_SERVER['DOCUMENT_ROOT'].'/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Voters/'.$image;
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            $picname = basename($_FILES['votersprofile']['name']);
-            $photo = time().$picname;
-            if($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "svg"){
-            ?>
-                <script> 
-                    alert("Please upload photo having extension .jpg / .jpeg / .png / .svg");
-                </script>
-            <?php
-            }
-            else if($_FILES["votersprofile"]["size"] > 1000000){
-            ?>
-                <script> 
-                    alert("Image size is too large");
-                </script>
-            <?php } 
-            else{
-                $pic_uploaded = 1;
+        $photo = 'Profile.png'; // Set default profile picture
+        if (!empty($_FILES['votersprofile']['name'])) {
+            $image = time().$_FILES["votersprofile"]['name'];
+            if (move_uploaded_file($_FILES['votersprofile']['tmp_name'], $_SERVER['DOCUMENT_ROOT']. 
+            '/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Voters/'.$image)){
+                $target_file = $_SERVER['DOCUMENT_ROOT'].'/UPDATED_E-VOTING_SYSTEM/E-Voting_System/Voters/'.$image;
+                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                $picname = basename($_FILES['votersprofile']['name']);
+                $photo = time().$picname;
+                if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "svg"){
+                ?>
+                    <script> 
+                        alert("Please upload photo having extension .jpg / .jpeg / .png / .svg");
+                    </script>
+                <?php
+                } else if ($_FILES["votersprofile"]["size"] > 1000000) {
+                ?>
+                    <script> 
+                        alert("Image size is too large");
+                    </script>
+                <?php
+                } else {
+                    $pic_uploaded = 1;
+                }
             }
         }
 
-        if($pic_uploaded == 1){
-            // Generate a unique ID for the voter
-            $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $votersid = substr(str_shuffle($set), 0, 15);
+        // Use default picture if no picture is uploaded
+        if ($pic_uploaded == 0) {
+            $photo = 'Profile.png'; // Default profile picture stored in 'Images' folder
+        }
 
-            // Validate required fields
-            if(empty($votersfirstname)){
-                header("Location: Voters_Page_Admin.php?message=Firstname of the voter is required");
-                exit();  
-            } elseif(empty($voterslastname)){
-                header("Location: Voters_Page_Admin.php?message=Lastname of the voter is required");
-                exit(); 
-            } elseif(empty($Grade)){
-                header("Location: Voters_Page_Admin.php?message=Grade of the voter is required");
-                exit();
-            } elseif(empty($Section)){
-                header("Location: Voters_Page_Admin.php?message=Section of the voter is required");
-                exit();
-            } elseif(empty($voterspassword)){
-                header("Location: Voters_Page_Admin.php?message=Password of the voter is required");
-                exit(); 
+        // Generate a unique ID for the voter
+        $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $votersid = substr(str_shuffle($set), 0, 15);
+
+        // Validate required fields
+        if(empty($votersfirstname)){
+            header("Location: Voters_Page_Admin.php?message=Firstname of the voter is required");
+            exit();  
+        } elseif(empty($voterslastname)){
+            header("Location: Voters_Page_Admin.php?message=Lastname of the voter is required");
+            exit(); 
+        } elseif(empty($Grade)){
+            header("Location: Voters_Page_Admin.php?message=Grade of the voter is required");
+            exit();
+        } elseif(empty($Section)){
+            header("Location: Voters_Page_Admin.php?message=Section of the voter is required");
+            exit();
+        } elseif(empty($voterspassword)){
+            header("Location: Voters_Page_Admin.php?message=Password of the voter is required");
+            exit(); 
+        } else {
+            // Insert voter information using the fetched section_id (No subquery needed in INSERT)
+            $sql = "INSERT INTO voters (voters_firstname, voters_lastname, voters_password, voters_id, voters_photo, grade_id, section_id) 
+            VALUES ('$votersfirstname','$voterslastname','$voterspassword','$votersid','$photo','$Grade','$section_id')";
+            $result = mysqli_query($conn, $sql);
+
+            if(!$result){
+                die("Query Failed: " . $conn->error);
             } else {
-                // Insert voter information using the fetched section_id (No subquery needed in INSERT)
-                $sql = "INSERT INTO voters (voters_firstname, voters_lastname, voters_password, voters_id, voters_photo, grade_id, section_id) 
-                VALUES ('$votersfirstname','$voterslastname','$voterspassword','$votersid','$photo','$Grade','$section_id')";
-                $result = mysqli_query($conn, $sql);
-
-                if(!$result){
-                    die("Query Failed: " . $conn->error);
-                } else {
-                    header("Location: Voters_Page_Admin.php?insert_msg=New voter has been added successfully");
-                    exit();   
-                }
+                header("Location: Voters_Page_Admin.php?insert_msg=New voter has been added successfully");
+                exit();   
             }
         }
     }

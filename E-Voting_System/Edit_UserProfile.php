@@ -209,7 +209,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                 </div>
 
 
-                <!-----SIDE BAR------>
                 <nav class="sidebar">
 
                     <!-----MENU BAR------>
@@ -225,11 +224,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         }
                         ?>
 
-                        <!-----SIDEBAR TOP CONTENT-->
+                        <!-----SIDEBAR TOP CONTENT------>
                         <div class="sidebar-content">
                             <div class="sidebar-top-content">
 
-                                <!------SIKHAY LOGO-->
+                                <!------SIKHAY LOGO------>
                                 <div class="sikhay-logo">
                                     <img src="Organization/<?php echo $row['logo'] ?>" alt="" width="78px">
                                     <div class="school-name">
@@ -266,7 +265,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                             </div>
                         </div>
-
 
                         <!-----MENU------>
                         <div class="menu">
@@ -333,17 +331,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                             </ul>
                         </div>
 
-
                         <!-----BUTTON CONTENT------>
                         <div class="bottom-content">
 
                             <!-----LOG OUT------>
+                            <li class="">
+
+                            </li>
 
                         </div>
 
-
                     </div>
-
 
                 </nav>
 

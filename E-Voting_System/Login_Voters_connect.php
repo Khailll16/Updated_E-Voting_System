@@ -34,9 +34,9 @@ if (isset($_POST['voter_id']) && isset($_POST['voter_psw'])) {
                 $_SESSION['voters_firstname'] = $row['voters_firstname'];
                 $_SESSION['voters_lastname'] = $row['voters_lastname'];
 
-
-                header("Location: Voters_Ballot_Page.php");
+                header("Location: Voters_Ballot_Page.php? WelcometoSikhay" . urlencode($row['voters_firstname']) . "" . urlencode($row['voters_lastname']) . "ID:" . urlencode($row['id']));
                 exit();
+                
             } else {
                 header("Location: LoginPage_Voters.php?error=Incorrect Voters id or Password");
                 exit();

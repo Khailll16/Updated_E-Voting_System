@@ -118,7 +118,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                 // Update the current position and display the header
                                                 $current_position = $row['position_name'];
-                                                echo "<h3>" . htmlspecialchars($current_position) . "</h3>";
+                                                echo "<h3 style='text-transform: uppercase;'>" . htmlspecialchars($current_position) . "</h3>";
 
                                                 // Start a new grid container for the candidates under this position
                                                 echo '<div class="grid-container">';

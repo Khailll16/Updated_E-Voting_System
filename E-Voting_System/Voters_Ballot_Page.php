@@ -37,44 +37,28 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                 <?php
                 }
                 ?>
-                <form action="">
-
+                <form action="Voters_BallotPreview.php" method="post">
                     <?php
-                    // SQL query to fetch positions and their corresponding candidates
                     $sql_positions = "
                     SELECT positions.descrip AS position_name, candidates.*
                     FROM positions
                     LEFT JOIN candidates ON positions.id = CAST(candidates.position_id AS UNSIGNED)
                     ORDER BY positions.id, candidates.id";
-
-                    // Execute the query and check for errors
                     $result_positions = $conn->query($sql_positions);
+
                     if (!$result_positions) {
                         die("Error in SQL query: " . $conn->error);
                     }
 
-                    // Check if any candidates are returned
-                    if (mysqli_num_rows($result_positions) === 0) {
-                        echo "No positions or candidates found.";
-                    }
-
-                    // Track the current position header to prevent repeating it
                     $current_position = '';
 
-                    // Loop through each result and group candidates by position
                     while ($row = mysqli_fetch_assoc($result_positions)) {
-                        // Check if the position has changed, then display a new header and reset the grid container
                         if ($current_position !== $row['position_name']) {
-                            // Close the previous grid container if any
                             if ($current_position !== '') {
-                                echo '</div>'; // Close previous grid-container
+                                echo '</div>';
                             }
-
-                            // Update the current position and display the header
                             $current_position = $row['position_name'];
-                            echo "<h3>" . htmlspecialchars($current_position) . "</h3>";
-
-                            // Start a new grid container for the candidates under this position
+                            echo "<h3 style='text-transform: uppercase;'>" . htmlspecialchars($current_position) . "</h3>";
                             echo '<div class="grid-container">';
                         }
                     ?>
@@ -102,7 +86,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                     <?php
                     }
 
-                    // Close the last grid container
                     if ($current_position !== '') {
                         echo '</div>';
                     }
@@ -147,7 +130,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                     <div id="ballot-popup" class="ballot-popup" style="display: none;">
                         <div class="ballot_popup-content">
                             <?php
-                            $sql = "SELECT * FROM `ballot`";
+                            $sql = "SELECT * FROM ballot";
                             $result = $conn->query($sql);
 
                             if (!$result) {
@@ -164,18 +147,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                             }
                             ?>
                             <div class="ballot-popup-forms">
-                                <div class="back-button">
-                                    <button class="ballot_close-form-btn"><i class="bx bx-arrow-back"></i> Back</button>
-                                </div>
                                 <?php
                                 if (isset($_GET['id'])) {
                                     $id = $_GET['id'];
 
                                     // Updated query to join with positions and get description
                                     $sql = "SELECT candidates.*, positions.descrip 
-                        FROM candidates 
-                        LEFT JOIN positions ON candidates.position_id = positions.id 
-                        WHERE candidates.id = '$id'";
+                                    FROM candidates 
+                                    LEFT JOIN positions ON candidates.position_id = positions.id 
+                                    WHERE candidates.id = '$id'";
                                     $result = mysqli_query($conn, $sql);
 
                                     if (!$result) {
@@ -185,6 +165,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                                     }
                                 }
                                 ?>
+                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; text-align: center; margin: 20px 20px 8px 20px;">PLATFORM</p>
                                 <div class="container">
                                     <div class="profile-section">
                                         <div class="image-container">
@@ -201,8 +182,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
 
                                     <!-- Form section: Changed to p tag for platform -->
                                     <div class="form-section">
-                                        <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; text-align: center; margin-bottom: 10px;">Platform</p>
-                                        <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; text-align: justify;">
+                                        <p style="font-size: 18px; font-weight: lighter; color: #4A4A4A; text-align: justify;">
                                             <?php echo $row['platform']; ?>
                                         </p>
                                     </div>
@@ -215,9 +195,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['voters_id'])) {
                 </form>
             </div>
         </main>
-
-        <script src="displayPopUpForm.js"></script>
     </body>
+    <script src="displayPopUpForm.js"></script>
 
     </html>
 

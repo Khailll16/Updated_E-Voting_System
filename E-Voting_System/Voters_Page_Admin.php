@@ -219,7 +219,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         ?>
 
                                                                 <tr>
-                                                                    <td style="padding-top: 7px;">
+                                                                    <td>
                                                                         <img src="Voters/<?php echo $row['voters_photo'] ?>" width='41px' style='background-color: #ddd; border-radius: 3px;' />
                                                                     </td>
                                                                     <td> <?php echo $row['voters_lastname']; ?> </td>
@@ -227,7 +227,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                     <td> <?php echo $row['voters_id']; ?> </td>
                                                                     <td> <?php echo $row['grade']; ?> </td>
                                                                     <td> <?php echo $row['section']; ?> </td>
-                                                                    <td style="padding: 8px 0px;">
+                                                                    <td>
                                                                         <div class="actions-button">
                                                                             <a href="Edit_Voters.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i></button></a>
                                                                             <a href="Delete_Voters.php?id=<?php echo $row['id']; ?>"><button class="delete"><i class='bx bxs-trash'></i></button></a>
@@ -238,7 +238,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             }
                                                         } else {
                                                             // If no data is found, display a message in the table
-                                                            echo "<tr><td colspan='7' style='text-align: center;'>No data available in table</td></tr>";
+                                                            echo "<tr><td colspan='7' style='text-align: center; padding: 10px 0px'>No data available in table</td></tr>";
                                                         }
                                                         ?>
                                                     </tbody>

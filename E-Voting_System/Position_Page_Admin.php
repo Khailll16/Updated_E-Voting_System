@@ -191,7 +191,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <tr>
                                                             <td> <?php echo $row['descrip']; ?> </td>
                                                             <td> <?php echo $row['max_vote']; ?> </td>
-                                                            <td style="padding: 8px 0px;">
+                                                            <td>
                                                                 <div class="actions-button">
                                                                     <a href="Edit_Positions.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i></button></a>
                                                                     <a href="Delete_Positions.php?id=<?php echo $row['id']; ?>"><button class="delete"><i class='bx bxs-trash'></i></button></a>
@@ -202,7 +202,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     }
                                                 } else {
                                                     // If no data is found, display a message in the table
-                                                    echo "<tr><td colspan='3' style='text-align: center;'>No data available in table</td></tr>";
+                                                    echo "<tr><td colspan='3' style='text-align: center; padding: 10px 0px;'>No data available in table</td></tr>";
                                                 }
                                                 ?>
                                             </table>

@@ -197,13 +197,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     ?>
 
                                                             <tr>
-                                                                <td style="padding-top: 7px;">
+                                                                <td>
                                                                     <img src="Candidates/<?php echo $row['candidate_profile'] ?>" data-id="<?php echo $row['id']; ?>" width='41px' style='background-color: #ddd; border-radius: 3px;' />
                                                                 </td>
                                                                 <td> <?php echo $row['candidate_lastname']; ?> </td>
                                                                 <td> <?php echo $row['candidate_firstname']; ?> </td>
                                                                 <td> <?php echo $row['descrip']; ?> </td> <!-- Display the position description -->
-                                                                <td style="padding: 8px 0px;">
+                                                                <td >
                                                                     <div class="actions-button">
                                                                         <a href="View_Candidates.php?id=<?php echo $row['id']; ?>"><button class="view"><i class='bx bx-play'></i></button></a>
                                                                         <a href="Edit_Candidates.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i></button></a>
@@ -215,7 +215,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         }
                                                     } else {
                                                         // If no data is found, display a message in the table
-                                                        echo "<tr><td colspan='7' style='text-align: center;'>No data available in table</td></tr>";
+                                                        echo "<tr><td colspan='7' style='text-align: center; padding:10px 0px;'>No data available in table</td></tr>";
                                                     }
                                                     ?>
                                                 </table>
@@ -442,7 +442,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </div>
                                         <div class="form-group-textarea">
                                             <label for="candidate-platform">Platform</label>
-                                            <textarea class="input-size" id="candidate-platform" name="candidate-platform" rows="7" style="resize: vertical;" required></textarea>
+                                            <textarea class="input-size" id="candidate-platform" name="candidate-platform" rows="7" style="resize: vertical;" maxlength="400" required></textarea>
                                         </div>
 
                                         <div class="form-group-button">

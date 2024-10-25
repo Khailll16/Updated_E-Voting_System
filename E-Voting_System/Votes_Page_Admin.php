@@ -125,7 +125,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                         <th style="border-radius: 0px 11px 11px 0px;">Voters</th>
                                                     </tr>
                                                     <?php
-                                                    $sql = "SELECT * FROM votes";
+                                                    // Updated SQL query using LEFT JOIN to display the first name of voters
+                                                    $sql = "SELECT positions.descrip AS position_name, 
+                   candidates.candidate_firstname AS candidate_name, 
+                   voters.voters_firstname AS voter_name
+            FROM votes
+            LEFT JOIN positions ON votes.position_id = positions.id
+            LEFT JOIN candidates ON votes.candidate_id = candidates.id
+            LEFT JOIN voters ON votes.voters_id = voters.id";
+
                                                     $result = $conn->query($sql);
 
                                                     if (!$result) {
@@ -133,22 +141,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     } elseif (mysqli_num_rows($result) > 0) { // Check if there is data to display
                                                         while ($row = mysqli_fetch_assoc($result)) {
                                                     ?>
-
                                                             <tr>
-                                                                <td><?php echo $row['position_id']; ?></td>
-                                                                <td><?php echo $row['candidate_id']; ?></td>
-                                                                <td><?php echo $row['voters_id']; ?></td>
+                                                                <td><?php echo htmlspecialchars($row['position_name'] ?? 'N/A'); ?></td>
+                                                                <td><?php echo htmlspecialchars($row['candidate_name'] ?? 'N/A'); ?></td>
+                                                                <td><?php echo htmlspecialchars($row['voter_name'] ?? 'N/A'); ?></td>
                                                             </tr>
-
                                                     <?php
                                                         }
                                                     } else {
                                                         // If no data is found, display a message in the table
-                                                        echo "<tr><td colspan='7' style='text-align: center;'>No data available in table</td></tr>";
+                                                        echo "<tr><td colspan='3' style='text-align: center;'>No data available in table</td></tr>";
                                                     }
                                                     ?>
-
                                                 </table>
+
+
                                                 <div class="pagination-content">
                                                     <div class="entries">
                                                         <p>Showing 1 to 2 of 2 entries</p>

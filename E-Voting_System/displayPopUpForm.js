@@ -146,10 +146,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     document.getElementById('profile-picture').src = "Candidates/" + candidateData.candidate_profile;
                     document.querySelector('.profile-section p:nth-child(2)').textContent = candidateData.candidate_firstname + ' ' + candidateData.candidate_lastname;
                     document.querySelector('.profile-section p:nth-child(3)').textContent = candidateData.descrip;
-                    document.querySelector('.form-section p:nth-child(2)').textContent = candidateData.platform;
+                    document.querySelector('.form-section p:nth-child(1)').textContent = candidateData.platform;
 
-                    // Show the popup
+                    // Add fade-in animation and show the popup
                     ballotpopup.style.display = 'block';
+                    ballotpopup.querySelector('.ballot_popup-content').style.animation = 'fadeIn 0.5s ease-in-out';
                 }
             };
             xhr.send();
@@ -188,6 +189,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     }
 });
+
 
 
 

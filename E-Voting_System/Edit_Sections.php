@@ -5,144 +5,142 @@ include "database_connect.php";
 if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 ?>
 
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
 
-<head>
-    <link rel="stylesheet" href="EditStyle_Voters.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="Images/Black Retro Minimalist Vegan Cafe Logo (26).png">
-    <title>Admin Sections Page | SIKHAY</title>
+    <head>
+        <link rel="stylesheet" href="EditStyle_Voters.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="icon" href="Images/Black Retro Minimalist Vegan Cafe Logo (26).png">
+        <title>Admin Sections Page | SIKHAY</title>
 
-</head>
+    </head>
 
-<body>
-    <div class="main-container">
+    <body>
+        <div class="main-container">
 
-        <!-----RIGHT SIDE CONTENT------>
-        <div class="right-side">
+            <!-----RIGHT SIDE CONTENT------>
+            <div class="right-side">
 
-            <div class="right-side-content">
+                <div class="right-side-content">
 
-                <!-----PROFILE ADMIN------>
-                <div class="top_content">
+                    <!-----PROFILE ADMIN------>
+                    <div class="top_content">
 
-                    <div class="breadcrumb-content">
-                        <ol class="breadcrumb">
-                            <li><a href="#"><i class='bx bxs-dashboard icon'></i> Home</a></li>
-                            <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> Sections </a></li>
-                        </ol>
+                        <div class="breadcrumb-content">
+                            <ol class="breadcrumb">
+                                <li><a href="#"><i class='bx bxs-dashboard icon'></i> Home</a></li>
+                                <li class="active" style="font-weight: lighter;" id="title-page"> <a href=""><i class='bx bxs-chevron-right'></i> Sections </a></li>
+                            </ol>
+                        </div>
+
+                        <nav class="nav-burger">
+                            <i class='bx bx-menu icon' onclick="toggleMenu()"></i>
+                            <div class="menu-content">
+                                <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
+                                <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
+                                <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
+                                <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
+                            </div>
+                        </nav>
+
                     </div>
 
-                    <nav class="nav-burger">
-                        <i class='bx bx-menu icon' onclick="toggleMenu()"></i>
-                        <div class="menu-content">
-                            <h2><i class='bx bxs-cog icon'></i> SETTINGS </h2>
-                            <a href="View_UserProfile.php"><i class='bx bxs-user-detail icon'></i> User Profile</a>
-                            <a href="View_WebSetup.php"><i class='bx bx-window icon'></i> Web Setup</a>
-                            <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
-                        </div>
-                    </nav>
+                    <!----DASHBOARD---->
+                    <div class="dashboard-body">
 
-                </div>
+                        <div class="dashboard-content">
 
-                <!----DASHBOARD---->
-                <div class="dashboard-body">
+                            <!----DASHBOARD TITLE---->
+                            <div class="second-content">
 
-                    <div class="dashboard-content">
-
-                        <!----DASHBOARD TITLE---->
-                        <div class="second-content">
-
-                            <div class="Voters-list-title">
-                                <h2 style="font-weight: 550;" class="header" id="breadcrup-title">EDIT SECTION</h2>
-                            </div>
-                            <div class="voters-list-content">
-                                <div class="back-button">
-                                    <button class="button-back"><a href="Section_Page_Admin.php" style="color: white;"><i class="bx bx-arrow-back"></i>Back</a></button>
+                                <div class="Voters-list-title">
+                                    <h2 style="font-weight: 550;" class="header" id="breadcrup-title">EDIT SECTION</h2>
                                 </div>
+                                <div class="voters-list-content">
+                                    <div class="back-button">
+                                        <button class="button-back"><a href="Section_Page_Admin.php" style="color: white;"><i class="bx bx-arrow-back"></i>Back</a></button>
+                                    </div>
 
-                                <div id="addvoters-popup" class="addvoters-popup">
+                                    <div id="addvoters-popup" class="addvoters-popup">
 
-                                    <div class="addvoters-popup-forms">
+                                        <div class="addvoters-popup-forms">
 
-                                        <?php
+                                            <?php
 
-                                        if (isset($_GET['id'])) {
-                                            $id = $_GET['id'];
+                                            if (isset($_GET['id'])) {
+                                                $id = $_GET['id'];
 
-                                            $sql = "SELECT * FROM `sections` WHERE `id` = '$id'";
-                                            $result = mysqli_query($conn, $sql);
+                                                $sql = "SELECT * FROM `sections` WHERE `id` = '$id'";
+                                                $result = mysqli_query($conn, $sql);
 
-                                            if (!$result) {
-                                                die("Invalid query: " . $conn->error);
-                                            } else {
-                                                $row = mysqli_fetch_assoc($result);
-                                            }
-                                        }
-                                        ?>
-
-                                        <?php
-
-                                        if (isset($_POST['update-pos'])) {
-                                            $section = $_POST['section'];
-                                            $grade = $_POST['grade'];
-                                            $maxstudent = $_POST['maximum'];
-
-                                            // Update section details
-                                            $sql = "UPDATE `sections` SET `grade` = '$grade', `section` = '$section', `max_student` = '$maxstudent' WHERE `id` = '$id'";
-                                            $result = mysqli_query($conn, $sql);
-
-                                            if (!$result) {
-                                                die("Invalid query: " . $conn->error);
-                                            } else {
-                                                // Update voters that belong to this section
-                                                $update_voters_sql = "UPDATE `voters` SET `grade_id` = '$grade', `section_id` = (SELECT id FROM sections WHERE section = '$section' AND grade = '$grade') WHERE `section_id` = (SELECT id FROM sections WHERE id = '$id')";
-                                                $voters_result = mysqli_query($conn, $update_voters_sql);
-
-                                                if (!$voters_result) {
-                                                    die("Error updating voters: " . $conn->error);
+                                                if (!$result) {
+                                                    die("Invalid query: " . $conn->error);
                                                 } else {
-                                                    header("Location: Section_Page_Admin.php?insert_msg=Section has been updated successfully");
-                                                    exit();
+                                                    $row = mysqli_fetch_assoc($result);
                                                 }
                                             }
-                                        }
+                                            ?>
 
-                                        ?>
+                                            <?php
 
-                                        <form action="Edit_Sections.php?id=<?php echo $id; ?>" method="POST">
+                                            if (isset($_POST['update-pos'])) {
+                                                $section = $_POST['section'];
+                                                $grade = $_POST['grade'];
+                                                $maxstudent = $_POST['maximum'];
 
-                                            <div class="container">
+                                                // Update section details
+                                                $sql = "UPDATE `sections` SET `grade` = '$grade', `section` = '$section', `max_student` = '$maxstudent' WHERE `id` = '$id'";
+                                                $result = mysqli_query($conn, $sql);
 
-                                                <div class="form-section">
+                                                if (!$result) {
+                                                    die("Invalid query: " . $conn->error);
+                                                } else {
+                                                    // Update voters that belong to this section
+                                                    $update_voters_sql = "UPDATE `voters` SET `grade_id` = '$grade', `section_id` = (SELECT id FROM sections WHERE section = '$section' AND grade = '$grade') WHERE `section_id` = (SELECT id FROM sections WHERE id = '$id')";
+                                                    $voters_result = mysqli_query($conn, $update_voters_sql);
 
-                                                    <label for="">Section
-                                                        <input type="text" name="section" class="input-field" value="<?php echo $row['section'] ?>">
-                                                    </label>
-                                                    <label for="">Grade
-                                                        <input type="number" name="grade" class="input-field" value="<?php echo $row['grade'] ?>">
-                                                    </label>
-                                                    <label for="">Maximum Student
-                                                        <input type="number" name="maximum" class="input-field" value="<?php echo $row['max_student'] ?>">
-                                                    </label>
+                                                    if (!$voters_result) {
+                                                        die("Error updating voters: " . $conn->error);
+                                                    } else {
+                                                        header("Location: Section_Page_Admin.php?insert_msg=Section has been updated successfully");
+                                                        exit();
+                                                    }
+                                                }
+                                            }
 
-                                                    <div class="buttons">
-                                                        <button name="update-pos" class="update-btn"><i class="bx bxs-edit"></i>Update</button>
+                                            ?>
+
+                                            <form action="Edit_Sections.php?id=<?php echo $id; ?>" method="POST">
+
+                                                <div class="container">
+
+                                                    <div class="form-section">
+
+                                                        <label for="">Section
+                                                            <input type="text" name="section" class="input-field" value="<?php echo $row['section'] ?>">
+                                                        </label>
+                                                        <label for="">Grade
+                                                            <input type="number" name="grade" class="input-field" value="<?php echo $row['grade'] ?>">
+                                                        </label>
+                                                        <label for="">Maximum Student
+                                                            <input type="number" name="maximum" class="input-field" value="<?php echo $row['max_student'] ?>">
+                                                        </label>
+
+                                                        <div class="buttons">
+                                                            <button name="update-pos" class="update-btn"><i class="bx bxs-edit"></i>Update</button>
+                                                        </div>
+
                                                     </div>
-
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                <!-----SIDE BAR------>
                 <nav class="sidebar">
 
                     <!-----MENU BAR------>
@@ -154,7 +152,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         if (!$result) {
                             die("Invalid query: " . $conn->error);
                         } else {
-                            $row = mysqli_fetch_assoc($result);
+                            ($row = mysqli_fetch_assoc($result));
                         }
                         ?>
 
@@ -181,7 +179,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         if (!$result) {
                                             die("Invalid query: " . $conn->error);
                                         } else {
-                                            $row = mysqli_fetch_assoc($result);
+                                            ($row = mysqli_fetch_assoc($result))
+
                                         ?>
                                             <span class="image">
                                                 <img id="picture-admin" src="Images/<?php echo $row['admin_profile'] ?>" alt="">
@@ -198,6 +197,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                             </div>
                         </div>
+
 
                         <!-----MENU------>
                         <div class="menu">
@@ -264,10 +264,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                             </ul>
                         </div>
 
+
                         <!-----BUTTON CONTENT------>
                         <div class="bottom-content">
 
                             <!-----LOG OUT------>
+                            <li class="">
+
+                            </li>
 
                         </div>
 
@@ -277,7 +281,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                 </nav>
 
-                <!--LOGOUT FORM------>
+
+                <!--LOGOUT FORM---->
+
                 <div id="logout_popup" class="logout_popup" style="display: none;">
                     <div class="logout_popup-content">
 
@@ -300,7 +306,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <g>
                                                 <g>
                                                     <path d="M504.5,75.5c-9.6-9.6-25.2-9.6-34.9,0L192.4,352.7L42.3,202.7c-9.6-9.6-25.2-9.6-34.9,0c-9.6,9.6-9.6,25.2,0,34.9L174.9,404.1
-                                                        c9.6,9.6,25.2,9.6,34.9,0l305.7-305.7C514.1,100.7,514.1,85.1,504.5,75.5z" />
+                                    c9.6,9.6,25.2,9.6,34.9,0l305.7-305.7C514.1,100.7,514.1,85.1,504.5,75.5z" />
                                                 </g>
                                             </g>
                                         </svg>
@@ -311,15 +317,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-        <script src="displayPopUpForm.js"></script>
-        <script src="hamburger-navbar.js"></script>
-        <script src="Edit_Voters_Profile.js"></script>
+            <script src="displayPopUpForm.js"></script>
+            <script src="hamburger-navbar.js"></script>
+            <script src="Edit_Voters_Profile.js"></script>
     </body>
 
-</html>
+    </html>
 
 <?php
 } else {

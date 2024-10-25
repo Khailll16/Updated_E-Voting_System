@@ -21,7 +21,7 @@ main {
 }
 
 .ballot-section {
-    width: 75%;
+    width: 60%;
     margin: 20px auto;
     border: 3px solid #24724D;
     border-radius: 25px;
@@ -165,7 +165,7 @@ main {
 .container {
     display: flex;
     gap: 50px;
-    padding: 30px;
+    padding: 0px 30px 30px 30px;
     align-items: center;
 }
 
@@ -187,17 +187,6 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.form-section {
-    display: flex;
-    flex-direction: column;
-    text-align: end;
-}
-
-.form-section label {
-    font-size: 18px;
-    color: #555555;
 }
 
 .input-field {
@@ -248,7 +237,7 @@ main {
     background-color: #24724D;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px
 }
 
 .summary-button {
@@ -287,6 +276,12 @@ main {
 
 /* Responsive Styles */
 /* Medium screens (tablets, small desktops) */
+@media screen and (max-width: 2100px) {
+    .grid-item {
+        width: 25%;
+        /* 3 items per row */
+    }
+}
 @media screen and (max-width: 1700px) {
     .grid-item {
         width: 33.33%;
@@ -310,10 +305,19 @@ main {
     }
 }
 
+/* CSS for fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
+/* Ballot Popup Styles */
 .ballot-popup {
     display: none;
-    /* Hidden by default */
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -322,10 +326,9 @@ main {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
-
-    /* Black w/ opacity */
 }
 
+/* Content with Fade-in Effect */
 .ballot_popup-content {
     background-color: #ffffff;
     margin-inline: auto;
@@ -334,8 +337,9 @@ main {
     border-radius: 30px;
     width: 40%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
 }
+
 
 .ballot-popup-forms {
     width: 100%;
@@ -343,23 +347,5 @@ main {
 
 .form-section {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.form-section label {
-    font-size: 1em;
-    font-weight: bold;
-    color: #555555;
-    margin-right: 20px;
-}
-
-.input-size {
-    width: 65%;
-    padding: 10px;
-    border: 1px solid #959191;
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: #E7E7E7;
+    flex-direction: column;
 }

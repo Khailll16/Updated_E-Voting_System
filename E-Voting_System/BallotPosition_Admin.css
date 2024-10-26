@@ -181,13 +181,9 @@ i {
 }
 
 .sikhay-logo{ 
-  /* display: flex; */
   align-items: center;
-  margin-bottom: 15px;
-  /* margin-top: -6px; */
   gap: 7px;
   padding: 10px 14px;
-  /* border-bottom: 2.9px solid #dcdcdc; */
   text-align: center;
 }
 
@@ -196,7 +192,7 @@ i {
 /*----side bar profile----*/
 .sidebar .sidebar-profile {
   position: relative;
-  padding: 10px 14px;
+  padding: 10px 14px 7px 14px;
 }
 
 .sidebar-profile .image-text img {
@@ -249,7 +245,7 @@ i {
 }
 
 .menu {
-  padding: 10px 14px;
+  padding: 0px 14px;
 }
 
 .menu-content {

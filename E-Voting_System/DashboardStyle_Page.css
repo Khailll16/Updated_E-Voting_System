@@ -191,13 +191,9 @@ i {
 }
 
 .sikhay-logo {
-    /* display: flex; */
     align-items: center;
-    margin-bottom: 15px;
-    /* margin-top: -6px; */
     gap: 7px;
     padding: 10px 14px;
-    /* border-bottom: 2.9px solid #dcdcdc; */
     text-align: center;
 }
 
@@ -206,7 +202,7 @@ i {
 /*----side bar profile----*/
 .sidebar .sidebar-profile {
     position: relative;
-    padding: 10px 14px;
+    padding: 10px 14px 7px 14px;
 }
 
 .sidebar-profile .image-text img {
@@ -260,7 +256,7 @@ i {
 }
 
 .menu {
-    padding: 10px 14px;
+    padding: 0px 14px;
 }
 
 .menu-content {
@@ -455,16 +451,171 @@ i {
     color: #ffffff;
     background: rgba(0, 0, 0, 0.15);
 }
-
-.votes-participation {
+.third-container {
     margin-top: 15px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* Enable wrapping for responsiveness */
+}
+.dashboard-content .header {
+    margin-bottom: 15px;
+}
+.voters-list-content {
     border-radius: 8px;
     background: #ffffff;
-    border-top: 3px solid #d2d6de;
     width: 100%;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-top: 3px solid #d2d6de;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     padding: 18px;
 }
+.votes-container {
+    flex: 1 1 300px; /* Allows the container to grow/shrink and sets minimum width */
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 18px;
+    min-width: 200px; /* Minimum width for responsiveness */
+}
+
+.grade-level-container {
+    flex: 0 1 180px;
+    height: auto;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    min-width: 300px;
+    max-width: 320px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .third-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.icon-grade-level {
+    position: relative;
+    width: 100px; /* Set to 100px */
+    height: 100px;
+    margin: auto;
+    margin-top: 15px; 
+}
+.view-button{
+    margin-top: 15px;
+    text-align: center;
+}
+.view-button button{
+    padding: 5px 25px;
+    gap: 3px;
+    color: white;
+    background-color: #24724D;
+    border: transparent;
+    border-radius: 30px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.view-button a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+.date-time {
+    flex: 0 1 180px;
+    height: auto;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    min-width: 300px;
+    max-width: 320px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.clock-icon {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 15px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+    margin-top: 12px;
+}
+
+.clock-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: #333;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hour-hand, .minute-hand, .second-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    transform: translateX(-50%);
+    background-color: #333;
+}
+
+.hour-hand {
+    width: 4px;
+    height: 25px;
+    background: #333;
+    z-index: 3;
+}
+
+.minute-hand {
+    width: 3px;
+    height: 35px;
+    background: #666;
+    z-index: 2;
+}
+
+.second-hand {
+    width: 2px;
+    height: 40px;
+    background: #e74c3c; /* Red color for second hand */
+    z-index: 1;
+}
+
+#timeDisplay {
+    margin-top: 12px;
+    color: #4A4A4A;
+    font-size: 15px;
+}
+#timePicker{
+    padding: 5px;
+    margin-top: 8px;
+    border: 1px solid #24724D;
+    border-radius: 4px;
+    font-size: 17px;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.grade-level-content{
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /*LOGOUT FORM*/
 

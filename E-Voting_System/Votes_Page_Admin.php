@@ -201,6 +201,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <p style="color: #4A4A4A; font-size: 16px;"><?php echo $row['organization_name']; ?></p>
                                                 <p style="font-weight: lighter; font-size: 13px; color: #9F9898;">Organization</p>
                                             </div>
+                                            <hr style="margin-top: 10px;">
                                         </div>
 
                                         <!-----PROFILE ADMIN------>
@@ -251,6 +252,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <a href="Votes_Page_Admin.php">
                                                 <i class='bx bxs-box icon'></i>
                                                 <span class="text nav-text">Votes</span>
+                                            </a>
+                                        </li>
+
+                                        <!-----Grade level------>
+                                        <li class="nav-link">
+                                            <a href="">
+                                                <i class='bx bx-bar-chart icon'></i>
+                                                <span class="text nav-text">Grade Level</span>
                                             </a>
                                         </li>
 

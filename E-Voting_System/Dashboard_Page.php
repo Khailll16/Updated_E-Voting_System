@@ -191,6 +191,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         <div class="date-time">
                                             <h2>DATE AND TIME</h2>
                                             <div class="clock-icon">
+                                                <span class="clock-number" style="top: 5%; left: 50%; transform: translate(-50%, -50%);">12</span>
+                                                <span class="clock-number" style="top: 20%; left: 85%; transform: translate(-50%, -50%);">1</span>
+                                                <span class="clock-number" style="top: 50%; left: 95%; transform: translate(-50%, -50%);">3</span>
+                                                <span class="clock-number" style="top: 80%; left: 85%; transform: translate(-50%, -50%);">5</span>
+                                                <span class="clock-number" style="top: 95%; left: 50%; transform: translate(-50%, -50%);">6</span>
+                                                <span class="clock-number" style="top: 80%; left: 15%; transform: translate(-50%, -50%);">7</span>
+                                                <span class="clock-number" style="top: 50%; left: 5%; transform: translate(-50%, -50%);">9</span>
+                                                <span class="clock-number" style="top: 20%; left: 15%; transform: translate(-50%, -50%);">11</span>
+                                                <span class="clock-number" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">12</span>
                                                 <div class="hour-hand"></div>
                                                 <div class="minute-hand"></div>
                                                 <div class="second-hand"></div>
@@ -198,6 +207,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             <p id="timeDisplay"></p> <!-- Display only the date here -->
                                             <input type="datetime-local" id="timePicker" disabled /> <!-- Disabled input to show date and time -->
                                         </div>
+
                                     </div>
 
 
@@ -295,7 +305,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                             <!-----Grade level------>
                             <li class="nav-link">
                                 <a href="">
-                                <i class='bx bx-bar-chart icon'></i>
+                                    <i class='bx bx-bar-chart icon'></i>
                                     <span class="text nav-text">Grade Level</span>
                                 </a>
                             </li>

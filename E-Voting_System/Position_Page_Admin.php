@@ -315,9 +315,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                             <!-----Grade level------>
                                             <li class="nav-link">
-                                                <a href="">
+                                                <a href="EducationLevel_Page_Admin.php">
                                                     <i class='bx bx-bar-chart icon'></i>
-                                                    <span class="text nav-text">Grade Level</span>
+                                                    <span class="text nav-text">Education Level</span>
                                                 </a>
                                             </li>
 
@@ -394,17 +394,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                     <div class="addposition-popup-forms">
                                         <form action="Add_Positions.php" method="POST">
+                                            <div class="form-section">
+                                                <div class="form-group">
+                                                    <label for="position-candidate">Position</label>
+                                                    <input type="text" id="position-candidate" name="position-candidate" class="input-field" value="" required>
+                                                </div>
 
-                                            <div class="form-group-title">
-                                                <label for="position-candidate">Position</label>
-                                                <input type="text" id="position-candidate" name="position-candidate" class="input-size" value="" required>
+                                                <div class="form-group">
+                                                    <label for="maximum-vote">Maximum Vote</label>
+                                                    <input type="number" id="maximum-vote" name="maximum-vote" class="input-field" value="" required>
+                                                </div>
                                             </div>
-
-                                            <div class="form-group-maximum-vote">
-                                                <label for="maximum-vote">Maximum Vote</label>
-                                                <input type="number" id="maximum-vote" name="maximum-vote" class="input-size" value="" required>
-                                            </div>
-
                                             <div class="form-group-button">
                                                 <button type="button" class="addposition-close-form-btn"><svg width="15px" height="15px" fill="#24724D"
                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

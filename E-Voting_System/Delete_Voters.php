@@ -123,9 +123,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <div class="image-container">
                                                                 <img id="profile-picture" src="Voters/<?php echo $row['voters_photo'] ?>" alt="">
                                                             </div>
-                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;"><?php echo $row['voters_firstname'] ?> <?php echo $row['voters_lastname'] ?></p>
+                                                            <p style="font-size: 24px; font-weight: bold; color: #4A4A4A; margin-top:10px;">
+                                                                <?php echo $row['voters_firstname'] ?> <?php echo $row['voters_lastname'] ?>
+                                                            </p>
+                                                            <p style="font-size: 18px; font-weight: lighter; color: #4A4A4A; margin-top: -10px;">
+                                                                Primary Education
+                                                            </p>
                                                             <!-- Display grade and section descriptions -->
-                                                            <p style="font-size: 20px; font-weight: lighter; color: #4A4A4A; margin-top: -20px;">
+                                                            <p style="font-size: 18px; font-weight: lighter; color: #4A4A4A; margin-top: -17px;">
                                                                 <?php echo $row['grade'] ?> - <?php echo $row['section'] ?>
                                                             </p>
                                                         </div>
@@ -235,11 +240,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                 <!-----Grade level------>
                                 <li class="nav-link">
-                                    <a href="">
+                                    <a href="EducationLevel_Page_Admin.php">
                                         <i class='bx bx-bar-chart icon'></i>
-                                        <span class="text nav-text">Grade Level</span>
+                                        <span class="text nav-text">Education Level</span>
                                     </a>
                                 </li>
+
 
                                 <!-----Sections------>
                                 <li class="nav-link">

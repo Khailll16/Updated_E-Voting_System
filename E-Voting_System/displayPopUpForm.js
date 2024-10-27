@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
 
 
@@ -22,6 +24,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
 });
+
+    /**ADD SECTION POP UP */
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const addsectionpopup = document.getElementById('addsection-popup');
+        const addsectionopenPopupBtn = document.getElementById('addsection-openPopup');
+        const addsectioncloseFormBtn = document.querySelector('.addsection-close-form-btn');
+    
+        addsectionopenPopupBtn.onclick = function() {
+            addsectionpopup.style.display = 'block';
+        }
+    
+        addsectioncloseFormBtn.onclick = function() {
+            addsectionpopup.style.display = 'none';
+        }
+    
+        window.onclick = function(event) {
+            if (event.target == addsectionpopup) {
+                addsectionpopup.style.display = 'none';
+            }
+        }
+    
+    });
     
 
 
@@ -71,6 +96,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
 });
+
+    /**ADD GRADE POP UP */
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const addgradepopup = document.getElementById('addgrade-popup');
+        const addgradeopenPopupBtn = document.getElementById('addgrade_openPopup');
+        const addgradecloseFormBtn = document.querySelector('.addgrade-close-form-btn');
+    
+        addgradeopenPopupBtn.onclick = function() {
+            addgradepopup.style.display = 'block';
+        }
+    
+        addgradecloseFormBtn.onclick = function() {
+            addgradepopup.style.display = 'none';
+        }
+    
+        window.onclick = function(event) {
+            if (event.target == addgradepopup) {
+                addgradepopup.style.display = 'none';
+            }
+        }
+    
+    });
 
 document.addEventListener('DOMContentLoaded', (event) => {
     const resetpositionpopup = document.getElementById('resetposition_popup');

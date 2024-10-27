@@ -126,28 +126,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <div class="grade-section">
                                                     <div class="grade-selection">
                                                         <form method="POST" action="">
-                                                            <select name="filter_grade" id="filter_grade" onchange="this.form.submit()">
+                                                            <select name="filter_grade" id="filter_grade">
                                                                 <option value="">Select Grade</option>
-                                                                <?php
-                                                                $sql = "SELECT DISTINCT grade FROM sections ORDER BY grade ASC";
-                                                                $result = $conn->query($sql);
-
-                                                                if (!$result) {
-                                                                    die("Invalid query: " . $conn->error);
-                                                                } else {
-                                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                                        $selected = ($selectedGrade == $row['grade']) ? 'selected' : '';
-                                                                        echo "<option value='" . $row['grade'] . "' $selected>" . $row['grade'] . "</option>";
-                                                                    }
-                                                                }
-                                                                ?>
                                                             </select>
                                                         </form>
                                                     </div>
 
                                                     <div class="grade-selection">
                                                         <form method="POST" action="">
-                                                            <select name="filter_section" id="filter_section" onchange="this.form.submit()">
+                                                            <select name="filter_section" id="filter_section">
                                                                 <option value="">Select Section</option>
                                                                 <?php
                                                                 if ($selectedGrade) {
@@ -188,18 +175,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <th> Last Name <a style="color: white; margin-left: 6px;" href="?sort=voters_lastname&order=<?php echo $toggleSortOrder; ?>"><i class="fas fa-sort-<?php echo $sortColumn == 'voters_lastname' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i></a></th>
                                                             <th> First Name <a style="color: white; margin-left: 6px;" href="?sort=voters_firstname&order=<?php echo $toggleSortOrder; ?>"><i class="fas fa-sort-<?php echo $sortColumn == 'voters_firstname' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i></a></th>
                                                             <th> Voters ID <a style="color: white; margin-left: 6px;" href="?sort=voters_id&order=<?php echo $toggleSortOrder; ?>"><i class="fas fa-sort-<?php echo $sortColumn == 'voters_id' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i></a></th>
-                                                            <th> Grade <a style="color: white; margin-left: 6px;" href="?sort=grade_id&order=<?php echo $toggleSortOrder; ?>"><i class="fas fa-sort-<?php echo $sortColumn == 'grade_id' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i></a></th>
+                                                            <th> Grades / Levels<a style="color: white; margin-left: 6px;" href="?sort=grade_id&order=<?php echo $toggleSortOrder; ?>"><i class="fas fa-sort-<?php echo $sortColumn == 'grade_id' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i></a></th>
                                                             <th> Section <a style="color: white; margin-left: 6px;" href="?sort=section_id&order=<?php echo $toggleSortOrder; ?>"><i class="fas fa-sort-<?php echo $sortColumn == 'section_id' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i></a></th>
                                                             <th style="border-radius: 0px 11px 11px 0px;">Actions</th>
                                                         </tr>
 
                                                         <?php
-                                                        $sql = "SELECT voters.*, sections.grade, sections.section 
-                                                                FROM voters 
-                                                                LEFT JOIN sections ON voters.section_id = sections.id
-                                                                WHERE (voters_lastname LIKE '%$searchQuery%' OR 
-                                                                       voters_firstname LIKE '%$searchQuery%' OR 
-                                                                       voters_id LIKE '%$searchQuery%')";
+                                                        $sql =  include "database_connect.php";
+
+                                                        $sql = "SELECT * FROM voters";
+                                                        $query = $conn->query($sql);
 
                                                         if ($selectedGrade) {
                                                             $sql .= " AND sections.grade = '$selectedGrade'";
@@ -225,8 +210,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                     <td> <?php echo $row['voters_lastname']; ?> </td>
                                                                     <td> <?php echo $row['voters_firstname']; ?> </td>
                                                                     <td> <?php echo $row['voters_id']; ?> </td>
-                                                                    <td> <?php echo $row['grade']; ?> </td>
-                                                                    <td> <?php echo $row['section']; ?> </td>
+                                                                    <td> </td>
+                                                                    <td> </td>
                                                                     <td>
                                                                         <div class="actions-button">
                                                                             <a href="Edit_Voters.php?id=<?php echo $row['id']; ?>"><button class="update"><i class='bx bxs-edit'></i></button></a>
@@ -363,9 +348,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                         <!-----Grade level------>
                                         <li class="nav-link">
-                                            <a href="">
+                                            <a href="EducationLevel_Page_Admin.php">
                                                 <i class='bx bx-bar-chart icon'></i>
-                                                <span class="text nav-text">Grade Level</span>
+                                                <span class="text nav-text">Education Level</span>
                                             </a>
                                         </li>
 
@@ -440,50 +425,63 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                 <div class="addvoters-popup-forms">
                                     <form action="Add_Voters.php" autocomplete="off" enctype="multipart/form-data" method="POST">
-                                        <div class="form-group-title">
-                                            <label for="votersfirstname">Firstname</label>
-                                            <input type="text" id="votersfirstname" name="votersfirstname" class="input-size" required>
-                                        </div>
+                                        <div class="form-section">
+                                            <div class="form-group">
+                                                <label for="votersfirstname">Firstname</label>
+                                                <input type="text" id="votersfirstname" name="votersfirstname" class="input-field" required>
+                                            </div>
 
-                                        <div class="form-group-title">
-                                            <label for="voterslastname">Lastname</label>
-                                            <input type="text" id="voterslastname" name="voterslastname" class="input-size" required>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="voterslastname">Lastname</label>
+                                                <input type="text" id="voterslastname" name="voterslastname" class="input-field" required>
+                                            </div>
 
-                                        <div style="margin-left:27px" class="form-group-position">
-                                            <label for="grade" class="col-sm-3 control-label">Grade</label>
-                                            <select style="width:68.5%" class="form-position" id="grade" name="grade" required onchange="fetchSections(this.value)">
-                                                <option value="" selected>- Select Grade -</option>
-                                                <?php
-                                                // Fetch distinct grades from sections table, sorted alphabetically
-                                                $sql = "SELECT DISTINCT grade FROM sections ORDER BY grade ASC";
-                                                $result = $conn->query($sql);
-                                                if ($result) {
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                        echo "<option value='" . $row['grade'] . "'>" . $row['grade'] . "</option>";
+                                            <div class="form-group">
+                                                <label for="education-level">Educational Level</label>
+                                                <select class="input-field" id="education-level" name="education_level" required>
+                                                    <option value=""> Select Educational Level </option>
+                                                    <?php
+                                                    // Fetch distinct educational levels from the level table
+                                                    $sql = "SELECT DISTINCT educational_level FROM level";
+                                                    $result = $conn->query($sql);
+
+                                                    if ($result) {
+                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                            echo "<option value='" . htmlspecialchars($row['educational_level']) . "'>" . htmlspecialchars($row['educational_level']) . "</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value=''>Error loading options</option>";
                                                     }
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
+                                                    ?>
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group-position">
-                                            <label for="section" class="col-sm-3 control-label">Section</label>
-                                            <select class="form-position" id="section" name="section" required>
-                                                <option value="" selected>- Select Section -</option>
-                                            </select>
-                                        </div>
+                                            <!-- Grade/Year Group Dropdown (Populated by JavaScript) -->
+                                            <div class="form-group">
+                                                <label for="education-grade">Grade or Year Group</label>
+                                                <select class="input-field" id="education-grade" name="education_grade" required>
+                                                    <option value=""> Select Grade or Year Group </option>
+                                                    <!-- Options will be populated based on selected educational level -->
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group-title">
-                                            <label for="voterspassword">Password</label>
-                                            <input type="password" id="voterspassword" name="voterspassword" class="input-size" required>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="section" class="col-sm-3 control-label">Section</label>
+                                                <select class="input-field" id="section" name="section" required>
+                                                    <option value="" selected> Select section </option>
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group-photo">
-                                            <label for="votersprofile">Photo</label>
-                                            <input type="file" id="votersprofile" name="votersprofile" class="input-size">
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="voterspassword">Password</label>
+                                                <input type="password" id="voterspassword" name="voterspassword" class="input-field" required>
+                                            </div>
 
+                                            <div class="form-group">
+                                                <label for="votersprofile">Photo</label>
+                                                <input type="file" id="votersprofile" name="votersprofile" class="input-field">
+                                            </div>
+                                        </div>
                                         <div class="form-group-button">
                                             <button type="button" class="voters-close-form-btn"><svg width="15px" height="15px" fill="#24724D" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z" fill="#24724D"></path>
@@ -539,6 +537,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                         </div>
                     </div>
                 </div>
+                <script src="gradeselection.js"></script>
                 <script src="Filter_Grade-Section.js"></script>
                 <script src="Tables_Functionals.js"></script>
                 <script src="displayPopUpForm.js"></script>

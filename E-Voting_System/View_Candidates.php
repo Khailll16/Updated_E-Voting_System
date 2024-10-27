@@ -208,12 +208,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                     </a>
                                 </li>
 
-                                
+
                                 <!-----Grade level------>
                                 <li class="nav-link">
-                                    <a href="">
+                                    <a href="EducationLevel_Page_Admin.php">
                                         <i class='bx bx-bar-chart icon'></i>
-                                        <span class="text nav-text">Grade Level</span>
+                                        <span class="text nav-text">Education Level</span>
                                     </a>
                                 </li>
 

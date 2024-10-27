@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "database_connect.php";
+include "Add_Sections.php";
 
 if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     $searchQuery = '';
@@ -9,7 +10,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     }
 
     // Determine the sorting order for the table columns
-    $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'grade'; // Default sorting by grade
+    $sortColumn = isset($_GET['sort']) ? $_GET['sort'] : 'grade_id'; // Default sorting by grade_id
     $sortOrder = isset($_GET['order']) && $_GET['order'] == 'desc' ? 'DESC' : 'ASC'; // Default to ascending order
 
     // Toggle sort order for next click
@@ -22,23 +23,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
     <head>
         <link rel="stylesheet" href="SectionStyle_Page.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Font Awesome for icons -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link rel="icon" href="Images/Black Retro Minimalist Vegan Cafe Logo (26).png">
         <title>Admin Sections Page | SIKHAY</title>
-
     </head>
 
     <body>
         <div class="main-container">
-
-            <!-----RIGHT SIDE CONTENT------>
             <div class="right-side">
-
                 <div class="right-side-content">
-
-                    <!-----PROFILE ADMIN------>
                     <div class="top_content">
-
                         <div class="breadcrumb-content">
                             <ol class="breadcrumb">
                                 <li><a href="Position_Page_Admin.php"><i class='bx bxs-dashboard icon'></i> Home</a></li>
@@ -55,17 +49,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 <a style="border-radius: 0px 0px 15px 15px;" id="logout_openPopup"><i class='bx bx-log-out icon'></i>Sign out</a>
                             </div>
                         </nav>
-
                     </div>
 
-                    <!----DASHBOARD------>
                     <div class="dashboard-body">
-
                         <div class="dashboard-content">
-
-                            <!----DASHBOARD TITLE------>
                             <div class="second-content">
-
                                 <div class="Voters-list-title">
                                     <h2 style="font-weight: 550;" class="header" id="breadcrup-title">SECTIONS LIST</h2>
                                 </div>
@@ -80,16 +68,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                 </div>
                                 <div class="voters-list-content">
                                     <div class="add-button">
-                                        <button id="addposition-openPopup" class="button-add"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                                        <button id="addsection-openPopup" class="button-add"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                                                 <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m5 11h-4v4h-2v-4H7v-2h4V7h2v4h4z" />
                                             </svg>New</button>
                                     </div>
 
                                     <div class="voters-list-container">
-
                                         <table class="voters-table">
-
-                                            <!--------ENTRIES SEARCH BAR CONTAINER-------->
                                             <div class="entries-search-bar-container">
                                                 <div class="selector-entries">
                                                     <label>Show</label>
@@ -108,7 +93,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <select name="filter_section" id="filter_section" onchange="this.form.submit()">
                                                                 <option value="">All Sections</option>
                                                                 <?php
-                                                                // Fetch all sections from the database
                                                                 $sql = "SELECT * FROM sections";
                                                                 $result = $conn->query($sql);
 
@@ -116,7 +100,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                                     die("Invalid query: " . $conn->error);
                                                                 } else {
                                                                     while ($row = mysqli_fetch_assoc($result)) {
-                                                                        // Keep selected option when reloading the page
                                                                         $selected = isset($_POST['filter_section']) && $_POST['filter_section'] == $row['section'] ? 'selected' : '';
                                                                         echo "<option value='" . $row['section'] . "' $selected>" . $row['section'] . "</option>";
                                                                     }
@@ -138,13 +121,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                             </div>
 
                                             <div class="table-container">
-
                                                 <table class="voters-list" style="border-spacing: 0 15px;">
                                                     <tr style="border-radius: 11px;">
                                                         <th style="border-radius: 11px 0px 0px 11px;">
-                                                            Grades
-                                                            <a style="color: white; margin-left: 6px;" href="?sort=grade&order=<?php echo $toggleSortOrder; ?>">
-                                                                <i class="fas fa-sort-<?php echo $sortColumn == 'grade' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i>
+                                                            Grades / Years
+                                                            <a style="color: white; margin-left: 6px;" href="?sort=grade_id&order=<?php echo $toggleSortOrder; ?>">
+                                                                <i class="fas fa-sort-<?php echo $sortColumn == 'grade_id' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i>
                                                             </a>
                                                         </th>
                                                         <th>
@@ -154,7 +136,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             </a>
                                                         </th>
                                                         <th>
-                                                            Maximum Student
+                                                            No. of Students
                                                             <a style="color: white; margin-left: 6px;" href="?sort=max_student&order=<?php echo $toggleSortOrder; ?>">
                                                                 <i class="fas fa-sort-<?php echo $sortColumn == 'max_student' && $sortOrder == 'ASC' ? 'up' : 'down'; ?>"></i>
                                                             </a>
@@ -174,7 +156,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     }
 
                                                     if ($searchQuery != '') {
-                                                        $sql .= " AND (grade LIKE '%$searchQuery%' OR section LIKE '%$searchQuery%' OR max_student LIKE '%$searchQuery%')";
+                                                        $sql .= " AND (grade_id LIKE '%$searchQuery%' OR section LIKE '%$searchQuery%' OR max_student LIKE '%$searchQuery%')";
                                                     }
 
                                                     // Append sorting clause
@@ -184,11 +166,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                     if (!$result) {
                                                         die("Invalid query: " . $conn->error);
-                                                    } elseif (mysqli_num_rows($result) > 0) { // Check if there is data to display
+                                                    } elseif (mysqli_num_rows($result) > 0) {
                                                         while ($row = mysqli_fetch_assoc($result)) {
                                                     ?>
                                                             <tr>
-                                                                <td> <?php echo $row['grade']; ?> </td>
+                                                                <td> <?php echo $row['grade_id']; ?> </td>
                                                                 <td> <?php echo $row['section']; ?> </td>
                                                                 <td> <?php echo $row['max_student']; ?> </td>
                                                                 <td>
@@ -201,7 +183,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     <?php
                                                         }
                                                     } else {
-                                                        // If no data is found, display a message in the table
                                                         echo "<tr><td colspan='7' style='text-align: center; padding: 10px 0px;'>No data available in table</td></tr>";
                                                     }
                                                     ?>
@@ -209,8 +190,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                 <div class="pagination-content">
                                                     <?php
-                                                    include "database_connect.php";
-
                                                     $sql = "SELECT * FROM sections";
                                                     $query = $conn->query($sql);
 
@@ -220,12 +199,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                     ?>
                                                     <div class="pagination">
                                                         <button class="prev-btn" onclick="loadTable(currentPage - 1)"><i class='bx bxs-left-arrow'></i> Prev</button>
-                                                        <span id="page-numbers"></span> <!-- This will hold the current page number -->
+                                                        <span id="page-numbers"></span>
                                                         <button class="next-btn" onclick="loadTable(currentPage + 1)">Next <i class='bx bxs-right-arrow'></i></button>
                                                     </div>
-
                                                 </div>
-                                            </div>
                                         </table>
                                     </div>
                                 </div>
@@ -317,9 +294,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                 <!-----Grade level------>
                                 <li class="nav-link">
-                                    <a href="">
+                                    <a href="EducationLevel_Page_Admin.php">
                                         <i class='bx bx-bar-chart icon'></i>
-                                        <span class="text nav-text">Grade Level</span>
+                                        <span class="text nav-text">Education Level</span>
                                     </a>
                                 </li>
 
@@ -381,32 +358,56 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                 </nav>
 
                 <!--------ADD POSITION POP UP FORM----------->
-                <div id="addposition-popup" class="addposition-popup">
-                    <div class="addposition-popup-content">
-                        <div class="addposition-popup-top">
+                <div id="addsection-popup" class="addsection-popup">
+                    <div class="addsection-popup-content">
+                        <div class="addsection-popup-top">
                             <h2>NEW SECTION</h2>
                         </div>
 
-                        <div class="addposition-popup-forms">
+                        <div class="addsection-popup-forms">
                             <form action="Add_Sections.php" method="POST">
+                            <div class="form-section">
+                                <!-- Educational Level Dropdown -->
+                                <div class="form-group">
+                                    <label for="education-level">Educational Level</label>
+                                    <select class="input-field" id="education-level" name="education_level" required>
+                                        <option value=""> Select Educational Level </option>
+                                        <?php
+                                        // Fetch distinct educational levels from the level table
+                                        $sql = "SELECT DISTINCT educational_level FROM level";
+                                        $result = $conn->query($sql);
 
-                                <div class="form-group-title">
-                                    <label for="position-candidate">Section</label>
-                                    <input type="text" id="position-candidate" name="section-student" class="input-size" value="" required>
+                                        if ($result) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                echo "<option value='" . htmlspecialchars($row['educational_level']) . "'>" . htmlspecialchars($row['educational_level']) . "</option>";
+                                            }
+                                        } else {
+                                            echo "<option value=''>Error loading options</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
 
-                                <div class="form-group-maximum-student">
-                                    <label for="maximum-student">Grade</label>
-                                    <input type="number" id="maximum-student" name="grade-student" class="input-size" value="" required>
+                                <!-- Grade/Year Group Dropdown (Populated by JavaScript) -->
+                                <div class="form-group">
+                                    <label for="education-grade">Grade or Year Group</label>
+                                    <select class="input-field" id="education-grade" name="education_grade" required>
+                                        <option value=""> Select Grade or Year Group </option>
+                                        <!-- Options will be populated based on selected educational level -->
+                                    </select>
                                 </div>
 
-                                <div class="form-group-maximum-vote">
+                                <!-- Section and Maximum Student Input Fields -->
+                                <div class="form-group">
+                                    <label for="section-candidate">Section</label>
+                                    <input type="text" id="section-candidate" name="section-student" class="input-field" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="maximum-vote">Maximum Student</label>
-                                    <input type="number" id="maximum-vote" name="maximum-student" class="input-size" value="" required>
+                                    <input type="number" id="maximum-vote" name="maximum-student" class="input-field" required>
                                 </div>
-
                                 <div class="form-group-button">
-                                    <button type="button" class="addposition-close-form-btn"><svg width="15px" height="15px" fill="#24724D"
+                                    <button type="button" class="addsection-close-form-btn"><svg width="15px" height="15px" fill="#24724D"
                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                 d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
@@ -429,6 +430,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         </svg>
                                         Save</button>
                                 </div>
+                            </div>
                             </form>
                         </div>
                     </div>
@@ -469,7 +471,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                     </div>
                 </div>
             </div>
-
+            <script src="gradeselection.js"></script>
             <script src="displayPopUpForm.js"></script>
             <script src="hamburger-navbar.js"></script>
             <script src="displayPopUpMessage.js"></script>

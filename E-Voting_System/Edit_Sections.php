@@ -116,12 +116,23 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 <div class="container">
 
                                                     <div class="form-section">
+                                                        <label for="" style="justify-content: end; display: flex;">Educational Level
+                                                            <select class="input-field" id="education-level" name="education-level" required="">
+                                                                <option value="" selected="">Select educational level</option>
+                                                                <option value="">Primary Education</option>
+                                                                <option value="">Secondary Education</option>
+                                                                <option value="">Senior Education</option>
+                                                                <option value="">Tertiary Education</option>
+                                                            </select>
+                                                        </label>
 
+                                                        <label for="" style="justify-content: end; display: flex;">Grade or Year Group
+                                                            <select class="input-field" id="grade" name="grade" required onchange="fetchSections(this.value)">
+                                                                <option value="" selected>Select grade or year group</option>
+                                                            </select>
+                                                        </label>
                                                         <label for="">Section
                                                             <input type="text" name="section" class="input-field" value="<?php echo $row['section'] ?>">
-                                                        </label>
-                                                        <label for="">Grade
-                                                            <input type="number" name="grade" class="input-field" value="<?php echo $row['grade'] ?>">
                                                         </label>
                                                         <label for="">Maximum Student
                                                             <input type="number" name="maximum" class="input-field" value="<?php echo $row['max_student'] ?>">
@@ -221,15 +232,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         <span class="text nav-text">Votes</span>
                                     </a>
                                 </li>
-                                
+
                                 <!-----Grade level------>
                                 <li class="nav-link">
-                                    <a href="">
+                                    <a href="EducationLevel_Page_Admin.php">
                                         <i class='bx bx-bar-chart icon'></i>
-                                        <span class="text nav-text">Grade Level</span>
+                                        <span class="text nav-text">Education Level</span>
                                     </a>
                                 </li>
-
 
                                 <!-----Sections------>
                                 <li class="nav-link">

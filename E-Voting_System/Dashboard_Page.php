@@ -185,7 +185,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                 </svg>
                                             </div>
                                             <div class="view-button">
-                                                <button><a href="GradeLevel_Page_Admin.php"><i class='bx bx-play'></i> View </a></button>
+                                                <button><a href="EducationLevel_Page_Admin.php"><i class='bx bx-play'></i> View </a></button>
                                             </div>
                                         </div>
                                         <div class="date-time">
@@ -304,9 +304,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                             <!-----Grade level------>
                             <li class="nav-link">
-                                <a href="GradeLevel_Page_Admin.php">
+                                <a href="EducationLevel_Page_Admin.php">
                                     <i class='bx bx-bar-chart icon'></i>
-                                    <span class="text nav-text">Grade Level</span>
+                                    <span class="text nav-text">Education Level</span>
                                 </a>
                             </li>
 

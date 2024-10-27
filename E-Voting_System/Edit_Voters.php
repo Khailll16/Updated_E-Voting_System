@@ -172,9 +172,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                                             <input type="text" name="voterslname" class="input-field" value="<?php echo $voter['voters_lastname'] ?>">
                                                         </label>
 
-                                                        <label for="" style="justify-content: end; display: flex;">Grade
+                                                        <div class="form-group" style="justify-content: end; display: flex;">
+                                                            <label for="">Educational Level</label>
+                                                            <select class="input-field" id="education-level" name="education-level" required="">
+                                                                <option value="" selected="">Select educational level</option>
+                                                                <option value="">Primary Education</option>
+                                                                <option value="">Secondary Education</option>
+                                                                <option value="">Senior Education</option>
+                                                                <option value="">Tertiary Education</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <label for="" style="justify-content: end; display: flex;">Grade or Year Group
                                                             <select class="input-field" id="grade" name="grade" required onchange="fetchSections(this.value)">
-                                                                <option value="" selected>- Select Grade -</option>
+                                                                <option value="" selected>Select grade or year group</option>
                                                                 <?php
                                                                 // Fetch distinct grades from sections table, sorted in ascending order
                                                                 $sql = "SELECT DISTINCT grade FROM sections ORDER BY grade ASC";
@@ -311,12 +322,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
                                         <span class="text nav-text">Votes</span>
                                     </a>
                                 </li>
-                                
+
                                 <!-----Grade level------>
                                 <li class="nav-link">
-                                    <a href="">
+                                    <a href="EducationLevel_Page_Admin.php">
                                         <i class='bx bx-bar-chart icon'></i>
-                                        <span class="text nav-text">Grade Level</span>
+                                        <span class="text nav-text">Education Level</span>
                                     </a>
                                 </li>
 

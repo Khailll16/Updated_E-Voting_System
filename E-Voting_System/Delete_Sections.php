@@ -120,8 +120,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                                     <div class="content-wrapper">
                                                         <div class="form-section" style="margin-top: 5px;">
-                                                            <label for="" style="color: #24724D; margin-bottom: 15px;">Grade and Section :
-                                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['grade'] ?> - <?php echo $row['section'] ?></p>
+                                                            <label for="" style="color: #24724D; margin-bottom: 15px;">Education Level :
+                                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"></p>
+                                                            </label>
+                                                            <label for="" style="color: #24724D; margin-bottom: 15px;">Grade or Year Group :
+                                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['grade'] ?></p>
+                                                            </label>
+                                                            <label for="" style="color: #24724D; margin-bottom: 15px;">Section :
+                                                                <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"> <?php echo $row['section'] ?>
+                                                                </p>
                                                             </label>
                                                             <label for="" style="color: #24724D; margin-bottom: 15px;">Maximum Student :
                                                                 <p style="font-size: 24px; font-weight: bold; color: #4A4A4A;"><?php echo $row['max_student']; ?></p>
@@ -233,11 +240,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                 <!-----Grade level------>
                                 <li class="nav-link">
-                                    <a href="">
+                                    <a href="EducationLevel_Page_Admin.php">
                                         <i class='bx bx-bar-chart icon'></i>
-                                        <span class="text nav-text">Grade Level</span>
+                                        <span class="text nav-text">Education Level</span>
                                     </a>
                                 </li>
+
 
                                 <!-----Sections------>
                                 <li class="nav-link">

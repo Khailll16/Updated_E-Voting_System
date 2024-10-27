@@ -341,9 +341,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                         <!-----Grade level------>
                                         <li class="nav-link">
-                                            <a href="">
+                                            <a href="EducationLevel_Page_Admin.php">
                                                 <i class='bx bx-bar-chart icon'></i>
-                                                <span class="text nav-text">Grade Level</span>
+                                                <span class="text nav-text">Education Level</span>
                                             </a>
                                         </li>
 
@@ -420,43 +420,47 @@ if (isset($_SESSION['id']) && isset($_SESSION['admin_username'])) {
 
                                 <div class="addCandidates_popup-forms">
                                     <form action="Add_Candidate.php" autocomplete="off" enctype="multipart/form-data" method="POST">
-                                        <div class="form-group-title">
-                                            <label for="update-candidate-firstname">Firstname</label>
-                                            <input type="text" id="update-candidate-firstname" name="candidate-firstname" class="input-size" value="" required>
-                                        </div>
-                                        <div class="form-group-title">
-                                            <label for="update-candidate-lastname">Lastname</label>
-                                            <input type="text" id="update-candidate-lastname" name="candidate-lastname" class="input-size" value="" required>
-                                        </div>
-                                        <div class="form-group-position">
-                                            <label for="position" class="col-sm-3 control-label">Position</label>
-                                            <select class="form-position" id="position" name="position" required="">
-                                                <option value="" selected="">- Select -</option>
-                                                <?php
-                                                $sql = "SELECT * FROM positions";
-                                                $result = $conn->query($sql);
+                                        <div class="form-section">
+                                            <div class="form-group">
+                                                <label for="update-candidate-firstname">Firstname</label>
+                                                <input type="text" id="update-candidate-firstname" name="candidate-firstname" class="input-field" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="update-candidate-lastname">Lastname</label>
+                                                <input type="text" id="update-candidate-lastname" name="candidate-lastname" class="input-field" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="position" class="col-sm-3 control-label">Position</label>
+                                                <select class="input-field" id="position" name="position" required="">
+                                                    <option value="" selected=""> Select Position</option>
+                                                    <?php
+                                                    $sql = "SELECT * FROM positions";
+                                                    $result = $conn->query($sql);
 
-                                                if (!$result) {
-                                                    die("Invalid query: " . $conn->error);
-                                                } else {
+                                                    if (!$result) {
+                                                        die("Invalid query: " . $conn->error);
+                                                    } else {
 
-                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        while ($row = mysqli_fetch_assoc($result)) {
 
-                                                        echo "<option value='" . $row['id'] . "'>" . $row['descrip'] . "</option>";
+                                                            echo "<option value='" . $row['id'] . "'>" . $row['descrip'] . "</option>";
+                                                        }
                                                     }
-                                                }
-                                                ?>
-                                            </select>
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="candidate-profile">Photo</label>
+                                                <input type="file" id="candidate-profile" name="candidate-photo" class="input-field" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="candidate-platform">Platform</label>
+                                                <textarea class="input-field" id="candidate-platform" name="candidate-platform" rows="7" style="resize: vertical;" maxlength="400" required></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <span for="" class="description">Platform input exceeds the 400-word maximum limit.</span>
+                                            </div>
                                         </div>
-                                        <div class="form-group-photo">
-                                            <label for="candidate-profile">Photo</label>
-                                            <input type="file" id="candidate-profile" name="candidate-photo" class="input-size" value="">
-                                        </div>
-                                        <div class="form-group-textarea">
-                                            <label for="candidate-platform">Platform</label>
-                                            <textarea class="input-size" id="candidate-platform" name="candidate-platform" rows="7" style="resize: vertical;" maxlength="400" required></textarea>
-                                        </div>
-
                                         <div class="form-group-button">
                                             <button type="button" class="addCandidates_close-form-btn"><svg width="15px" height="15px" fill="#24724D"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
